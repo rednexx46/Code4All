@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewLogoEntrar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintBottom_toTopOf="@+id/textViewTituloEntrar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_livro_aberto" />
+
+        <TextView
+            android:id="@+id/textViewTituloEntrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="8dp"
+            android:text="@string/autenticacao"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSloganEntrar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewLogoEntrar" />
+
+        <TextView
+            android:id="@+id/textViewSloganEntrar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/slogan"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonEntrarEmail"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTituloEntrar"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/textViewTituloEntrar"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloEntrar" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonEntrarEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:drawableStart="@drawable/ic_email"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:onClick="entrarContaEmail"
+            android:padding="16dp"
+            android:text="@string/botao_email"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/textoCriarConta"
+            app:layout_constraintEnd_toEndOf="@+id/textViewSloganEntrar"
+            app:layout_constraintStart_toStartOf="@+id/textViewSloganEntrar"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSloganEntrar" />
+
+        <TextView
+            android:id="@+id/textViewPrimeiraVezEntrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/utilizador_novo"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textoCriarConta"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textoCriarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:onClick="criarConta"
+            android:text="@string/criar_conta"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/corTextoClique"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewPrimeiraVezEntrar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

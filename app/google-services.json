@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "304936618891",
+    "firebase_url": "https://code4all-cb746-default-rtdb.firebaseio.com",
+    "project_id": "code4all-cb746",
+    "storage_bucket": "code4all-cb746.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304936618891:android:759352688f89efe65ebd8e",
+        "android_client_info": {
+          "package_name": "com.josexavier.code4all"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304936618891-d59jusj55ish236tlrtfqi6oiuarhabm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.josexavier.code4all",
+            "certificate_hash": "a2a65703b90ac6ab22124f849e33efcd0e433b42"
+          }
+        },
+        {
+          "client_id": "304936618891-7h4s1749n2e8ou1l0nh1md54b4op7ngj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHNyYONXCWN6hKyBgMMTfd4tpQYptXePQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304936618891-7h4s1749n2e8ou1l0nh1md54b4op7ngj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

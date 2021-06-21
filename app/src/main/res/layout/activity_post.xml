@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.josexavier.code4all.activity.PostActivity">
+
+        <TextView
+            android:id="@+id/textViewTituloPostVisualizacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/carregando"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewFotoPostVisualizacao"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="24dp"
+            android:padding="10dp"
+            android:background="@drawable/retangulo_laranja"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTituloPostVisualizacao"
+            app:layout_constraintStart_toStartOf="@+id/textViewTituloPostVisualizacao"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloPostVisualizacao"
+            app:srcCompat="@drawable/ic_imagem" />
+
+        <TextView
+            android:id="@+id/textViewDescricaoPostVisualizacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/carregando"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTagPostVisualizacao" />
+
+        <TextView
+            android:id="@+id/textViewTagPostVisualizacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/carregando"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPostVisualizacao" />
+
+        <TextView
+            android:id="@+id/textViewComentariosPostVisualizacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/comentarios"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescricaoPostVisualizacao" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewComentarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewComentariosPostVisualizacao" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonGostarPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/retangulo_rosa"
+            android:drawableStart="@drawable/ic_coracao"
+            android:drawablePadding="16dp"
+            android:padding="16dp"
+            android:text="@string/gosto"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonComentarPost"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewComentarios" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonComentarPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/retangulo_ciano"
+            android:drawableStart="@drawable/ic_comentario"
+            android:drawablePadding="16dp"
+            android:padding="16dp"
+            android:text="@string/comentar"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonGostarPost"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewComentarios" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

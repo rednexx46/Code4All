@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true"
+    tools:context="com.josexavier.code4all.fragment.CriarQuizFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textCriarQuizTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/criar_quiz"
+            android:textAlignment="center"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/textCriarQuizSubTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/passo_1_3"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/imageCriarQuiz"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:padding="16dp"
+            android:src="@drawable/ic_imagem" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCriarQuizGaleria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/retangulo_laranja"
+            android:padding="10dp"
+            android:src="@drawable/ic_imagem" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCriarQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextCriarQuizTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/borda_preta"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/titulo_do_quiz"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerCriarQuizTemas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/borda_preta"
+                android:fontFamily="@font/montserrat_medium"
+                android:padding="10dp"
+                android:spinnerMode="dialog"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCriarQuiz2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editTextCriarQuizIntroTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/borda_preta"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/titulo_da_introducao"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextCriarQuizIntroDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/borda_preta"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/descricao_do_quiz_resumo"
+                android:inputType="textMultiLine"
+                android:padding="16dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextCriarQuizIntroVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/borda_preta"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/video_descritivo_link"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCriarQuiz3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/configuracao_da_pergunta"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borda_preta"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/editTextCriarQuizPerguntaID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/borda_preta"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/id_da_pergunta"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editTextCriarQuizPerguntaTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/borda_preta"
+                    android:ems="10"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/titulo_pergunta"
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/editTextCriarQuizPerguntaTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/borda_preta"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:padding="4dp"
+                    android:spinnerMode="dialog"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editTextCriarQuizPerguntaXP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/borda_preta"
+                    android:ems="10"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/xp_da_pergunta"
+                    android:inputType="number"
+                    android:padding="16dp"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/opcoes_de_resposta"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonCriarQuizAdicionarOpcao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/retangulo_azul"
+                android:fontFamily="@font/montserrat_medium"
+                android:padding="16dp"
+                android:text="@string/adicionar_opcao"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonCriarQuizRemoverOpcao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/retangulo_laranja_vermelho"
+                android:fontFamily="@font/montserrat_medium"
+                android:padding="16dp"
+                android:text="@string/remover_opcao"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCriarQuizDefinirSolucao"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/retangulo_azul"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="16dp"
+            android:text="@string/definir_solucao"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCriarQuizNovaPergunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/retangulo_ciano"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="16dp"
+            android:text="@string/nova_pergunta"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCriarQuizPassoAnterior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/retangulo_azul"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="16dp"
+            android:text="@string/passo_anterior"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCriarQuizAvancar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/retangulo_laranja"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/passo_seguinte"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</ScrollView>

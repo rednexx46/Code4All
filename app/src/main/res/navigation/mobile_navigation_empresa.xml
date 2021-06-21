@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_inicio_empresa">
+
+
+    <fragment
+        android:id="@+id/nav_inicio_empresa"
+        android:name="com.josexavier.code4all.fragment.InicioEmpresaFragment"
+        android:label="@string/opcao_inicio"
+        tools:layout="@layout/fragment_inicio_empresa" />
+
+    <fragment
+        android:id="@+id/nav_ofertas_verificacao"
+        android:name="com.josexavier.code4all.fragment.OfertasEmpresaVerificacaoFragment"
+        android:label="@string/opcao_ofertas"
+        tools:layout="@layout/fragment_ofertas_empresa_verificacao" />
+
+    <fragment
+        android:id="@+id/nav_empresas"
+        android:name="com.josexavier.code4all.fragment.EmpresasFragment"
+        android:label="@string/empresas"
+        tools:layout="@layout/fragment_empresas" />
+
+    <!-- Empresas - Begin -->
+
+    <fragment
+        android:id="@+id/nav_criar_oferta"
+        android:name="com.josexavier.code4all.fragment.CriarOfertaFragment"
+        android:label="@string/criar_oferta"
+        tools:layout="@layout/fragment_criar_oferta" />
+
+    <fragment
+        android:id="@+id/nav_listar_ofertas"
+        android:name="com.josexavier.code4all.fragment.ListarOfertasEmpresaFragment"
+        android:label="@string/listar_ofertas"
+        tools:layout="@layout/fragment_listar_ofertas_empresa" />
+
+    <!-- Empresas - End -->
+
+    <fragment
+        android:id="@+id/nav_empresa"
+        android:name="com.josexavier.code4all.fragment.EmpresaFragment"
+        android:label="@string/empresa"
+        tools:layout="@layout/fragment_empresa" />
+
+    <fragment
+        android:id="@+id/nav_definicoes"
+        android:name="com.josexavier.code4all.fragment.DefinicoesFragment"
+        android:label="@string/opcao_definicoes"
+        tools:layout="@layout/fragment_definicoes" />
+
+    <fragment
+        android:id="@+id/nav_sobre"
+        android:name="com.josexavier.code4all.fragment.SobreFragment"
+        android:label="@string/opcao_sobre"
+        tools:layout="@layout/fragment_sobre" />
+
+</navigation>

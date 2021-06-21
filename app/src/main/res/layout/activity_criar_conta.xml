@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:context="com.josexavier.code4all.activity.CriarContaActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_livro_aberto" />
+
+        <TextView
+            android:id="@+id/textViewTituloCriarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/registro"
+            android:textColor="@android:color/black"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+        <TextView
+            android:id="@+id/textViewSloganInscricoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/informacao_registro"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloCriarConta" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutDefinicoesPrivacidadeSeguranca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSloganInscricoes">
+
+            <EditText
+                android:id="@+id/editRegistrarNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:drawableStart="@drawable/ic_pessoa"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/nome"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/editRegistrarEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="8dp"
+                android:autofillHints=""
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <Spinner
+                android:id="@+id/spinnerEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:drawableTint="@android:color/black"
+                android:fontFamily="@font/montserrat_medium"
+                android:padding="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerSexo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:drawableTint="@android:color/black"
+                android:fontFamily="@font/montserrat_medium"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/editRegistrarPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/password"
+                android:autofillHints=""
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/editRegistrarConfirmarPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/confirmar_password"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/editRegistrarDataNascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_calendario"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/data_de_nascimento"
+                android:inputType="none"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/editRegistrarNIF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/borda_preta"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_nif"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/nif"
+                android:inputType="number"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBoxEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/aviso_email"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutDefinicoesPrivacidadeSeguranca"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutDefinicoesPrivacidadeSeguranca"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutDefinicoesPrivacidadeSeguranca" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/configuracao_switch"
+            android:textSize="0sp"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutDefinicoesPrivacidadeSeguranca"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutDefinicoesPrivacidadeSeguranca"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxEmail" />
+
+        <TextView
+            android:id="@+id/textViewEmpresaCriarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/empresa"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/toggleButton"
+            app:layout_constraintEnd_toStartOf="@+id/toggleButton"
+            app:layout_constraintTop_toTopOf="@+id/toggleButton" />
+
+        <TextView
+            android:id="@+id/textViewUtilizadorCriarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/utilizador"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/toggleButton"
+            app:layout_constraintStart_toEndOf="@+id/toggleButton"
+            app:layout_constraintTop_toTopOf="@+id/toggleButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:onClick="verificarDados"
+            android:padding="16dp"
+            android:text="@string/Registar"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutDefinicoesPrivacidadeSeguranca"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutDefinicoesPrivacidadeSeguranca"
+            app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+        <TextView
+            android:id="@+id/textViewJaTemContaCriarCOnta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/conta"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textViewEntrarCriarConta"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+        <TextView
+            android:id="@+id/textViewEntrarCriarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:onClick="entrarCriarConta"
+            android:text="@string/entrar"
+            android:textColor="@color/corTextoClique"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewJaTemContaCriarCOnta"
+            app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

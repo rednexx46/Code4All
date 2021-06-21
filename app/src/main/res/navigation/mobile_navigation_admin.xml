@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_inicio_admin">
+
+
+    <fragment
+        android:id="@+id/nav_inicio_admin"
+        android:name="com.josexavier.code4all.fragment.InicioAdminFragment"
+        android:label="@string/opcao_inicio"
+        tools:layout="@layout/fragment_inicio_admin" />
+
+    <fragment
+        android:id="@+id/nav_contas"
+        android:name="com.josexavier.code4all.fragment.ContasFragment"
+        android:label="@string/opcao_contas"
+        tools:layout="@layout/fragment_contas" />
+
+    <fragment
+        android:id="@+id/nav_posts_verificacao"
+        android:name="com.josexavier.code4all.fragment.PostsVerificacaoFragment"
+        android:label="@string/posts"
+        tools:layout="@layout/fragment_posts_verificacao" />
+
+    <fragment
+        android:id="@+id/nav_empresas"
+        android:name="com.josexavier.code4all.fragment.EmpresasFragment"
+        android:label="@string/empresas"
+        tools:layout="@layout/fragment_empresas" />
+
+    <fragment
+        android:id="@+id/nav_forum"
+        android:name="com.josexavier.code4all.fragment.ForumFragment"
+        android:label="@string/opcao_forum"
+        tools:layout="@layout/fragment_forum" />
+
+    <!-- Administradores - Begin -->
+    <fragment
+        android:id="@+id/nav_criar_quiz"
+        android:name="com.josexavier.code4all.fragment.CriarQuizFragment"
+        android:label="@string/opcao_criar_quiz"
+        tools:layout="@layout/fragment_criar_quiz" />
+
+    <fragment
+        android:id="@+id/nav_listar_quiz"
+        android:name="com.josexavier.code4all.fragment.ListarQuizFragment"
+        android:label="@string/opcao_listar_quizes"
+        tools:layout="@layout/fragment_listar_quiz" />
+
+    <fragment
+        android:id="@+id/nav_criar_post"
+        android:name="com.josexavier.code4all.fragment.CriarPostFragment"
+        android:label="@string/opcao_criar_post"
+        tools:layout="@layout/fragment_criar_post" />
+
+    <fragment
+        android:id="@+id/nav_listar_post"
+        android:name="com.josexavier.code4all.fragment.ListarPostsFragment"
+        android:label="@string/opcao_listar_posts"
+        tools:layout="@layout/fragment_listar_post" />
+
+    <fragment
+        android:id="@+id/nav_criar_tt"
+        android:name="com.josexavier.code4all.fragment.CriarTagsTemasFragment"
+        android:label="@string/opcao_criar_tt"
+        tools:layout="@layout/fragment_criar_tags_temas" />
+
+    <fragment
+        android:id="@+id/nav_listar_tt"
+        android:name="com.josexavier.code4all.fragment.ListarTagsTemasFragment"
+        android:label="@string/opcao_listar_tt"
+        tools:layout="@layout/fragment_listar_post" />
+
+    <fragment
+        android:id="@+id/nav_criar_notificacao"
+        android:name="com.josexavier.code4all.fragment.CriarNotificacaoFragment"
+        android:label="@string/opcao_criar_notificacao"
+        tools:layout="@layout/fragment_criar_notificacao" />
+
+    <fragment
+        android:id="@+id/nav_listar_notificacoes"
+        android:name="com.josexavier.code4all.fragment.ListarNotificacoesFragment"
+        android:label="@string/opcao_listar_notificacoes"
+        tools:layout="@layout/fragment_listar_notificacoes" />
+
+    <!-- Administradores - End -->
+
+    <fragment
+        android:id="@+id/nav_conta"
+        android:name="com.josexavier.code4all.fragment.ContaFragment"
+        android:label="@string/opcao_conta"
+        tools:layout="@layout/fragment_conta" />
+
+    <fragment
+        android:id="@+id/nav_definicoes"
+        android:name="com.josexavier.code4all.fragment.DefinicoesFragment"
+        android:label="@string/opcao_definicoes"
+        tools:layout="@layout/fragment_definicoes" />
+
+    <fragment
+        android:id="@+id/nav_sobre"
+        android:name="com.josexavier.code4all.fragment.SobreFragment"
+        android:label="@string/opcao_sobre"
+        tools:layout="@layout/fragment_sobre" />
+
+</navigation>

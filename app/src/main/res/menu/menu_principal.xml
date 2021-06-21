@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@drawable/ic_casa"
+            android:title="@string/opcao_inicio" />
+        <item
+            android:id="@+id/nav_quizes"
+            android:icon="@drawable/ic_livro"
+            android:title="@string/opcao_quizes" />
+        <item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_cafe"
+            android:title="@string/opcao_forum" />
+        <item
+            android:id="@+id/nav_pontuacao"
+            android:icon="@drawable/ic_lista"
+            android:title="@string/opcao_pontuacao" />
+        <item
+            android:id="@+id/nav_conta"
+            android:icon="@drawable/ic_pessoa"
+            android:title="@string/opcao_conta" />
+        <item
+            android:id="@+id/nav_ofertas"
+            android:icon="@drawable/ic_ofertas"
+            android:title="@string/opcao_ofertas" />
+        <item
+            android:id="@+id/nav_definicoes"
+            android:icon="@drawable/ic_definicoes"
+            android:title="@string/opcao_definicoes" />
+        <item
+            android:id="@+id/nav_sobre"
+            android:icon="@drawable/ic_info"
+            android:title="@string/opcao_sobre" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/opcao_logout" />
+    </group>
+    <group android:id="@+id/group_footer">
+        <item
+            android:id="@+id/nav_footer"
+            android:title=""
+            app:actionLayout="@layout/footer" />
+    </group>
+</menu>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="com.josexavier.code4all.fragment.CriarNotificacaoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textViewTituloCriarNotificacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/criar"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewSubTituloCriarNotificacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/notificacao"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTituloCriarNotificacao"
+            app:layout_constraintStart_toStartOf="@+id/textViewTituloCriarNotificacao"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloCriarNotificacao" />
+
+        <ImageView
+            android:id="@+id/imageViewCriarNotificacao"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/retangulo_laranja_escuro"
+            android:padding="16dp"
+            android:src="@drawable/ic_imagem"
+            app:layout_constraintEnd_toEndOf="@+id/textViewSubTituloCriarNotificacao"
+            app:layout_constraintStart_toStartOf="@+id/textViewSubTituloCriarNotificacao"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubTituloCriarNotificacao" />
+
+
+        <ImageButton
+            android:id="@+id/imageButtonGaleriaCriarNotificacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/retangulo_laranja"
+            android:padding="10dp"
+            android:src="@drawable/ic_imagem"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewCriarNotificacao"
+            app:layout_constraintStart_toStartOf="@+id/imageViewCriarNotificacao"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewCriarNotificacao" />
+
+        <EditText
+            android:id="@+id/editTextTituloCriarNotificacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/borda_preta"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="@string/titulo"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButtonGaleriaCriarNotificacao" />
+
+        <EditText
+            android:id="@+id/editTextDescricaoCriarNotificacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/borda_preta"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="@string/descricao_hint"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:padding="16dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTituloCriarNotificacao" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCriarNotificacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:padding="16dp"
+            android:text="@string/criar_notificacao"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/editTextDescricaoCriarNotificacao"
+            app:layout_constraintStart_toStartOf="@+id/editTextDescricaoCriarNotificacao"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDescricaoCriarNotificacao" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

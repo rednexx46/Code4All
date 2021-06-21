@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.josexavier.code4all.fragment.CriarTagsTemasFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/textCriarTemaTituloTT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/criar"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/textCriarTemaSubTituloTT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textCriarTemaSubTituloTT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/tema"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextCriarTemaTT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCriarTemaTituloTT" />
+
+        <EditText
+            android:id="@+id/editTextCriarTemaTT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/borda_preta"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="@string/tema"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCriarTemaTT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCriarTemaSubTituloTT" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCriarTemaTT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/criar_tema"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/viewDivisor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCriarTemaTT" />
+
+        <View
+            android:id="@+id/viewDivisor"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/textCriarTagTituloTT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonCriarTemaTT" />
+
+        <TextView
+            android:id="@+id/textCriarTagTituloTT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/criar"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/textCriarTagSubTituloTT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewDivisor" />
+
+        <TextView
+            android:id="@+id/textCriarTagSubTituloTT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/tag"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextCriarTagTT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCriarTagTituloTT" />
+
+
+        <EditText
+            android:id="@+id/editTextCriarTagTT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/borda_preta"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="@string/tag"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCriarTagTT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCriarTagSubTituloTT" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCriarTagTT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/criar_tag"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCriarTagTT" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

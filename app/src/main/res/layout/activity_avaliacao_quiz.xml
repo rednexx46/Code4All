@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="com.josexavier.code4all.activity.AvaliacaoQuizActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.josexavier.code4all.activity.AvaliacaoQuizActivity">
+
+        <TextView
+            android:id="@+id/textViewTituloAvaliacaoQuiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/avaliacao_final"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSloganAvaliacaoQuiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewSloganAvaliacaoQuiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/slogan_avaliacao_quiz"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextAvaliacaoQuiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloAvaliacaoQuiz" />
+
+        <EditText
+            android:id="@+id/editTextAvaliacaoQuiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/borda_preta"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="@string/descricao_avaliacao"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonPartilharLinkedIn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSloganAvaliacaoQuiz" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonPartilharLinkedIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/retangulo_linkedin"
+            android:drawableStart="@drawable/ic_linkedin"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:onClick="partilharLinkedIn"
+            android:padding="16dp"
+            android:text="@string/partilhar_linkedin"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/textViewAgradecimentosAvaliacaoQuiz"
+            app:layout_constraintEnd_toEndOf="@+id/editTextAvaliacaoQuiz"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/editTextAvaliacaoQuiz"
+            app:layout_constraintTop_toBottomOf="@+id/editTextAvaliacaoQuiz" />
+
+        <TextView
+            android:id="@+id/textViewAgradecimentosAvaliacaoQuiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/agradecimentos_avaliacao_quiz"
+            android:textAlignment="center"
+            android:textColor="@color/corDiferente"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/fabAvaliacaoQuiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonPartilharLinkedIn" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAvaliacaoQuiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/corPrimaria"
+            android:clickable="true"
+            android:focusable="true"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_verificacao" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.josexavier.code4all.activity.QuizInfoActivity">
+
+        <TextView
+            android:id="@+id/textViewTituloQuizInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewQuizInfo"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/retangulo_laranja"
+            android:padding="10dp"
+            android:src="@drawable/ic_imagem"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTituloQuizInfo"
+            app:layout_constraintStart_toStartOf="@+id/textViewTituloQuizInfo"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloQuizInfo" />
+
+        <view
+            android:id="@+id/viewYoutubePlayer"
+            class="com.google.android.youtube.player.YouTubePlayerView"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewQuizInfo" />
+
+        <TextView
+            android:id="@+id/textViewDescricaoQuizInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/viewYoutubePlayer"
+            app:layout_constraintStart_toStartOf="@+id/viewYoutubePlayer"
+            app:layout_constraintTop_toBottomOf="@+id/viewYoutubePlayer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

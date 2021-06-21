@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="com.josexavier.code4all.activity.QuizActivity">
+
+        <TextView
+            android:id="@+id/textViewProgressoQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/carregando"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/progressBarProgressoQuiz"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_bar_quizes_subscritos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProgressoQuiz" />
+
+        <TextView
+            android:id="@+id/textViewPerguntaQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/carregando"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarProgressoQuiz" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcoesQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/borda_preta"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSolucaoMultiplaQuiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPerguntaQuiz">
+
+            <RadioGroup
+                android:id="@+id/radioGroupOpcoes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcaoA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="A" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcaoB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="B" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcaoC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="C" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcaoD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="D" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcaoE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="E" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcaoF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="F" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMultipla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <CheckBox
+                    android:id="@+id/checkBoxA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="adicionarSolucao"
+                    android:tag="A" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="adicionarSolucao"
+                    android:tag="B" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="adicionarSolucao"
+                    android:tag="C" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="adicionarSolucao"
+                    android:tag="D" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="adicionarSolucao"
+                    android:tag="E" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="adicionarSolucao"
+                    android:tag="F" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewSolucaoMultiplaQuiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLimparSelecaoQuiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonLimparSelecaoQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/retangulo_laranja_escuro"
+            android:onClick="limparSolucaoMultipla"
+            android:padding="16dp"
+            android:text="@string/limpar_selecao"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/buttonConfirmarSelecaoQuiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonConfirmarSelecaoQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/retangulo_verde"
+            android:padding="16dp"
+            android:text="@string/confirmar_selecao"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

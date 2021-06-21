@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/fundo_quiz"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imagemQuizSubscrito"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/retangulo_laranja"
+        android:padding="16dp"
+        android:src="@drawable/ic_imagem" />
+
+    <TextView
+        android:id="@+id/nomeQuizSubscrito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:text="@string/carregando"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/progressoQuizesSubscritos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/carregando"
+        android:textColor="@android:color/black"
+        android:textSize="13sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBarQuizesSubscritos"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="0.3"
+        android:max="100"
+        android:progressDrawable="@drawable/progress_bar_quizes_subscritos" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0.7"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/criadorQuizSubscrito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="@string/carregando"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dataInscricaoQuizSubscrito"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="center"
+                android:text="@string/carregando"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textPontuacaoQuizSubscrito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_extra_bold"
+        android:padding="10dp"
+        android:text="@string/carregando"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/botaoEntrarQuizSubscrito"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/retangulo_laranja"
+        android:fontFamily="@font/montserrat_extra_bold"
+        android:padding="16dp"
+        android:text="@string/carregando"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+
+</LinearLayout>

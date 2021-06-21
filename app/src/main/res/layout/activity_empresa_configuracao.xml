@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        tools:context="com.josexavier.code4all.activity.EmpresaConfiguracaoActivity">
+
+        <TextView
+            android:id="@+id/textViewTituloEmpresaConfiguracao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/configuracao_da"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewSubTituloEmpresaConfiguracao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/carregando"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloEmpresaConfiguracao" />
+
+        <ImageView
+            android:id="@+id/imageViewEmpresaConfiguracao"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:padding="10dp"
+            android:background="@drawable/retangulo_laranja"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubTituloEmpresaConfiguracao"
+            app:srcCompat="@drawable/ic_imagem" />
+
+        <ImageButton
+            android:id="@+id/imageButtonGaleriaEmpresaConfiguracao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/retangulo_laranja"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewEmpresaConfiguracao"
+            app:layout_constraintStart_toStartOf="@+id/imageViewEmpresaConfiguracao"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewEmpresaConfiguracao"
+            app:srcCompat="@drawable/ic_imagem" />
+
+        <Spinner
+            android:id="@+id/spinnerEmpregadosEmpresaConfiguracao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/borda_preta"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="10dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButtonGaleriaEmpresaConfiguracao" />
+
+
+        <EditText
+            android:id="@+id/editTextLocalidadeEmpresaConfiguracao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/borda_preta"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Localidade..."
+            android:inputType="text"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/spinnerEmpregadosEmpresaConfiguracao"
+            app:layout_constraintStart_toStartOf="@+id/spinnerEmpregadosEmpresaConfiguracao"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerEmpregadosEmpresaConfiguracao" />
+
+        <EditText
+            android:id="@+id/editTextDescricaoEmpresaConfiguracao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/borda_preta"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="@string/descricao_hint"
+            android:inputType="textMultiLine"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/spinnerEmpregadosEmpresaConfiguracao"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/spinnerEmpregadosEmpresaConfiguracao"
+            app:layout_constraintTop_toBottomOf="@+id/editTextLocalidadeEmpresaConfiguracao" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSubmeterFotoEmpresaConfiguracao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/guardar_configuracoes"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDescricaoEmpresaConfiguracao" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

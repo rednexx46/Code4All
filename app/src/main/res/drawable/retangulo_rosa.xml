@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@android:color/darker_gray">
+    <item>
+        <shape android:id="@+id/listview_background_shape">
+            <stroke
+                android:width="2dp"
+                android:color="@android:color/black" />
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <corners android:radius="20dp" />
+            <solid android:color="@color/rosa" />
+        </shape>
+    </item>
+</ripple>

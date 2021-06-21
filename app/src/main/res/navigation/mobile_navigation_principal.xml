@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_inicio">
+
+    <fragment
+        android:id="@+id/nav_inicio"
+        android:name="com.josexavier.code4all.fragment.InicioFragment"
+        android:label="@string/opcao_inicio"
+        tools:layout="@layout/fragment_inicio" />
+
+
+    <fragment
+        android:id="@+id/nav_quizes"
+        android:name="com.josexavier.code4all.fragment.QuizesFragment"
+        android:label="@string/opcao_quizes"
+        tools:layout="@layout/fragment_quizes" />
+
+    <fragment
+        android:id="@+id/nav_forum"
+        android:name="com.josexavier.code4all.fragment.ForumFragment"
+        android:label="@string/opcao_forum"
+        tools:layout="@layout/fragment_forum" />
+
+    <fragment
+        android:id="@+id/nav_pontuacao"
+        android:name="com.josexavier.code4all.fragment.PontuacaoFragment"
+        android:label="@string/opcao_pontuacao"
+        tools:layout="@layout/fragment_pontuacao" />
+
+    <fragment
+        android:id="@+id/nav_conta"
+        android:name="com.josexavier.code4all.fragment.ContaFragment"
+        android:label="@string/opcao_conta"
+        tools:layout="@layout/fragment_conta" />
+
+    <fragment
+        android:id="@+id/nav_ofertas"
+        android:name="com.josexavier.code4all.fragment.OfertasFragment"
+        android:label="@string/opcao_ofertas"
+        tools:layout="@layout/fragment_ofertas" />
+
+    <fragment
+        android:id="@+id/nav_definicoes"
+        android:name="com.josexavier.code4all.fragment.DefinicoesFragment"
+        android:label="@string/opcao_definicoes"
+        tools:layout="@layout/fragment_definicoes" />
+
+    <fragment
+        android:id="@+id/nav_sobre"
+        android:name="com.josexavier.code4all.fragment.SobreFragment"
+        android:label="@string/opcao_sobre"
+        tools:layout="@layout/fragment_sobre" />
+
+</navigation>

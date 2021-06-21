@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio_mod"
+            android:icon="@drawable/ic_casa"
+            android:title="@string/opcao_inicio" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_contas"
+            android:icon="@drawable/ic_pessoas"
+            android:title="@string/opcao_contas" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_posts_verificacao"
+            android:icon="@drawable/ic_cafe"
+            android:title="@string/posts" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_empresas"
+            android:icon="@drawable/ic_mala"
+            android:title="@string/empresas" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_estrela"
+            android:title="@string/opcao_forum" />
+    </group>
+    <group>
+        <item android:title="@string/opcao_forum">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_criar_post"
+                        android:icon="@drawable/ic_adicionar"
+                        android:title="@string/opcao_criar_post" />
+
+                    <item
+                        android:id="@+id/nav_listar_post"
+                        android:icon="@drawable/ic_lista"
+                        android:title="@string/opcao_listar_posts" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="@string/tags_temas">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_criar_tt"
+                        android:icon="@drawable/ic_adicionar"
+                        android:title="@string/opcao_criar_tt" />
+
+                    <item
+                        android:id="@+id/nav_listar_tt"
+                        android:icon="@drawable/ic_lista"
+                        android:title="@string/opcao_listar_tt" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="@string/notificacoes">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_criar_notificacao"
+                        android:icon="@drawable/ic_adicionar"
+                        android:title="@string/opcao_criar_notificacao" />
+
+                    <item
+                        android:id="@+id/nav_listar_notificacoes"
+                        android:icon="@drawable/ic_lista"
+                        android:title="@string/opcao_listar_notificacoes" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="@string/outros">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_conta"
+                        android:icon="@drawable/ic_pessoa"
+                        android:title="@string/opcao_conta" />
+                    <item
+                        android:id="@+id/nav_definicoes"
+                        android:icon="@drawable/ic_definicoes"
+                        android:title="@string/opcao_definicoes" />
+                    <item
+                        android:id="@+id/nav_sobre"
+                        android:icon="@drawable/ic_info"
+                        android:title="@string/opcao_sobre" />
+                    <item
+                        android:id="@+id/nav_logout"
+                        android:icon="@drawable/ic_logout"
+                        android:title="@string/opcao_logout" />
+                </group>
+            </menu>
+        </item>
+    </group>
+
+    <group android:id="@+id/group_footer">
+        <item
+            android:id="@+id/nav_footer"
+            android:title=""
+            app:actionLayout="@layout/footer" />
+    </group>
+</menu>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.josexavier.code4all.fragment.DefinicoesFragment">
+
+        <TextView
+            android:id="@+id/textDefinicoesTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/opcao_definicoes"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAlterarInscricoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_ciano"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/modificar_inscricoes"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAlterarPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDefinicoesTitulo" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAlterarPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_laranja_escuro"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/alterar_password"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/buttonRemoverConta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAlterarInscricoes" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRemoverConta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_vermelho"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/remover_conta"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAlterarPassword" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio_empresa"
+            android:icon="@drawable/ic_casa"
+            android:title="@string/opcao_inicio" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_ofertas_verificacao"
+            android:icon="@drawable/ic_ofertas"
+            android:title="@string/opcao_ofertas" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_empresas"
+            android:icon="@drawable/ic_mala"
+            android:title="@string/empresas" />
+    </group>
+    <group>
+        <item android:title="@string/ofertas">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_criar_oferta"
+                        android:icon="@drawable/ic_adicionar"
+                        android:title="@string/criar_oferta" />
+                    <item
+                        android:id="@+id/nav_listar_ofertas"
+                        android:icon="@drawable/ic_lista"
+                        android:title="@string/listar_ofertas" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="@string/outros">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_empresa"
+                        android:icon="@drawable/ic_mala"
+                        android:title="@string/empresa" />
+                    <item
+                        android:id="@+id/nav_definicoes"
+                        android:icon="@drawable/ic_definicoes"
+                        android:title="@string/opcao_definicoes" />
+                    <item
+                        android:id="@+id/nav_sobre"
+                        android:icon="@drawable/ic_info"
+                        android:title="@string/opcao_sobre" />
+                    <item
+                        android:id="@+id/nav_logout"
+                        android:icon="@drawable/ic_logout"
+                        android:title="@string/opcao_logout" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group android:id="@+id/group_footer">
+        <item
+            android:id="@+id/nav_footer"
+            android:title=""
+            app:actionLayout="@layout/footer" />
+    </group>
+</menu>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.josexavier.code4all.activity.EditarPostActivity">
+
+        <TextView
+            android:id="@+id/textViewEditarPostTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="Editar"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewEditarPostSubTitulo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewEditarPostSubTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/postagem"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewEditarPost"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEditarPostTitulo"
+            app:layout_constraintStart_toStartOf="@+id/textViewEditarPostTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEditarPostTitulo" />
+
+        <EditText
+            android:id="@+id/editTextTituloEditarPost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/borda_preta"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Título do Post"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerTagsEditarPost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewEditarPost" />
+
+        <Spinner
+            android:id="@+id/spinnerTagsEditarPost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="387dp"
+            android:background="@drawable/borda_preta"
+            android:padding="10dp"
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toTopOf="@+id/editTextDescricaoEditarPost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTituloEditarPost" />
+
+        <EditText
+            android:id="@+id/editTextDescricaoEditarPost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borda_preta"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Descrição do Post"
+            android:inputType="textMultiLine"
+            android:padding="16dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonEditarPost"
+            app:layout_constraintEnd_toEndOf="@+id/editTextTituloEditarPost"
+            app:layout_constraintStart_toStartOf="@+id/editTextTituloEditarPost"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTagsEditarPost" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonEditarPost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:onClick="confirmarEdicaoPost"
+            android:padding="16dp"
+            android:text="@string/confirmar_edicao"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/editTextDescricaoEditarPost"
+            app:layout_constraintStart_toStartOf="@+id/editTextDescricaoEditarPost"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDescricaoEditarPost" />
+
+        <ImageView
+            android:id="@+id/imageViewEditarPost"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:padding="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextTituloEditarPost"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEditarPostSubTitulo"
+            app:layout_constraintStart_toStartOf="@+id/textViewEditarPostSubTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEditarPostSubTitulo"
+            app:srcCompat="@drawable/ic_imagem" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

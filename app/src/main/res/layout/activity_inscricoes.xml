@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.josexavier.code4all.activity.InscricoesActivity">
+
+    <TextView
+        android:id="@+id/textInscricoesTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_extra_bold"
+        android:text="@string/inscricoes"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSloganInscricoes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/inscricoes_texto"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInscricoesTitulo" />
+
+    <ListView
+        android:id="@+id/listViewInscricoes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSloganInscricoes" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu_colorNormal="@color/corPrimaria"
+        app:menu_colorPressed="@color/corPrimariaEscura"
+        app:menu_icon="@drawable/ic_definicoes">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabInscricoesLimpar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="limparInscricoes"
+            android:src="@drawable/ic_x"
+            app:fab_colorNormal="@color/corPrimariaEscura"
+            app:fab_colorPressed="@color/corIntroUm"
+            app:fab_label="Limpar Inscrições"
+            app:fab_size="normal" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabInscricoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="guardarInscricoes"
+            android:src="@drawable/ic_verificacao"
+            app:fab_colorNormal="@color/corPrimariaEscura"
+            app:fab_colorPressed="@color/corIntroUm"
+            app:fab_label="Guardar Inscrições"
+            app:fab_size="normal" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

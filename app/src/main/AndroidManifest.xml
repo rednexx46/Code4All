@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.josexavier.code4all">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/nome_da_app"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Code4All">
+        <activity
+            android:name=".activity.EditarOfertaActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EmpresaVisualizacaoActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditarEmpresaActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OfertaActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CriarOfertaActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EsquecerPasswordActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EmpresaConfiguracaoActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditarQuizActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditarNotificacaoActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PostActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ContaActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AvaliacaoQuizActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QuizActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QuizInfoActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".activity.EditarPerfilActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ModeradorActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CriarPostActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.PostsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PostsActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.PrincipalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.InscricoesActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.CriarContaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditarPostActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.PrincipalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EmpresaActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AdminActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Code4All.NoActionBar" />
+        <activity
+            android:name=".activity.NotificacoesActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.PrincipalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PrincipalActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Code4All.NoActionBar" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.IntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.IntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CriarContaActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.IntroActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

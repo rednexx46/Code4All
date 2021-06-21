@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="corPrimaria">#FF9A03</color>
+    <color name="corPrimariaEscura">#D97B06</color>
+    <color name="corDiferente">#CF3E3B</color>
+    <color name="corIntroUm">#D97B06</color>
+    <color name="corIntroDois">#B45C09</color>
+    <color name="corIntroTres">#8E3E0C</color>
+    <color name="facebook">#1947E5</color>
+    <color name="twitter">#00C6AE</color>
+    <color name="corTextoClique">#F95A2C</color>
+    <color name="corFundoQuiz">#FFF3F8</color>
+    <color name="corAmarelo">#EAEA27</color>
+    <color name="branco">#FFFFFF</color>
+    <color name="corLinkedIn">#0A66C2</color>
+    <color name="rosa">#FF89BB</color>
+
+</resources>

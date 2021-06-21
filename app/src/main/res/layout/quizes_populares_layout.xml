@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:background="@drawable/fundo_quiz"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imagemQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/retangulo_laranja"
+        android:padding="10dp"
+        android:src="@drawable/ic_imagem" />
+
+    <TextView
+        android:id="@+id/nomeQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:text="@string/carregando"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/retangulo_laranja"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/estrelaQuiz1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_estrela" />
+
+        <ImageView
+            android:id="@+id/estrelaQuiz2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_estrela" />
+
+        <ImageView
+            android:id="@+id/estrelaQuiz3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_estrela" />
+
+        <ImageView
+            android:id="@+id/estrelaQuiz4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_estrela" />
+
+        <ImageView
+            android:id="@+id/estrelaQuiz5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_estrela" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/estrelasTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:gravity="center"
+            android:text="@string/carregando"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewMembrosQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:gravity="center"
+            android:text="@string/carregando"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0.7"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/criadorQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/carregando"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dataCriacaoQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/carregando"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botaoMatricularQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="0.4"
+            android:background="@drawable/retangulo_laranja"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="8dp"
+            android:text="@string/carregando"
+            android:textColor="@android:color/white"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

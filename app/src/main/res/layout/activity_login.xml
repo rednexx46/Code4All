@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="com.josexavier.code4all.activity.LoginActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewLogoLogin"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewTituloLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_livro_aberto" />
+
+        <TextView
+            android:id="@+id/textViewTituloLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/entrar"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSloganLogin"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewLogoLogin"
+            app:layout_constraintStart_toStartOf="@+id/imageViewLogoLogin"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewLogoLogin" />
+
+        <TextView
+            android:id="@+id/textViewSloganLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/informacao_login"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutLogin"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTituloLogin"
+            app:layout_constraintStart_toStartOf="@+id/textViewTituloLogin"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTituloLogin" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSloganLogin">
+
+            <EditText
+                android:id="@+id/editTextEmailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:autofillHints=""
+                android:background="@drawable/borda_preta"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/editTextPasswordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:autofillHints=""
+                android:background="@drawable/borda_preta"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/retangulo_laranja"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
+            android:text="@string/entrar"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/textViewEsquecerPasswordLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutLogin" />
+
+        <TextView
+            android:id="@+id/textViewEsquecerPasswordLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:onClick="esquecerPassword"
+            android:padding="8dp"
+            android:text="@string/esquecer_password"
+            android:textAlignment="center"
+            android:textColor="@color/corTextoClique"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewCriarContaLogin"
+            app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+            app:layout_constraintStart_toStartOf="@+id/buttonLogin"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+
+        <TextView
+            android:id="@+id/textViewPrimeiraVezLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="8dp"
+            android:text="@string/utilizador_novo"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textViewCriarContaLogin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewCriarContaLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:onClick="criarConta"
+            android:padding="8dp"
+            android:text="@string/criar_conta"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/corTextoClique"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewPrimeiraVezLogin" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

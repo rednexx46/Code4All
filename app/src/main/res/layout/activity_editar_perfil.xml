@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    tools:context="com.josexavier.code4all.activity.EditarPerfilActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="com.josexavier.code4all.activity.EditarPerfilActivity">
+
+        <TextView
+            android:id="@+id/textEditarPerfilTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="Editar"
+            android:textAlignment="center"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/textEditarPerfilSubTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/perfil"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:id="@+id/linearCorFundoPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageContaEditarPerfil"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/borda_perfil"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/editTextEditarPerfilNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/borda_branca"
+                android:drawableStart="@drawable/ic_pessoa"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/nome"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/editTextEditarPerfilEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/borda_branca"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/email"
+                android:inputType="textWebEmailAddress"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/editTextEditarPerfilBiografia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/borda_branca"
+                android:drawableStart="@drawable/ic_texto"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/black"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/biografia"
+                android:inputType="textMultiLine"
+                android:padding="16dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="21sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonAtualizarCorPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/retangulo_ciano"
+                    android:drawableStart="@drawable/ic_atualizar"
+                    android:drawablePadding="8dp"
+                    android:onClick="atualizarCorPerfil"
+                    android:padding="8dp"
+                    android:fontFamily="@font/montserrat_extra_bold"
+                    android:textColor="@android:color/white"
+                    android:text="@string/atualizar_cor_perfil" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonAtualizarCorFundoPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/retangulo_rosa"
+                    android:drawableStart="@drawable/ic_atualizar"
+                    android:drawablePadding="8dp"
+                    android:onClick="atualizarCorFundoPerfil"
+                    android:padding="8dp"
+                    android:fontFamily="@font/montserrat_extra_bold"
+                    android:textColor="@android:color/white"
+                    android:text="@string/atualizar_cor_fundo_perfil" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:background="@drawable/retangulo_laranja_escuro"
+            android:onClick="confirmarAlteracoesPerfil"
+            android:padding="16dp"
+            android:text="Confirmar Alterações!"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>
