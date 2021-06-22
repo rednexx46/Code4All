@@ -20,11 +20,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.helper.Configs;
-import com.josexavier.code4all.model.Notificacao;
 import com.google.firebase.database.DatabaseReference;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.helper.Configs;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.model.Notificacao;
 
 import java.io.ByteArrayOutputStream;
 

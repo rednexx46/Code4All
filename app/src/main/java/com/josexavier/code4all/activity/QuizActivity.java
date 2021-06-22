@@ -17,16 +17,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.helper.Configs;
-import com.josexavier.code4all.model.Conta;
-import com.josexavier.code4all.model.Pergunta;
-import com.josexavier.code4all.model.Quiz;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.helper.Configs;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.model.Conta;
+import com.josexavier.code4all.model.Pergunta;
+import com.josexavier.code4all.model.Quiz;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -443,4 +443,5 @@ public class QuizActivity extends AppCompatActivity {
         Toast.makeText(this, "Solução Limpa com Sucesso!", Toast.LENGTH_SHORT).show();
         textViewSolucaoMultipla.setText("");
     }
+
 }

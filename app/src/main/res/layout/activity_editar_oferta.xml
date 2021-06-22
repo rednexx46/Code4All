@@ -65,13 +65,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonConfirmarAlteracoesEditarOferta"
-        android:onClick="confirmarAlteracoesOferta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/retangulo_laranja"
         android:fontFamily="@font/montserrat_extra_bold"
+        android:onClick="confirmarAlteracoesOferta"
         android:padding="16dp"
         android:text="@string/confirmar_alteracoes"
         android:textColor="@android:color/white"

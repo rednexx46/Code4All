@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_gravity="center"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
@@ -84,26 +84,26 @@
             android:id="@+id/buttonEditarOferta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_weight="0.5"
-            android:layout_marginEnd="8dp"
             android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="0.5"
             android:background="@drawable/retangulo_verde"
             android:fontFamily="@font/montserrat_extra_bold"
             android:text="Editar Oferta"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonRemoverOferta"
             android:layout_width="match_parent"
-            android:layout_marginStart="8dp"
-            android:visibility="gone"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="0.5"
             android:background="@drawable/retangulo_vermelho"
             android:fontFamily="@font/montserrat_extra_bold"
             android:text="Remover Oferta"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
 
     </LinearLayout>
 

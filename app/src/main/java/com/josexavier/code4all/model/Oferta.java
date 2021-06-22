@@ -1,7 +1,7 @@
 package com.josexavier.code4all.model;
 
-import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.google.firebase.database.DatabaseReference;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
 
 public class Oferta {
 

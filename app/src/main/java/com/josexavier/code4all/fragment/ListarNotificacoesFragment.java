@@ -19,17 +19,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.EditarNotificacaoActivity;
 import com.josexavier.code4all.adapter.NotificacoesAdapter;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.helper.RecyclerItemClickListener;
 import com.josexavier.code4all.model.Notificacao;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -145,7 +145,7 @@ public class ListarNotificacoesFragment extends Fragment {
 
         builder.setPositiveButton("Sim", (dialog, which) -> {
             dialogRemocao.show();
-            StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("notificacoes").child(listaNotificacoes.get(position).getId()+".png");
+            StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("notificacoes").child(listaNotificacoes.get(position).getId() + ".png");
             fotoRef.delete().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     DefinicaoFirebase.recuperarBaseDados().child("notificacoes").child(listaNotificacoes.get(position).getId()).removeValue((error, ref) -> {

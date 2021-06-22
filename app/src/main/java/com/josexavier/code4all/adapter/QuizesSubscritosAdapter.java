@@ -13,16 +13,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.activity.QuizActivity;
-import com.josexavier.code4all.activity.QuizInfoActivity;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Quiz;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.activity.QuizActivity;
+import com.josexavier.code4all.activity.QuizInfoActivity;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.model.Quiz;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -14,11 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.EmpresaVisualizacaoActivity;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.model.Empresa;
-import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
 

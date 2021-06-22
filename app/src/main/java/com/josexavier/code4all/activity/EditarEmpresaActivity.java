@@ -1,10 +1,5 @@
 package com.josexavier.code4all.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,10 +16,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.helper.Configs;
-import com.josexavier.code4all.model.Empresa;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +31,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.helper.Configs;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.model.Empresa;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -58,7 +58,7 @@ public class EditarEmpresaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_empresa);
 
-       dialogCarregamento = new SpotsDialog.Builder().setContext(this).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        dialogCarregamento = new SpotsDialog.Builder().setContext(this).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         configuracoesIniciais();
 

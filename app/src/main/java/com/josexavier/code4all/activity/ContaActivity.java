@@ -11,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Conta;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.model.Conta;
 
 import org.jetbrains.annotations.NotNull;
 

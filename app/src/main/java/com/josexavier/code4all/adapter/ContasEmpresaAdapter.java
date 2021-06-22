@@ -12,12 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.ContaActivity;
 import com.josexavier.code4all.activity.CriarOfertaActivity;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.model.Conta;
-import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
 

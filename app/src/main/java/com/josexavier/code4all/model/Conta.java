@@ -1,8 +1,8 @@
 package com.josexavier.code4all.model;
 
+import com.google.firebase.database.DatabaseReference;
 import com.josexavier.code4all.activity.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.google.firebase.database.DatabaseReference;
 
 public class Conta {
 

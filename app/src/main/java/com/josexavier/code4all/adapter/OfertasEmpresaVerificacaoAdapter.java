@@ -15,13 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.activity.ContaActivity;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.helper.Configs;
-import com.josexavier.code4all.model.Oferta;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.activity.ContaActivity;
+import com.josexavier.code4all.helper.Configs;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.model.Oferta;
 
 import org.jetbrains.annotations.NotNull;
 

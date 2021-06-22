@@ -10,12 +10,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.helper.Configs;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.helper.Configs;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
 
 import dmax.dialog.SpotsDialog;
 

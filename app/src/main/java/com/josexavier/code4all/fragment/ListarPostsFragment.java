@@ -19,17 +19,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.EditarPostActivity;
 import com.josexavier.code4all.adapter.PostAdminAdapter;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.helper.RecyclerItemClickListener;
 import com.josexavier.code4all.model.Post;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;

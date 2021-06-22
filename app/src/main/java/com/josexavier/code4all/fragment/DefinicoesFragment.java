@@ -18,11 +18,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.activity.InscricoesActivity;
-import com.josexavier.code4all.activity.IntroActivity;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.helper.Configs;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +26,11 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.activity.InscricoesActivity;
+import com.josexavier.code4all.activity.IntroActivity;
+import com.josexavier.code4all.helper.Configs;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
 
 import dmax.dialog.SpotsDialog;
 
@@ -102,39 +102,39 @@ public class DefinicoesFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(autenticacao.getUid());
                                     utilizadorRef.removeValue().addOnCompleteListener(task2 -> {
-                                            if (task2.isSuccessful()) {
-                                                StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(utilizador.getUid());
-                                                fotoRef.delete().addOnCompleteListener(task3 -> {
-                                                    if (task3.isSuccessful()) {
-                                                        utilizador.delete().addOnCompleteListener(task4 -> {
-                                                            if (task4.isSuccessful()) {
-                                                                dialog.dismiss();
-                                                                autenticacao.signOut();
-                                                                Toast.makeText(getContext(), "Conta removida com Sucesso!", Toast.LENGTH_SHORT).show();
-                                                                Intent intentIntroActivity = new Intent(getContext(), IntroActivity.class);
-                                                                intentIntroActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                                                startActivity(intentIntroActivity);
-                                                                getActivity().finish();
-                                                            } else{
-                                                                dialog.dismiss();
-                                                                String erro;
-                                                                try {
-                                                                    throw task4.getException();
-                                                                } catch (FirebaseAuthRecentLoginRequiredException e) {
-                                                                    erro = "Credenciais Expiradas!";
-                                                                } catch (Exception e) {
-                                                                    erro = getString(R.string.erro);
-                                                                    e.printStackTrace();
-                                                                }
-                                                                Toast.makeText(getContext(), erro, Toast.LENGTH_SHORT).show();
+                                        if (task2.isSuccessful()) {
+                                            StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(utilizador.getUid());
+                                            fotoRef.delete().addOnCompleteListener(task3 -> {
+                                                if (task3.isSuccessful()) {
+                                                    utilizador.delete().addOnCompleteListener(task4 -> {
+                                                        if (task4.isSuccessful()) {
+                                                            dialog.dismiss();
+                                                            autenticacao.signOut();
+                                                            Toast.makeText(getContext(), "Conta removida com Sucesso!", Toast.LENGTH_SHORT).show();
+                                                            Intent intentIntroActivity = new Intent(getContext(), IntroActivity.class);
+                                                            intentIntroActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                                            startActivity(intentIntroActivity);
+                                                            getActivity().finish();
+                                                        } else {
+                                                            dialog.dismiss();
+                                                            String erro;
+                                                            try {
+                                                                throw task4.getException();
+                                                            } catch (FirebaseAuthRecentLoginRequiredException e) {
+                                                                erro = "Credenciais Expiradas!";
+                                                            } catch (Exception e) {
+                                                                erro = getString(R.string.erro);
+                                                                e.printStackTrace();
                                                             }
-                                                        });
-                                                    } else
-                                                        Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                                });
+                                                            Toast.makeText(getContext(), erro, Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                } else
+                                                    Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                            });
 
                                         } else
-                                        Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
                                     });
                                 } else
                                     Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();

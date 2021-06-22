@@ -17,20 +17,20 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.activity.PostActivity;
-import com.josexavier.code4all.activity.PostsActivity;
-import com.josexavier.code4all.adapter.PostsAdapter;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.helper.Configs;
-import com.josexavier.code4all.helper.RecyclerItemClickListener;
-import com.josexavier.code4all.model.Post;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.activity.PostActivity;
+import com.josexavier.code4all.activity.PostsActivity;
+import com.josexavier.code4all.adapter.PostsAdapter;
+import com.josexavier.code4all.helper.Configs;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.helper.RecyclerItemClickListener;
+import com.josexavier.code4all.model.Post;
 
 import java.util.ArrayList;
 import java.util.List;

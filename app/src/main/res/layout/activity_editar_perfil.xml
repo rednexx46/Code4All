@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:fillViewport="true"
+    android:orientation="vertical"
     tools:context="com.josexavier.code4all.activity.EditarPerfilActivity">
 
     <LinearLayout
@@ -30,8 +30,8 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat_extra_bold"
             android:text="@string/perfil"
-            android:textColor="@android:color/black"
             android:textAlignment="center"
+            android:textColor="@android:color/black"
             android:textSize="40sp" />
 
         <LinearLayout
@@ -124,11 +124,11 @@
                     android:background="@drawable/retangulo_ciano"
                     android:drawableStart="@drawable/ic_atualizar"
                     android:drawablePadding="8dp"
+                    android:fontFamily="@font/montserrat_extra_bold"
                     android:onClick="atualizarCorPerfil"
                     android:padding="8dp"
-                    android:fontFamily="@font/montserrat_extra_bold"
-                    android:textColor="@android:color/white"
-                    android:text="@string/atualizar_cor_perfil" />
+                    android:text="@string/atualizar_cor_perfil"
+                    android:textColor="@android:color/white" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/buttonAtualizarCorFundoPerfil"
@@ -139,11 +139,11 @@
                     android:background="@drawable/retangulo_rosa"
                     android:drawableStart="@drawable/ic_atualizar"
                     android:drawablePadding="8dp"
+                    android:fontFamily="@font/montserrat_extra_bold"
                     android:onClick="atualizarCorFundoPerfil"
                     android:padding="8dp"
-                    android:fontFamily="@font/montserrat_extra_bold"
-                    android:textColor="@android:color/white"
-                    android:text="@string/atualizar_cor_fundo_perfil" />
+                    android:text="@string/atualizar_cor_fundo_perfil"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
@@ -155,8 +155,8 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
-            android:fontFamily="@font/montserrat_extra_bold"
             android:background="@drawable/retangulo_laranja_escuro"
+            android:fontFamily="@font/montserrat_extra_bold"
             android:onClick="confirmarAlteracoesPerfil"
             android:padding="16dp"
             android:text="Confirmar Alterações!"

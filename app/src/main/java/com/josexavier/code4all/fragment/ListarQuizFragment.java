@@ -19,17 +19,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.EditarQuizActivity;
 import com.josexavier.code4all.adapter.QuizesAdminAdapter;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.helper.RecyclerItemClickListener;
 import com.josexavier.code4all.model.Quiz;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +38,8 @@ import dmax.dialog.SpotsDialog;
 
 public class ListarQuizFragment extends Fragment {
 
-    private List<Quiz> listaFiltrada = new ArrayList<>();
     private final List<Quiz> listaQuizes = new ArrayList<>();
+    private List<Quiz> listaFiltrada = new ArrayList<>();
     private QuizesAdminAdapter quizesAdapter;
     private AlertDialog dialogRemocao;
 

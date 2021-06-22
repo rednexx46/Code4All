@@ -46,9 +46,9 @@
                 android:id="@+id/textViewEmpresaNome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="24dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
                 android:fontFamily="@font/montserrat_extra_bold"
                 android:gravity="center"
                 android:textColor="@android:color/white"
@@ -61,8 +61,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="16dp"
-                android:fontFamily="@font/montserrat_extra_bold"
                 android:background="@drawable/retangulo_laranja_escuro"
+                android:fontFamily="@font/montserrat_extra_bold"
                 android:text="@string/editar_perfil"
                 android:textColor="@android:color/white" />
 

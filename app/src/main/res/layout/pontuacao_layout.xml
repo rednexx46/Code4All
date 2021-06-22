@@ -66,9 +66,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="8dp"
-        android:textAlignment="center"
         android:fontFamily="@font/montserrat_extra_bold"
-        android:textColor="@android:color/white"/>
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

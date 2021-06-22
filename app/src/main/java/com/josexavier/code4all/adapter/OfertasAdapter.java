@@ -12,11 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.EmpresaVisualizacaoActivity;
 import com.josexavier.code4all.activity.OfertaActivity;
 import com.josexavier.code4all.model.Oferta;
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 

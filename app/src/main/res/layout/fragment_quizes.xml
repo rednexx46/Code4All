@@ -40,10 +40,10 @@
             android:id="@+id/textViewSloganQuizesPopulares"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
             android:text="@string/slogan_quizes_populares"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -76,11 +76,11 @@
                 android:id="@+id/textViewSloganSubscricoesQuizes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAlignment="center"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="@string/carregando"
+                android:textAlignment="center"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -30,18 +30,18 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-import com.josexavier.code4all.R;
-import com.josexavier.code4all.activity.Validacao;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Introducao;
-import com.josexavier.code4all.model.Pergunta;
-import com.josexavier.code4all.model.Quiz;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.josexavier.code4all.R;
+import com.josexavier.code4all.activity.Validacao;
+import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.model.Introducao;
+import com.josexavier.code4all.model.Pergunta;
+import com.josexavier.code4all.model.Quiz;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;

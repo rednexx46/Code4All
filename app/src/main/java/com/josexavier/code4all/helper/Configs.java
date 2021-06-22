@@ -16,6 +16,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.AdminActivity;
 import com.josexavier.code4all.activity.EmpresaActivity;
@@ -26,13 +33,6 @@ import com.josexavier.code4all.activity.RecuperarIntent;
 import com.josexavier.code4all.activity.Validacao;
 import com.josexavier.code4all.activity.VariavelTemp;
 import com.josexavier.code4all.model.Conta;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,15 +41,15 @@ import java.util.Random;
 public class Configs {
 
     public static final String emailCriador = "josexavier46@outlook.pt";
-    public static String[] grupos = {"membro", "mod", "admin", "empresa"};
+    public static final int SELECAO_CAMARA = 100;
+    public static final int SELECAO_GALERIA = 200;
     private static final String PREFS = "numero_execucoes";
+    public static String[] grupos = {"membro", "mod", "admin", "empresa"};
     public static int cliques = 0;
     public static String PENDENTE = "pendente";
     public static String RECUSADO = "recusado";
     public static String ACEITE = "aceite";
     public static String CONCLUIDO = "concluido";
-    public static final int SELECAO_CAMARA = 100;
-    public static final int SELECAO_GALERIA = 200;
 
     public static void guardarNome(String nome, Validacao validacao) {
 
