@@ -108,6 +108,7 @@ public class DefinicoesFragment extends Fragment {
                                                 if (task3.isSuccessful()) {
                                                     utilizador.delete().addOnCompleteListener(task4 -> {
                                                         if (task4.isSuccessful()) {
+                                                            dialogConta.dismiss();
                                                             dialog.dismiss();
                                                             autenticacao.signOut();
                                                             Toast.makeText(getContext(), "Conta removida com Sucesso!", Toast.LENGTH_SHORT).show();
@@ -116,6 +117,7 @@ public class DefinicoesFragment extends Fragment {
                                                             startActivity(intentIntroActivity);
                                                             getActivity().finish();
                                                         } else {
+                                                            dialogConta.dismiss();
                                                             dialog.dismiss();
                                                             String erro;
                                                             try {
@@ -129,20 +131,32 @@ public class DefinicoesFragment extends Fragment {
                                                             Toast.makeText(getContext(), erro, Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
-                                                } else
+                                                } else {
+                                                    dialogConta.dismiss();
+                                                    dialog.dismiss();
                                                     Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                                }
                                             });
 
-                                        } else
+                                        } else {
+                                            dialogConta.dismiss();
+                                            dialog.dismiss();
                                             Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                        }
                                     });
-                                } else
+                                } else {
+                                    dialogConta.dismiss();
+                                    dialog.dismiss();
                                     Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                }
                             });
 
                         });
-                    } else
-                        Toast.makeText(getContext(), "Introduza a sua Password!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        dialogConta.dismiss();
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                    }
 
                 });
                 builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());

@@ -173,11 +173,4 @@ public class CriarNotificacaoFragment extends Fragment {
         }
     }
 
-    private void abrirCamara() {
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(i, SELECAO_CAMARA);
-        }
-    }
-
 }

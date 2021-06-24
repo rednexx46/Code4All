@@ -180,19 +180,19 @@ public class ContasFragment extends Fragment {
 
                 case "mod":
                     tipos.add(tipoUtilizadorSelecionado);
-                    if (!tipoUtilizadorSelecionado.equals("membro"))
-                        tipos.add("membro");
-                    if (!tipoUtilizadorSelecionado.equals("mod"))
-                        tipos.add("mod");
+                    if (!tipoUtilizadorSelecionado.equals(Configs.grupos[0]))
+                        tipos.add(Configs.grupos[0]);
+                    if (!tipoUtilizadorSelecionado.equals(Configs.grupos[1]))
+                        tipos.add(Configs.grupos[1]);
                     break;
                 case "admin":
                     tipos.add(tipoUtilizadorSelecionado);
-                    if (!tipoUtilizadorSelecionado.equals("membro"))
-                        tipos.add("membro");
-                    if (!tipoUtilizadorSelecionado.equals("mod"))
-                        tipos.add("mod");
-                    if (!tipoUtilizadorSelecionado.equals("admin"))
-                        tipos.add("admin");
+                    if (!tipoUtilizadorSelecionado.equals(Configs.grupos[0]))
+                        tipos.add(Configs.grupos[0]);
+                    if (!tipoUtilizadorSelecionado.equals(Configs.grupos[1]))
+                        tipos.add(Configs.grupos[1]);
+                    if (!tipoUtilizadorSelecionado.equals(Configs.grupos[2]))
+                        tipos.add(Configs.grupos[2]);
                     break;
 
             }

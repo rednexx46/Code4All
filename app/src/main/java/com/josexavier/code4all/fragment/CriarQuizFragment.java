@@ -319,8 +319,10 @@ public class CriarQuizFragment extends Fragment {
     private void guardarPergunta() {
         String titulo = editTextPerguntaTitulo.getText().toString();
         Pergunta perguntaGuardar = new Pergunta();
-        if (spinnerPergunta.getSelectedItemPosition() == UNICA) perguntaGuardar.setTipo("unica");
-        else perguntaGuardar.setTipo("multipla");
+        if (spinnerPergunta.getSelectedItemPosition() == UNICA)
+            perguntaGuardar.setTipo("unica");
+        else
+            perguntaGuardar.setTipo("multipla");
         perguntaGuardar.setId(idPergunta);
         perguntaGuardar.setXp(xpValor);
         perguntaGuardar.setTitulo(titulo);
@@ -515,7 +517,7 @@ public class CriarQuizFragment extends Fragment {
     }
 
     private void removerOpcao(View root) {
-        if (idChar == 65) { // PRIMEIRA OP // BUG
+        if (idChar == 66) { // PRIMEIRA OP // BUG
             Toast.makeText(getContext(), "Operação Inválida!", Toast.LENGTH_SHORT).show();
         } else { // SE NAO PODE APAGAR :)
             isVetorPreenchido = false;

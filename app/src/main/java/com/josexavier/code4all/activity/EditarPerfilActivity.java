@@ -15,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -102,14 +100,17 @@ public class EditarPerfilActivity extends AppCompatActivity {
             if (task.isSuccessful())
                 guardarFoto(corAleatoria, validar -> {
                     if (validar) {
+                        dialog.dismiss();
                         Toast.makeText(EditarPerfilActivity.this, "Cor Atualizada com Sucesso!", Toast.LENGTH_SHORT).show();
                     } else {
+                        dialog.dismiss();
                         Toast.makeText(EditarPerfilActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
                     }
                 });
-            else
+            else {
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
+            }
         });
     }
 
@@ -141,49 +142,58 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 }
             }
 
-            Bitmap bitmap = Configs.desenharTexto(iniciais, 10000, corPerfil);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] data = baos.toByteArray();
-            StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(autenticacao.getCurrentUser().getUid()).child("foto.jpeg");
-            UploadTask uploadTask = firebaseStorage.putBytes(data);
+            if (iniciais.length() < 3 && iniciais.length() > 0) {
 
-            uploadTask.addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    firebaseStorage.getDownloadUrl().addOnCompleteListener(task2 -> {
-                        if (task2.isSuccessful()) {
-                            final String foto = task2.getResult().toString();
+                Bitmap bitmap = Configs.desenharTexto(iniciais, 10000, corPerfil);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+                StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(autenticacao.getCurrentUser().getUid()).child("foto.jpeg");
+                UploadTask uploadTask = firebaseStorage.putBytes(data);
 
-                            UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setPhotoUri(task2.getResult()).build();
-                            FirebaseUser utilizador = autenticacao.getCurrentUser();
+                uploadTask.addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        firebaseStorage.getDownloadUrl().addOnCompleteListener(task2 -> {
+                            if (task2.isSuccessful()) {
+                                final String foto = task2.getResult().toString();
 
-                            utilizador.updateProfile(profileRequest).addOnCompleteListener(task3 -> {
-                                if (task3.isSuccessful()) {
-                                    HashMap<String, Object> fotoPerfil = new HashMap<>();
-                                    fotoPerfil.put("foto", foto);
+                                UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setPhotoUri(task2.getResult()).build();
+                                FirebaseUser utilizador = autenticacao.getCurrentUser();
 
-                                    DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
+                                utilizador.updateProfile(profileRequest).addOnCompleteListener(task3 -> {
+                                    if (task3.isSuccessful()) {
+                                        HashMap<String, Object> fotoPerfil = new HashMap<>();
+                                        fotoPerfil.put("foto", foto);
 
-                                    utilizadorRef.updateChildren(fotoPerfil).addOnCompleteListener(task4 -> {
-                                        if (task4.isSuccessful()) {
-                                            validacao.isValidacaoSucesso(true);
-                                        } else {
-                                            validacao.isValidacaoSucesso(false);
-                                            Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                        }
+                                        DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
 
-                                    });
+                                        utilizadorRef.updateChildren(fotoPerfil).addOnCompleteListener(task4 -> {
+                                            if (task4.isSuccessful()) {
+                                                validacao.isValidacaoSucesso(true);
+                                            } else {
+                                                dialog.dismiss();
+                                                validacao.isValidacaoSucesso(false);
+                                                Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                            }
 
-                                } else {
-                                    Toast.makeText(this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                        });
 
-                        }
-                    });
-                }
-            });
+                                    } else {
+                                        dialog.dismiss();
+                                        Toast.makeText(this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+                        });
+                    }
+                });
+            } else {
+                dialog.dismiss();
+                Toast.makeText(this, "Introduza apenas o Primeiro e o Último Nome!", Toast.LENGTH_SHORT).show();
+            }
         } else {
+            dialog.dismiss();
             Toast.makeText(this, "Introduza um nome!", Toast.LENGTH_SHORT).show();
         }
 
@@ -198,9 +208,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 dialog.show();
                 atualizarDadosPerfil();
             } else {
+                dialog.dismiss();
                 Toast.makeText(this, "Introduza algo na Biografia!", Toast.LENGTH_SHORT).show();
             }
         } else {
+            dialog.dismiss();
             Toast.makeText(this, "Introduza um Nome!", Toast.LENGTH_SHORT).show();
         }
 
@@ -210,14 +222,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setDisplayName(nome).build();
         FirebaseUser utilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser();
-        utilizador.updateProfile(profileRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                if (task.isSuccessful())
-                    validacao.isValidacaoSucesso(true);
-                else
-                    validacao.isValidacaoSucesso(false);
-            }
+        utilizador.updateProfile(profileRequest).addOnCompleteListener(task -> {
+            if (task.isSuccessful())
+                validacao.isValidacaoSucesso(true);
+            else
+                validacao.isValidacaoSucesso(false);
         });
 
     }
@@ -246,6 +255,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         guardarNome(nome, validar2 -> {
                                             if (validar2) {
+                                                dialog.dismiss();
                                                 Toast.makeText(EditarPerfilActivity.this, "Dados Guardados com Sucesso!", Toast.LENGTH_SHORT).show();
                                                 onBackPressed();
                                             } else

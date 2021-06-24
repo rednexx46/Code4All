@@ -44,7 +44,7 @@ public class CriarPostActivity extends AppCompatActivity {
 
     private Bitmap imagem = null;
     private byte[] dadosImagem;
-    private AlertDialog dialog;
+    private AlertDialog dialog, dialogCarregamento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class CriarPostActivity extends AppCompatActivity {
         imagemPost = findViewById(R.id.imageCriarPostImagem);
 
         dialog = new SpotsDialog.Builder().setContext(this).setMessage("Guardando Post...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        dialogCarregamento = new SpotsDialog.Builder().setContext(this).setMessage("Carregando Dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         ImageButton imageButtonGaleria;
         imageButtonGaleria = findViewById(R.id.imageCriarPostGaleria);
@@ -141,16 +142,17 @@ public class CriarPostActivity extends AppCompatActivity {
             if (validar) {
                 post.guardar(validar2 -> {
                     if (validar2) {
+                        dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Post Criado com Sucesso!", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
+                        dialog.dismiss();
                         Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
             }
-            dialog.dismiss();
         });
     }
 
@@ -182,14 +184,8 @@ public class CriarPostActivity extends AppCompatActivity {
         }
     }
 
-    private void abrirCamara() {
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (i.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(i, SELECAO_CAMARA);
-        }
-    }
-
     private void buscarTags(Spinner spinner) {
+        dialogCarregamento.show();
         DatabaseReference referenciaTags = DefinicaoFirebase.recuperarBaseDados().child("tags");
         referenciaTags.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -198,6 +194,7 @@ public class CriarPostActivity extends AppCompatActivity {
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     tags.add(dados.getValue(String.class));
                 }
+                dialogCarregamento.dismiss();
                 ArrayAdapter<List<String>> adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, tags);
                 spinner.setAdapter(adapter);
             }

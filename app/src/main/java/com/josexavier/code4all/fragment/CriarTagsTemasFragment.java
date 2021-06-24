@@ -35,7 +35,6 @@ public class CriarTagsTemasFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_criar_tags_temas, container, false);
 
         dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Criando TT...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-        ;
 
         tema = root.findViewById(R.id.editTextCriarTemaTT);
         tag = root.findViewById(R.id.editTextCriarTagTT);

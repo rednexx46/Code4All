@@ -106,7 +106,7 @@ public class ListarQuizFragment extends Fragment {
             }
         });
 
-        buscarQuizes(DefinicaoFirebase.recuperarBaseDados().child("quizes"), recyclerView);
+        buscarQuizes(DefinicaoFirebase.recuperarBaseDados().child("quizes"));
 
         return root;
 
@@ -172,7 +172,7 @@ public class ListarQuizFragment extends Fragment {
         quizesAdapter.filtrarDados(listaFiltrada);
     }
 
-    private void buscarQuizes(DatabaseReference referenciaQuizes, RecyclerView recyclerView) {
+    private void buscarQuizes(DatabaseReference referenciaQuizes) {
 
         referenciaQuizes.addValueEventListener(new ValueEventListener() {
             @Override

@@ -196,12 +196,11 @@ public class QuizActivity extends AppCompatActivity {
 
                 String solucaoQuiz = quizAtual.getPerguntas().get(perguntaAtual).getSolucao();
 
-                if (solucaoMultipla.equals("") || solucaoMultipla.length() < solucaoQuiz.length()) {
+                if (solucaoMultipla.equals("") || solucaoMultipla.length() < solucaoQuiz.length())
                     Toast.makeText(this, "É preciso selecionar " + solucaoQuiz.length() + " opções!", Toast.LENGTH_SHORT).show();
-
-                } else if (solucaoMultipla.length() > solucaoQuiz.length()) {
+                else if (solucaoMultipla.length() > solucaoQuiz.length())
                     Toast.makeText(this, "Está a selecionar mais opções que o devido!", Toast.LENGTH_SHORT).show();
-                } else {
+                else {
 
                     int count = 0;
 
@@ -225,8 +224,6 @@ public class QuizActivity extends AppCompatActivity {
 
                         }
                     }
-
-                    Log.i("dados", "Contador .: " + count);
 
                     int xpPergunta = perguntas.get(perguntaAtual).getXp();
 

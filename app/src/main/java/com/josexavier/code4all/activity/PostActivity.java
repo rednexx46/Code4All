@@ -195,9 +195,12 @@ public class PostActivity extends AppCompatActivity {
         gostosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                dialogCarregamento.show();
                 if (snapshot.hasChild(Configs.recuperarIdUtilizador())) {
+                    dialogCarregamento.dismiss();
                     buttonGostar.setText("Gostei");
                 } else {
+                    dialogCarregamento.dismiss();
                     buttonGostar.setText("Gosto");
                 }
             }
@@ -213,7 +216,7 @@ public class PostActivity extends AppCompatActivity {
 
             if (buttonGostar.getText().toString().equals("Gostei")) {
                 gostoUtilizadorRef.removeValue().addOnCompleteListener(task -> {
-
+                    dialogCarregamento.show();
                     DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost);
 
                     postRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -225,10 +228,13 @@ public class PostActivity extends AppCompatActivity {
                             hashMapGosto.put("gostos", gostos - 1);
 
                             postRef.updateChildren(hashMapGosto).addOnCompleteListener(task2 -> {
-                                if (task2.isSuccessful())
+                                if (task2.isSuccessful()) {
+                                    dialogCarregamento.dismiss();
                                     buttonGostar.setText("Gosto");
-                                else
+                                } else {
+                                    dialogCarregamento.dismiss();
                                     Toast.makeText(PostActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                }
                             });
 
                         }
@@ -249,7 +255,7 @@ public class PostActivity extends AppCompatActivity {
 
                 gostoUtilizadorRef.setValue(gosto).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
+                        dialogCarregamento.show();
                         DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost);
 
                         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -261,10 +267,13 @@ public class PostActivity extends AppCompatActivity {
                                 hashMapGosto.put("gostos", gostos + 1);
 
                                 postRef.updateChildren(hashMapGosto).addOnCompleteListener(task2 -> {
-                                    if (task2.isSuccessful())
+                                    if (task2.isSuccessful()) {
+                                        dialogCarregamento.dismiss();
                                         buttonGostar.setText("Gostei");
-                                    else
+                                    } else {
+                                        dialogCarregamento.dismiss();
                                         Toast.makeText(PostActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                    }
                                 });
 
                             }

@@ -146,4 +146,5 @@ public class EditarPostActivity extends AppCompatActivity {
             }
         });
     }
+
 }

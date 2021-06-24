@@ -79,8 +79,6 @@ public class EditarNotificacaoActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(EditarNotificacaoActivity.this, "Introduza um Título!", Toast.LENGTH_SHORT).show();
             }
-
-
         });
 
         buscarNotificacao(idNotificacao);

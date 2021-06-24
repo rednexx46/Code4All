@@ -66,6 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/borda_preta"
             android:ems="10"
@@ -76,7 +77,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="373dp" />
+            app:layout_constraintTop_toBottomOf="@+id/imageCriarPostGaleria" />
 
         <EditText
             android:id="@+id/editTextCriarPostDescricao"
@@ -115,7 +116,7 @@
             android:id="@+id/buttonCriarPost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/retangulo_laranja"
             android:fontFamily="@font/montserrat_extra_bold"
             android:padding="16dp"

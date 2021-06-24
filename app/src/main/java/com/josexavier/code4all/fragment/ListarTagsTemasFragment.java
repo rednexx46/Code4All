@@ -41,7 +41,7 @@ public class ListarTagsTemasFragment extends Fragment {
     private ArrayList<String> listaTags = new ArrayList<>();
     private ArrayList<String> idTags = new ArrayList<>();
     private ArrayAdapter<String> listaTagsAdapter;
-    private AlertDialog dialogRemocao;
+    private AlertDialog dialogRemocao, dialogCarregamento;
 
     private boolean isTemaVisivel = true;
 
@@ -52,6 +52,7 @@ public class ListarTagsTemasFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_listar_tags_temas, container, false);
 
         dialogRemocao = new SpotsDialog.Builder().setContext(getContext()).setMessage("Removendo TT...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        dialogCarregamento = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         ListView temas, tags;
 
@@ -219,6 +220,7 @@ public class ListarTagsTemasFragment extends Fragment {
     }
 
     private void buscarTemas() {
+        dialogCarregamento.show();
         DatabaseReference temasRef = DefinicaoFirebase.recuperarBaseDados().child("temas");
 
         temasRef.addValueEventListener(new ValueEventListener() {
@@ -230,6 +232,7 @@ public class ListarTagsTemasFragment extends Fragment {
                     idTemas.add(dados.getKey());
                     listaTemas.add(dados.getValue(String.class));
                 }
+                dialogCarregamento.dismiss();
                 listaTemasAdapter.notifyDataSetChanged();
             }
 
@@ -241,6 +244,7 @@ public class ListarTagsTemasFragment extends Fragment {
     }
 
     private void buscarTags() {
+        dialogCarregamento.show();
         DatabaseReference temasRef = DefinicaoFirebase.recuperarBaseDados().child("tags");
 
         temasRef.addValueEventListener(new ValueEventListener() {
@@ -252,6 +256,7 @@ public class ListarTagsTemasFragment extends Fragment {
                     idTags.add(dados.getKey());
                     listaTags.add(dados.getValue(String.class));
                 }
+                dialogCarregamento.dismiss();
                 listaTagsAdapter.notifyDataSetChanged();
             }
 

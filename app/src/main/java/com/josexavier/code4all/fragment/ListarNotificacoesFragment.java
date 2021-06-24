@@ -43,7 +43,7 @@ public class ListarNotificacoesFragment extends Fragment {
     private List<Notificacao> listaNotificacoes = new ArrayList<>();
     private List<Notificacao> listaFiltrada = new ArrayList<>();
     private NotificacoesAdapter notificacoesAdapter;
-    private AlertDialog dialogRemocao;
+    private AlertDialog dialogRemocao, dialogCarregamento;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +52,7 @@ public class ListarNotificacoesFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_listar_notificacoes, container, false);
 
         dialogRemocao = new SpotsDialog.Builder().setContext(getContext()).setMessage("Removendo Notificação...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        dialogCarregamento = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         RecyclerView recyclerViewNotificacoes;
         recyclerViewNotificacoes = root.findViewById(R.id.recyclerViewListarNotificacoes);
@@ -175,6 +176,7 @@ public class ListarNotificacoesFragment extends Fragment {
     }
 
     private void buscarNotificacoes() {
+        dialogCarregamento.show();
         DatabaseReference notificacoesRef = DefinicaoFirebase.recuperarBaseDados().child("notificacoes");
 
         notificacoesRef.addValueEventListener(new ValueEventListener() {
@@ -185,6 +187,7 @@ public class ListarNotificacoesFragment extends Fragment {
                 for (DataSnapshot dados : snapshot.getChildren())
                     listaNotificacoes.add(dados.getValue(Notificacao.class));
 
+                dialogCarregamento.dismiss();
                 notificacoesAdapter.notifyDataSetChanged();
 
             }

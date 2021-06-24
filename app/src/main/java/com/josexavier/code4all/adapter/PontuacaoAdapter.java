@@ -56,6 +56,9 @@ public class PontuacaoAdapter extends RecyclerView.Adapter<PontuacaoAdapter.MyVi
         if (listaContas.get(position).getId().equals(Configs.recuperarIdUtilizador())) {
             Drawable background = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja_escuro);
             holder.linearLayout.setBackground(background);
+        } else {
+            Drawable background = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja);
+            holder.linearLayout.setBackground(background);
         }
 
 

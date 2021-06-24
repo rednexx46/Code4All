@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
+import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Conta;
 import com.josexavier.code4all.model.Post;
@@ -52,9 +53,9 @@ public class InicioModFragment extends Fragment {
                 int postsFazer = 0, posts = 0;
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    if (dados.getValue(Post.class).getEstado().equals("!aceite")) {
+                    if (dados.getValue(Post.class).getEstado().equals(Configs.PENDENTE)) {
                         postsFazer++;
-                    } else if (dados.getValue(Post.class).getEstado().equals("aceite")) {
+                    } else if (dados.getValue(Post.class).getEstado().equals(Configs.ACEITE)) {
                         posts++;
                     }
                 }
