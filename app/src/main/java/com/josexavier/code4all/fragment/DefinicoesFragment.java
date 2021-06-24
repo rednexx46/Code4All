@@ -98,12 +98,14 @@ public class DefinicoesFragment extends Fragment {
                             AuthCredential credenciais = EmailAuthProvider
                                     .getCredential(emailUtilizador, password);
 
+                            String idUtilizador = utilizador.getUid();
+
                             utilizador.reauthenticate(credenciais).addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
-                                    DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(autenticacao.getUid());
+                                    DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
                                     utilizadorRef.removeValue().addOnCompleteListener(task2 -> {
                                         if (task2.isSuccessful()) {
-                                            StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(utilizador.getUid());
+                                            StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(idUtilizador).child("foto.jpeg");
                                             fotoRef.delete().addOnCompleteListener(task3 -> {
                                                 if (task3.isSuccessful()) {
                                                     utilizador.delete().addOnCompleteListener(task4 -> {

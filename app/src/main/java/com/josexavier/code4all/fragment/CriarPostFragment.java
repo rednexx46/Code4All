@@ -45,7 +45,7 @@ public class CriarPostFragment extends Fragment {
     private byte[] dadosImagem;
     private List<String> tags = new ArrayList<>();
     private ImageView imagemPost;
-    private AlertDialog dialog;
+    private AlertDialog dialog, dialogCarregamento;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +53,7 @@ public class CriarPostFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_criar_post, container, false);
 
         dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Criando Post...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        dialogCarregamento = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         EditText editTextTitulo, editTextDescricao;
         Spinner spinnerTags;
@@ -133,13 +134,6 @@ public class CriarPostFragment extends Fragment {
         }
     }
 
-    private void abrirCamara() {
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(i, SELECAO_CAMARA);
-        }
-    }
-
     private void criarPost(String titulo, String descricao, int posicao) {
         DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts");
 
@@ -194,6 +188,7 @@ public class CriarPostFragment extends Fragment {
     }
 
     private void buscarTags(Spinner spinner) {
+        dialogCarregamento.show();
         DatabaseReference referenciaTags = DefinicaoFirebase.recuperarBaseDados().child("tags");
         referenciaTags.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -202,6 +197,7 @@ public class CriarPostFragment extends Fragment {
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     tags.add(dados.getValue(String.class));
                 }
+                dialogCarregamento.dismiss();
                 ArrayAdapter<List<String>> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, tags);
                 spinner.setAdapter(adapter);
             }

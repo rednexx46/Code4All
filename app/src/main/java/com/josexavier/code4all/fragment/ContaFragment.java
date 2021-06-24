@@ -42,6 +42,7 @@ public class ContaFragment extends Fragment {
     private LinearLayout fundoPerfil;
     private ImageView fotoPerfil;
     private TextView nomeConta, biografia, biografiaData, contaXP, estado, nascimento;
+    private boolean jaDeuParabens = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,19 +99,22 @@ public class ContaFragment extends Fragment {
 
                 SimpleDateFormat dataFormatacao = new SimpleDateFormat("dd/MM/yy");
 
-                try {
+                if (!jaDeuParabens) {
+                    try {
 
-                    Calendar calendarioHoje = Calendar.getInstance();
-                    calendarioHoje.setTime(dataFormatacao.parse(Configs.recuperarDataHoje()));
+                        Calendar calendarioHoje = Calendar.getInstance();
+                        calendarioHoje.setTime(dataFormatacao.parse(Configs.recuperarDataHoje()));
 
-                    Calendar calendarioNascimento = Calendar.getInstance();
-                    calendarioNascimento.setTime(dataFormatacao.parse(conta.getDataNascimento()));
+                        Calendar calendarioNascimento = Calendar.getInstance();
+                        calendarioNascimento.setTime(dataFormatacao.parse(conta.getDataNascimento()));
 
-                    if ((calendarioHoje.get(Calendar.DAY_OF_MONTH) == calendarioNascimento.get(Calendar.DAY_OF_MONTH)) && (calendarioHoje.get(Calendar.MONTH) == calendarioNascimento.get(Calendar.MONTH)))
-                        Toast.makeText(getContext(), "Parabéns, a Equipa Code4All deseja-lhe um ótimo dia, cheio de alegrias!", Toast.LENGTH_LONG).show();
+                        if ((calendarioHoje.get(Calendar.DAY_OF_MONTH) == calendarioNascimento.get(Calendar.DAY_OF_MONTH)) && (calendarioHoje.get(Calendar.MONTH) == calendarioNascimento.get(Calendar.MONTH)))
+                            Toast.makeText(getContext(), "Parabéns, a Equipa Code4All deseja-lhe um ótimo dia, cheio de alegrias!", Toast.LENGTH_LONG).show();
 
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    jaDeuParabens = true;
                 }
 
                 dialog.dismiss();

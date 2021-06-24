@@ -16,36 +16,22 @@
             android:id="@+id/textCriarPostAdminTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/montserrat_extra_bold"
             android:text="@string/criar"
             android:textSize="36sp"
-            app:layout_constraintBottom_toTopOf="@+id/textCriarPostAdminSubTitulo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textCriarPostAdminSubTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_extra_bold"
-            android:text="@string/post"
-            android:textColor="@android:color/black"
-            android:textSize="40sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageCriarPostAdminImagem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textCriarPostAdminTitulo" />
-
 
         <ImageView
             android:id="@+id/imageCriarPostAdminImagem"
             android:layout_width="125dp"
             android:layout_height="125dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/retangulo_laranja"
             android:padding="16dp"
             android:src="@drawable/ic_imagem"
-            app:layout_constraintBottom_toTopOf="@+id/imageCriarPostAdminGaleria"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textCriarPostAdminSubTitulo"
@@ -55,12 +41,11 @@
             android:id="@+id/imageCriarPostAdminGaleria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:background="@drawable/retangulo_laranja"
             android:padding="10dp"
             android:src="@drawable/ic_imagem"
-            app:layout_constraintBottom_toTopOf="@+id/editTextCriarPostAdminTitulo"
             app:layout_constraintEnd_toEndOf="@+id/imageCriarPostAdminImagem"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/imageCriarPostAdminImagem"
             app:layout_constraintTop_toBottomOf="@+id/imageCriarPostAdminImagem" />
 
@@ -69,6 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/borda_preta"
             android:ems="10"
@@ -77,7 +63,6 @@
             android:inputType="text"
             android:padding="16dp"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextCriarPostAdminDescricao"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageCriarPostAdminGaleria" />
@@ -87,6 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/borda_preta"
             android:ems="10"
@@ -95,7 +81,6 @@
             android:inputType="textMultiLine"
             android:padding="16dp"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/spinnerCriarPostAdminTags"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextCriarPostAdminTitulo" />
@@ -105,11 +90,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/borda_preta"
             android:padding="10dp"
             android:spinnerMode="dialog"
-            app:layout_constraintBottom_toTopOf="@+id/buttonCriarPostAdmin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextCriarPostAdminDescricao" />
@@ -118,11 +103,11 @@
             android:id="@+id/textViewAvisoCriarPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/aviso"
             android:textAlignment="center"
             android:textColor="@color/corPrimaria"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textViewSloganCriarPost"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonCriarPostAdmin" />
@@ -131,8 +116,10 @@
             android:id="@+id/textViewSloganCriarPost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/aviso_post"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -142,18 +129,33 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonCriarPostAdmin"
-            android:layout_width="347dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/retangulo_laranja"
             android:padding="16dp"
             android:text="@string/opcao_criar_post"
+            android:fontFamily="@font/montserrat_extra_bold"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toTopOf="@+id/textViewAvisoCriarPost"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerCriarPostAdminTags" />
+
+        <TextView
+            android:id="@+id/textCriarPostAdminSubTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_extra_bold"
+            android:text="@string/post"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="@+id/textCriarPostAdminTitulo"
+            app:layout_constraintStart_toStartOf="@+id/textCriarPostAdminTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/textCriarPostAdminTitulo" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

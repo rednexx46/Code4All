@@ -41,7 +41,7 @@ public class ListarQuizFragment extends Fragment {
     private final List<Quiz> listaQuizes = new ArrayList<>();
     private List<Quiz> listaFiltrada = new ArrayList<>();
     private QuizesAdminAdapter quizesAdapter;
-    private AlertDialog dialogRemocao;
+    private AlertDialog dialogRemocao, dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +50,7 @@ public class ListarQuizFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_listar_quiz, container, false);
 
         dialogRemocao = new SpotsDialog.Builder().setContext(getContext()).setMessage("Removendo Quiz...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerViewQuizesAdmin);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), RecyclerView.VERTICAL);
@@ -173,7 +174,7 @@ public class ListarQuizFragment extends Fragment {
     }
 
     private void buscarQuizes(DatabaseReference referenciaQuizes) {
-
+        dialog.show();
         referenciaQuizes.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -182,7 +183,7 @@ public class ListarQuizFragment extends Fragment {
                     Quiz quiz = postSnapshot.getValue(Quiz.class);
                     listaQuizes.add(quiz);
                 }
-
+                dialog.dismiss();
                 quizesAdapter.notifyDataSetChanged();
             }
 

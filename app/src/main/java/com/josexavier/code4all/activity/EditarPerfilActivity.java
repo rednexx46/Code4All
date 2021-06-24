@@ -44,6 +44,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
     private EditText editTextNome, editTextEmail, editTextBiografia;
     private String idUtilizador = Configs.recuperarIdUtilizador();
     private AlertDialog dialog, dialogCarregamento;
+    private ValueEventListener perfilListener;
+    private DatabaseReference perfilRef;
+    private boolean jaRecuperou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +67,8 @@ public class EditarPerfilActivity extends AppCompatActivity {
     }
 
     private void recuperarDados() {
-        DatabaseReference perfilRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
-        perfilRef.addValueEventListener(new ValueEventListener() {
+        perfilRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
+        perfilListener = perfilRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 dialogCarregamento.show();
@@ -76,10 +79,13 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
                 linearLayoutCorFundoPerfil.setBackground(drawable);
                 Glide.with(getApplicationContext()).load(conta.getFoto()).into(imagemPerfil);
-                editTextNome.setText(Configs.recuperarNomeUtilizador());
-                editTextBiografia.setText(conta.getBiografia());
-                editTextEmail.setText(Configs.recuperarEmailUtilizador());
-                editTextEmail.setEnabled(false);
+                if (!jaRecuperou) {
+                    editTextNome.setText(Configs.recuperarNomeUtilizador());
+                    editTextBiografia.setText(conta.getBiografia());
+                    editTextEmail.setText(Configs.recuperarEmailUtilizador());
+                    editTextEmail.setEnabled(false);
+                    jaRecuperou = true;
+                }
                 dialogCarregamento.dismiss();
             }
 
@@ -88,6 +94,12 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        perfilRef.removeEventListener(perfilListener);
     }
 
     public void atualizarCorPerfil(View view) {

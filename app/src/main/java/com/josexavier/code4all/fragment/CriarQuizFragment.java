@@ -83,7 +83,7 @@ public class CriarQuizFragment extends Fragment {
     private String solucaoFinal;
     private List<Pergunta> perguntas = new ArrayList<>();
 
-    private Dialog dialogCarregamento;
+    private Dialog dialogCarregamento, dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +92,7 @@ public class CriarQuizFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_criar_quiz, container, false);
 
         dialogCarregamento = new SpotsDialog.Builder().setContext(getContext()).setMessage("Criando Quiz...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         linearLayout = root.findViewById(R.id.linearLayoutCriarQuiz);
         linearLayout2 = root.findViewById(R.id.linearLayoutCriarQuiz2);
@@ -562,6 +563,7 @@ public class CriarQuizFragment extends Fragment {
     }
 
     private void buscarTemas() {
+        dialog.show();
         DatabaseReference referenciaTemas = DefinicaoFirebase.recuperarBaseDados().child("temas");
         referenciaTemas.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -572,6 +574,7 @@ public class CriarQuizFragment extends Fragment {
                 }
                 ArrayAdapter<List<String>> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, temas);
                 spinnerTemas.setAdapter(adapter);
+                dialog.dismiss();
             }
 
             @Override
