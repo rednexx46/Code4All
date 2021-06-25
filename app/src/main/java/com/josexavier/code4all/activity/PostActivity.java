@@ -52,6 +52,8 @@ public class PostActivity extends AppCompatActivity {
     private List<Comentario> listaComentarios = new ArrayList<>();
     private ComentariosAdapter comentariosAdapter;
     private android.app.AlertDialog dialogCarregamento;
+    private ValueEventListener gostosEventListener;
+    private DatabaseReference gostosRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,8 +193,8 @@ public class PostActivity extends AppCompatActivity {
         buttonComentar = findViewById(R.id.buttonComentarPost);
 
 
-        DatabaseReference gostosRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost).child("gostosPost");
-        gostosRef.addValueEventListener(new ValueEventListener() {
+        gostosRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost).child("gostosPost");
+        gostosEventListener = gostosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 dialogCarregamento.show();
@@ -373,6 +375,12 @@ public class PostActivity extends AppCompatActivity {
 
         buscarPost(idPost);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gostosRef.removeEventListener(gostosEventListener);
     }
 
     private void buscarComentarios(String idPost) {
