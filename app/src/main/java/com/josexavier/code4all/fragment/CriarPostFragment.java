@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -39,7 +40,6 @@ import dmax.dialog.SpotsDialog;
 
 public class CriarPostFragment extends Fragment {
 
-    private final int SELECAO_CAMARA = 100;
     private final int SELECAO_GALERIA = 200;
     private Bitmap imagem = null;
     private byte[] dadosImagem;
@@ -93,13 +93,13 @@ public class CriarPostFragment extends Fragment {
         try {
 
             switch (requestCode) {
-                case SELECAO_CAMARA:
+                case Configs.SELECAO_CAMARA:
                     imagem = (Bitmap) data.getExtras().get("data");
                     break;
-                case SELECAO_GALERIA:
+                case Configs.SELECAO_GALERIA:
                     Uri localImagemSelecionada = data.getData();
 
-                    if (android.os.Build.VERSION.SDK_INT >= 29) {
+                    if (Build.VERSION.SDK_INT >= 29) {
                         // Usar versão mais recente do código
                         ImageDecoder.Source source = ImageDecoder.createSource(getActivity().getContentResolver(), localImagemSelecionada);
                         imagem = ImageDecoder.decodeBitmap(source);

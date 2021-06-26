@@ -57,8 +57,8 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
         holder.titulo.setText(quiz.getTitulo());
         holder.criadorQuiz.setText(quiz.getCriador());
         holder.dataCriacao.setText(quiz.getDataCriacao());
-        holder.estrelasTotal.setText(String.format("%.2f", quiz.getClassificacao()));
-        holder.membros.setText("Membros .: " + quiz.getTotalMembros());
+        holder.estrelasTotal.setText("Pontuação:\n" + String.format("%.2f", quiz.getClassificacao()));
+        holder.membros.setText("Membros:\n" + quiz.getTotalMembros());
 
         holder.imagem.setOnClickListener(v -> {
 

@@ -117,11 +117,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/retangulo_laranja"
             android:fontFamily="@font/montserrat_extra_bold"
             android:padding="16dp"
             android:text="@string/opcao_criar_post"
             android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/spinnerCriarPostTags"
             app:layout_constraintStart_toStartOf="@+id/spinnerCriarPostTags"
             app:layout_constraintTop_toBottomOf="@+id/spinnerCriarPostTags" />

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
@@ -91,13 +92,13 @@ public class CriarPostActivity extends AppCompatActivity {
         try {
 
             switch (requestCode) {
-                case SELECAO_CAMARA:
+                case Configs.SELECAO_CAMARA:
                     imagem = (Bitmap) data.getExtras().get("data");
                     break;
-                case SELECAO_GALERIA:
+                case Configs.SELECAO_GALERIA:
                     Uri localImagemSelecionada = data.getData();
 
-                    if (android.os.Build.VERSION.SDK_INT >= 29) {
+                    if (Build.VERSION.SDK_INT >= 29) {
                         // Usar versão mais recente do código
                         ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), localImagemSelecionada);
                         imagem = ImageDecoder.decodeBitmap(source);

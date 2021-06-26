@@ -19,9 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.model.Introducao;
 import com.josexavier.code4all.model.Quiz;
-import com.josexavier.code4all.interfaces.Validacao;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -52,7 +52,11 @@ public class QuizInfoActivity extends YouTubeBaseActivity implements YouTubePlay
                 textViewDescricao.setText(introducao.getDescricao());
                 textViewTitulo.setText(introducao.getTitulo());
                 youtubePlayerView = findViewById(R.id.viewYoutubePlayer);
-                youtubePlayerView.initialize(GOOGLE_API_KEY, QuizInfoActivity.this);
+                try {
+                    youtubePlayerView.initialize(GOOGLE_API_KEY, QuizInfoActivity.this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 

@@ -178,7 +178,7 @@ public class ListarQuizFragment extends Fragment {
 
     private void buscarQuizes() {
         dialog.show();
-        quizesRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
+        quizesRef = DefinicaoFirebase.recuperarBaseDados().child("quizes");
         quizesEventListener = quizesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
