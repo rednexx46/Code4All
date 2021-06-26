@@ -24,6 +24,8 @@ import org.jetbrains.annotations.NotNull;
 public class InicioAdminFragment extends Fragment {
 
     private TextView textPostsFazer, textMembros, textEmpresas, textMods, textAdmins, textQuizes, textPosts, textOfertas;
+    private DatabaseReference geralRef;
+    private ValueEventListener geralEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,9 +50,9 @@ public class InicioAdminFragment extends Fragment {
     }
 
     private void buscarInfo() {
-        DatabaseReference referenciaGeral = DefinicaoFirebase.recuperarBaseDados();
+        geralRef = DefinicaoFirebase.recuperarBaseDados();
 
-        referenciaGeral.child("contas").addValueEventListener(new ValueEventListener() {
+        geralEventListener = geralRef.child("contas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
@@ -75,14 +77,14 @@ public class InicioAdminFragment extends Fragment {
                 textMods.setText(String.valueOf(mods));
                 textAdmins.setText(String.valueOf(admins));
 
-                referenciaGeral.child("quizes").addValueEventListener(new ValueEventListener() {
+                geralRef.child("quizes").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                         int quizes = (int) snapshot.getChildrenCount();
                         textQuizes.setText(String.valueOf(quizes));
 
-                        referenciaGeral.child("posts").addValueEventListener(new ValueEventListener() {
+                        geralRef.child("posts").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
@@ -99,7 +101,7 @@ public class InicioAdminFragment extends Fragment {
                                 textPosts.setText(String.valueOf(posts));
                                 textPostsFazer.setText(String.valueOf(postsFazer));
 
-                                referenciaGeral.child("ofertas").addValueEventListener(new ValueEventListener() {
+                                geralRef.child("ofertas").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
@@ -138,5 +140,11 @@ public class InicioAdminFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        geralRef.removeEventListener(geralEventListener);
     }
 }

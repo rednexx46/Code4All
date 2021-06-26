@@ -1,4 +1,4 @@
-package com.josexavier.code4all.activity;
+package com.josexavier.code4all.interfaces;
 
 import android.content.Intent;
 

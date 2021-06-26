@@ -39,6 +39,8 @@ public class PostsActivity extends AppCompatActivity {
     private List<Post> listaPosts = new ArrayList<>();
     private PostsAdapter adapter;
     private AlertDialog dialog;
+    private DatabaseReference meusPostsRef;
+    private ValueEventListener meusPostsEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +126,8 @@ public class PostsActivity extends AppCompatActivity {
     }
 
     private void buscarMeusPosts() {
-        DatabaseReference meusPostsRef = DefinicaoFirebase.recuperarBaseDados().child("posts");
-        meusPostsRef.addValueEventListener(new ValueEventListener() {
+        meusPostsRef = DefinicaoFirebase.recuperarBaseDados().child("posts");
+        meusPostsEventListener = meusPostsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 dialog.show();
@@ -150,4 +152,9 @@ public class PostsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        meusPostsRef.removeEventListener(meusPostsEventListener);
+    }
 }

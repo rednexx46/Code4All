@@ -90,7 +90,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat_medium"
             android:hint="@string/descricao"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:padding="16dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"

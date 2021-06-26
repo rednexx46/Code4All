@@ -24,6 +24,8 @@ import org.jetbrains.annotations.NotNull;
 public class InicioModFragment extends Fragment {
 
     private TextView textPostsFazer, textMembros, textEmpresas, textModeradores, textPosts, textOfertas;
+    private DatabaseReference geralRef;
+    private ValueEventListener geralEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,9 +47,9 @@ public class InicioModFragment extends Fragment {
     }
 
     private void buscarInfo() {
-        DatabaseReference ref = DefinicaoFirebase.recuperarBaseDados();
+        geralRef = DefinicaoFirebase.recuperarBaseDados();
 
-        ref.child("posts").addValueEventListener(new ValueEventListener() {
+        geralEventListener = geralRef.child("posts").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 int postsFazer = 0, posts = 0;
@@ -63,7 +65,7 @@ public class InicioModFragment extends Fragment {
                 textPostsFazer.setText(String.valueOf(postsFazer));
                 textPosts.setText(String.valueOf(posts));
 
-                ref.child("contas").addValueEventListener(new ValueEventListener() {
+                geralRef.child("contas").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
@@ -85,7 +87,7 @@ public class InicioModFragment extends Fragment {
                         textEmpresas.setText(String.valueOf(empresas));
                         textModeradores.setText(String.valueOf(mods));
 
-                        ref.child("ofertas").addValueEventListener(new ValueEventListener() {
+                        geralRef.child("ofertas").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 int ofertas = (int) snapshot.getChildrenCount();
@@ -114,5 +116,11 @@ public class InicioModFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        geralRef.removeEventListener(geralEventListener);
     }
 }

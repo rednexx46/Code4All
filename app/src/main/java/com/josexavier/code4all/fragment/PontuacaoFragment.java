@@ -39,6 +39,8 @@ public class PontuacaoFragment extends Fragment {
 
     private List<Conta> listaContas = new ArrayList<>();
     private PontuacaoAdapter pontuacaoAdapter;
+    private DatabaseReference contasRef;
+    private ValueEventListener contasEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,9 +85,9 @@ public class PontuacaoFragment extends Fragment {
     }
 
     private void buscarUtilizadores() {
-        DatabaseReference contasRef = DefinicaoFirebase.recuperarBaseDados().child("contas");
+        contasRef = DefinicaoFirebase.recuperarBaseDados().child("contas");
         AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Pontuações...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-        contasRef.addValueEventListener(new ValueEventListener() {
+        contasEventListener = contasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 dialog.show();
@@ -110,5 +112,11 @@ public class PontuacaoFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        contasRef.removeEventListener(contasEventListener);
     }
 }

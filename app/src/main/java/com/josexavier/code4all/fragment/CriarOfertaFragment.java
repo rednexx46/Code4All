@@ -39,6 +39,9 @@ public class CriarOfertaFragment extends Fragment {
     private List<Conta> listaFiltrada = new ArrayList<>();
     private ContasEmpresaAdapter adapter;
 
+    private DatabaseReference contasRef;
+    private ValueEventListener contasEventListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,8 +98,8 @@ public class CriarOfertaFragment extends Fragment {
 
     private void buscarContas() { // buscar todas as contas que sejam do tipo "membro"
 
-        DatabaseReference contasRef = DefinicaoFirebase.recuperarBaseDados().child("contas");
-        contasRef.addValueEventListener(new ValueEventListener() {
+        contasRef = DefinicaoFirebase.recuperarBaseDados().child("contas");
+        contasEventListener = contasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaContas.clear();
@@ -123,6 +126,11 @@ public class CriarOfertaFragment extends Fragment {
 
             }
         });
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        contasRef.removeEventListener(contasEventListener);
     }
 }

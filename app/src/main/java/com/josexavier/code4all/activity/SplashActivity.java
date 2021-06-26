@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Utilizador;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         // Definir o arquivo XML como layout
         setContentView(R.layout.activity_splash);
 
-        utilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser();
+        Configs.recuperarUtilizador(user -> utilizador = user);
 
         // "Atividade de Carregamento"
         carregamento();

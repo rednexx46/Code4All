@@ -43,6 +43,9 @@ public class ListarQuizFragment extends Fragment {
     private QuizesAdminAdapter quizesAdapter;
     private AlertDialog dialogRemocao, dialog;
 
+    private DatabaseReference quizesRef;
+    private ValueEventListener quizesEventListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -107,7 +110,7 @@ public class ListarQuizFragment extends Fragment {
             }
         });
 
-        buscarQuizes(DefinicaoFirebase.recuperarBaseDados().child("quizes"));
+        buscarQuizes();
 
         return root;
 
@@ -173,9 +176,10 @@ public class ListarQuizFragment extends Fragment {
         quizesAdapter.filtrarDados(listaFiltrada);
     }
 
-    private void buscarQuizes(DatabaseReference referenciaQuizes) {
+    private void buscarQuizes() {
         dialog.show();
-        referenciaQuizes.addValueEventListener(new ValueEventListener() {
+        quizesRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
+        quizesEventListener = quizesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaQuizes.clear();
@@ -195,4 +199,9 @@ public class ListarQuizFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        quizesRef.removeEventListener(quizesEventListener);
+    }
 }

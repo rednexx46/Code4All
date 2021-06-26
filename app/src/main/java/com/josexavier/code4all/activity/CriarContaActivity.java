@@ -30,6 +30,7 @@ import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Conta;
 import com.josexavier.code4all.model.Empresa;
+import com.josexavier.code4all.interfaces.Validacao;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -254,6 +255,7 @@ public class CriarContaActivity extends AppCompatActivity {
                                     atividadeInscricoes.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                     startActivity(atividadeInscricoes);
                                     dialog.dismiss();
+                                    IntroActivity.activity.finish(); // Finaliza a IntroActivity
                                     finish();
                                 } else
                                     Toast.makeText(CriarContaActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();

@@ -19,10 +19,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
-import com.josexavier.code4all.activity.Validacao;
 import com.josexavier.code4all.adapter.QuizesPopularesAdapter;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.model.Quiz;
 
 import org.jetbrains.annotations.NotNull;
@@ -41,6 +41,8 @@ public class QuizesFragment extends Fragment {
     private RecyclerView recyclerViewQuizesPopulares, recyclerViewInscricoes;
     private TextView textViewSubscricoes;
     private AlertDialog dialog;
+    private DatabaseReference quizSubscritoRef, quizesRef;
+    private ValueEventListener quizSubscritosEventListener, quizesEventListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -83,6 +85,13 @@ public class QuizesFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        quizSubscritoRef.removeEventListener(quizSubscritosEventListener);
+        quizesRef.removeEventListener(quizesEventListener);
+    }
+
     private LinearLayoutManager criarLayoutManager() {
         return new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
     }
@@ -122,8 +131,8 @@ public class QuizesFragment extends Fragment {
     }
 
     private void buscarQuizesSubscricao(String tema, Validacao sucesso) {
-        DatabaseReference quizSubscritoRef = DefinicaoFirebase.recuperarBaseDados().child("quizes");
-        quizSubscritoRef.addValueEventListener(new ValueEventListener() {
+        quizSubscritoRef = DefinicaoFirebase.recuperarBaseDados().child("quizes");
+        quizSubscritosEventListener = quizSubscritoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot dados : snapshot.getChildren()) {
@@ -151,9 +160,9 @@ public class QuizesFragment extends Fragment {
 
         dialog.show();
 
-        DatabaseReference quizesRef = DefinicaoFirebase.recuperarBaseDados().child("quizes");
+        quizesRef = DefinicaoFirebase.recuperarBaseDados().child("quizes");
 
-        quizesRef.addValueEventListener(new ValueEventListener() {
+        quizesEventListener = quizesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaQuizes.clear();

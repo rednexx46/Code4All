@@ -43,6 +43,9 @@ public class ListarTagsTemasFragment extends Fragment {
     private ArrayAdapter<String> listaTagsAdapter;
     private AlertDialog dialogRemocao, dialogCarregamento;
 
+    private DatabaseReference tagsRef, temasRef;
+    private ValueEventListener tagsEventListener, temasEventListener;
+
     private boolean isTemaVisivel = true;
 
     @Override
@@ -221,9 +224,9 @@ public class ListarTagsTemasFragment extends Fragment {
 
     private void buscarTemas() {
         dialogCarregamento.show();
-        DatabaseReference temasRef = DefinicaoFirebase.recuperarBaseDados().child("temas");
+        temasRef = DefinicaoFirebase.recuperarBaseDados().child("temas");
 
-        temasRef.addValueEventListener(new ValueEventListener() {
+        temasEventListener = temasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaTemas.clear();
@@ -245,9 +248,9 @@ public class ListarTagsTemasFragment extends Fragment {
 
     private void buscarTags() {
         dialogCarregamento.show();
-        DatabaseReference temasRef = DefinicaoFirebase.recuperarBaseDados().child("tags");
+        tagsRef = DefinicaoFirebase.recuperarBaseDados().child("tags");
 
-        temasRef.addValueEventListener(new ValueEventListener() {
+        tagsEventListener = tagsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaTags.clear();
@@ -267,4 +270,10 @@ public class ListarTagsTemasFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        temasRef.removeEventListener(temasEventListener);
+        tagsRef.removeEventListener(tagsEventListener);
+    }
 }

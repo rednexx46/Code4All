@@ -1,7 +1,7 @@
 package com.josexavier.code4all.model;
 
 import com.google.firebase.database.DatabaseReference;
-import com.josexavier.code4all.activity.Validacao;
+import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 
 import java.util.HashMap;

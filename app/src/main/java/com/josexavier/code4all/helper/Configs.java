@@ -29,9 +29,10 @@ import com.josexavier.code4all.activity.EmpresaActivity;
 import com.josexavier.code4all.activity.IntroActivity;
 import com.josexavier.code4all.activity.ModeradorActivity;
 import com.josexavier.code4all.activity.PrincipalActivity;
-import com.josexavier.code4all.activity.RecuperarIntent;
-import com.josexavier.code4all.activity.Validacao;
-import com.josexavier.code4all.activity.VariavelTemp;
+import com.josexavier.code4all.interfaces.RecuperarIntent;
+import com.josexavier.code4all.interfaces.Utilizador;
+import com.josexavier.code4all.interfaces.Validacao;
+import com.josexavier.code4all.interfaces.VariavelTemp;
 import com.josexavier.code4all.model.Conta;
 
 import java.text.SimpleDateFormat;
@@ -200,6 +201,9 @@ public class Configs {
 
             }
         });
+    }
+    public static void recuperarUtilizador(Utilizador utilizador) {
+        utilizador.recuperarUtilizador(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser());
     }
 
     public static String recuperarDataHoje() {

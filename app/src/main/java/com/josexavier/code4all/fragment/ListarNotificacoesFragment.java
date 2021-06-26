@@ -45,6 +45,9 @@ public class ListarNotificacoesFragment extends Fragment {
     private NotificacoesAdapter notificacoesAdapter;
     private AlertDialog dialogRemocao, dialogCarregamento;
 
+    private DatabaseReference notificacoesRef;
+    private ValueEventListener notificacoesEventListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -177,9 +180,9 @@ public class ListarNotificacoesFragment extends Fragment {
 
     private void buscarNotificacoes() {
         dialogCarregamento.show();
-        DatabaseReference notificacoesRef = DefinicaoFirebase.recuperarBaseDados().child("notificacoes");
+        notificacoesRef = DefinicaoFirebase.recuperarBaseDados().child("notificacoes");
 
-        notificacoesRef.addValueEventListener(new ValueEventListener() {
+        notificacoesEventListener = notificacoesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaNotificacoes.clear();
@@ -199,4 +202,9 @@ public class ListarNotificacoesFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        notificacoesRef.removeEventListener(notificacoesEventListener);
+    }
 }

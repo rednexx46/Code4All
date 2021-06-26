@@ -37,7 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.josexavier.code4all.R;
-import com.josexavier.code4all.activity.Validacao;
+import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Introducao;
 import com.josexavier.code4all.model.Pergunta;

@@ -41,6 +41,8 @@ public class ForumFragment extends Fragment {
     private List<Post> listaFiltrada = new ArrayList<>();
     private RecyclerView recyclerForum;
     private PostsAdapter adapter;
+    private Query queryForum;
+    private ValueEventListener queryForumEventListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -136,9 +138,9 @@ public class ForumFragment extends Fragment {
 
         DatabaseReference forum = DefinicaoFirebase.recuperarBaseDados().child("posts");
 
-        Query queryForum = forum.orderByChild("estado").equalTo("aceite");
+        queryForum = forum.orderByChild("estado").equalTo("aceite");
 
-        queryForum.addValueEventListener(new ValueEventListener() {
+        queryForumEventListener = queryForum.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaPost.clear();
@@ -156,5 +158,11 @@ public class ForumFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        queryForum.removeEventListener(queryForumEventListener);
     }
 }

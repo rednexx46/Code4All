@@ -28,6 +28,7 @@ import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Conta;
+import com.josexavier.code4all.interfaces.Validacao;
 
 import org.jetbrains.annotations.NotNull;
 

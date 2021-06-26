@@ -38,6 +38,8 @@ public class EmpresasFragment extends Fragment {
     private List<Empresa> listaEmpresas = new ArrayList<>();
     private EmpresasAdapter empresasAdapter;
     private AlertDialog dialog;
+    private DatabaseReference empresasRef;
+    private ValueEventListener empresasEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,8 +100,8 @@ public class EmpresasFragment extends Fragment {
     }
 
     private void buscarEmpresas(String idUtilizador) {
-        DatabaseReference empresasRef = DefinicaoFirebase.recuperarBaseDados().child("contas");
-        empresasRef.addValueEventListener(new ValueEventListener() {
+        empresasRef = DefinicaoFirebase.recuperarBaseDados().child("contas");
+        empresasEventListener = empresasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 dialog.show();
@@ -122,4 +124,9 @@ public class EmpresasFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        empresasRef.removeEventListener(empresasEventListener);
+    }
 }

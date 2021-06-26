@@ -26,6 +26,8 @@ import dmax.dialog.SpotsDialog;
 public class InicioEmpresaFragment extends Fragment {
 
     private TextView textViewPendentes, textViewTotal, textViewConcluidas, textViewAceites, textViewRecusadas;
+    private DatabaseReference ofertasRef;
+    private ValueEventListener ofertasEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,8 +51,8 @@ public class InicioEmpresaFragment extends Fragment {
     }
 
     private void buscarInfo(String idUtilizador) { // Buscar todas as informações da empresa em geral
-        DatabaseReference ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
-        ofertasRef.addValueEventListener(new ValueEventListener() {
+        ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
+        ofertasEventListener = ofertasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
@@ -93,5 +95,11 @@ public class InicioEmpresaFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ofertasRef.removeEventListener(ofertasEventListener);
     }
 }

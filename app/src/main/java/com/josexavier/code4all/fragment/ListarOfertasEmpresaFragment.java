@@ -35,6 +35,9 @@ public class ListarOfertasEmpresaFragment extends Fragment {
     private List<Oferta> listaOfertas = new ArrayList<>();
     private OfertasEmpresaAdapter ofertasEmpresaAdapter;
 
+    private DatabaseReference ofertasRef;
+    private ValueEventListener ofertasEventListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,8 +63,8 @@ public class ListarOfertasEmpresaFragment extends Fragment {
     }
 
     private void buscarOfertas(String idEmpresa) { // Buscar todas as ofertas da empresa para listar as mesmas
-        DatabaseReference ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
-        ofertasRef.addValueEventListener(new ValueEventListener() {
+        ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
+        ofertasEventListener = ofertasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaOfertas.clear();
@@ -85,4 +88,9 @@ public class ListarOfertasEmpresaFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ofertasRef.removeEventListener(ofertasEventListener);
+    }
 }

@@ -48,8 +48,9 @@ public class ContasFragment extends Fragment {
     private ArrayAdapter<List<String>> spinnerAdapter;
     private Spinner spinnerTiposConta;
     private RecyclerView recyclerContas;
-
     private AlertDialog dialogCarregamento, dialogModificacao;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

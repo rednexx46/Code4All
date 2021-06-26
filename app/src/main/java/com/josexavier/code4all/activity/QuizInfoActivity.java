@@ -21,6 +21,7 @@ import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Introducao;
 import com.josexavier.code4all.model.Quiz;
+import com.josexavier.code4all.interfaces.Validacao;
 
 import org.jetbrains.annotations.NotNull;
 

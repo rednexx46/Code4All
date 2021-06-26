@@ -35,6 +35,8 @@ public class PostsVerificacaoFragment extends Fragment {
     private List<Post> listaPosts = new ArrayList<>();
     private PostsVerificacaoAdapter adapter;
     private AlertDialog dialog;
+    private DatabaseReference postsRef;
+    private ValueEventListener postsEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,8 +67,8 @@ public class PostsVerificacaoFragment extends Fragment {
     }
 
     private void buscarPosts() {
-        DatabaseReference postsRef = DefinicaoFirebase.recuperarBaseDados().child("posts");
-        postsRef.addValueEventListener(new ValueEventListener() {
+        postsRef = DefinicaoFirebase.recuperarBaseDados().child("posts");
+        postsEventListener = postsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 dialog.show();
@@ -87,4 +89,9 @@ public class PostsVerificacaoFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        postsRef.removeEventListener(postsEventListener);
+    }
 }

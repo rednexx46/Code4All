@@ -32,6 +32,8 @@ public class OfertasFragment extends Fragment {
 
     private List<Oferta> listaOfertas = new ArrayList<>();
     private OfertasAdapter ofertasAdapter;
+    private DatabaseReference ofertasRef;
+    private ValueEventListener ofertasEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,10 +61,10 @@ public class OfertasFragment extends Fragment {
 
     private void buscarOfertas() { // Buscar ofertas do utilizador
         Configs.recuperarIdUtilizador(idUtilizador -> {
-            DatabaseReference referenciaOfertas = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
+            ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
             AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Ofertas...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
-            referenciaOfertas.addValueEventListener(new ValueEventListener() {
+            ofertasEventListener = ofertasRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     dialog.show();
@@ -82,9 +84,11 @@ public class OfertasFragment extends Fragment {
                 }
             });
         });
-
-
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ofertasRef.removeEventListener(ofertasEventListener);
+    }
 }

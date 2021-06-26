@@ -1,6 +1,7 @@
 package com.josexavier.code4all.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,10 +19,12 @@ public class IntroActivity extends com.heinrichreimersoftware.materialintro.app.
     private final String[] permissoesNecessarias = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
-
+    public static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        activity = this;
 
         // Validar permissões
         Permissao.validarPermissoes(permissoesNecessarias, this, 1);
@@ -71,22 +74,6 @@ public class IntroActivity extends com.heinrichreimersoftware.materialintro.app.
         setButtonBackVisible(false);
         setButtonNextVisible(false);
 
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
-        if (autenticacao.getCurrentUser() != null) {
-
-            Configs.buscarUtilizador(getApplicationContext(), intent -> {
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            });
-        }
 
     }
 

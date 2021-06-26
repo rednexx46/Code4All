@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Post;
+import com.josexavier.code4all.interfaces.Validacao;
 
 import org.jetbrains.annotations.NotNull;
 

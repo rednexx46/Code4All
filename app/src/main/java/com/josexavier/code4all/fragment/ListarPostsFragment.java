@@ -43,6 +43,9 @@ public class ListarPostsFragment extends Fragment {
     private PostAdminAdapter postAdminAdapter;
     private AlertDialog dialogCarregamento, dialogPostRemocao;
 
+    private DatabaseReference postsRef;
+    private ValueEventListener postsEventListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,7 +107,7 @@ public class ListarPostsFragment extends Fragment {
             }
         }));
 
-        buscarPosts(DefinicaoFirebase.recuperarBaseDados().child("posts"));
+        buscarPosts();
 
         return root;
 
@@ -171,9 +174,9 @@ public class ListarPostsFragment extends Fragment {
         postAdminAdapter.filtrarDados(listaFiltrada);
     }
 
-    private void buscarPosts(DatabaseReference ref) {
-
-        ref.addValueEventListener(new ValueEventListener() {
+    private void buscarPosts() {
+        postsRef = DefinicaoFirebase.recuperarBaseDados().child("posts");
+        postsEventListener = postsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dialogCarregamento.show();
@@ -194,4 +197,9 @@ public class ListarPostsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        postsRef.removeEventListener(postsEventListener);
+    }
 }

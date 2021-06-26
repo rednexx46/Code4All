@@ -1,5 +1,6 @@
 package com.josexavier.code4all.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import com.josexavier.code4all.helper.DefinicaoFirebase;
 import dmax.dialog.SpotsDialog;
 
 public class LoginActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Começa a atividade consoante o grupo do utilizador
                             Configs.buscarUtilizador(getApplicationContext(), intent -> {
+                                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 dialogAutenticacao.dismiss();
+                                IntroActivity.activity.finish(); // Finaliza a IntroActivity
                                 finish(); // Finaliza a LoginActivity
                                 startActivity(intent); // Começa a nova atividade
                             });
