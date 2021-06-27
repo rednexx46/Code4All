@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.josexavier.code4all.R;
+import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Introducao;
@@ -58,8 +59,6 @@ public class CriarQuizFragment extends Fragment {
     private final int NULO = 0;
     private final int UNICA = 1;
     private final int MULTIPLA = 2;
-    private final int SELECAO_CAMARA = 100;
-    private final int SELECAO_GALERIA = 200;
 
     private Bitmap imagem = null;
 
@@ -249,16 +248,12 @@ public class CriarQuizFragment extends Fragment {
     }
 
     private void abrirGaleria() {
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(i, SELECAO_GALERIA);
-        }
-    }
-
-    private void abrirCamara() {
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(i, SELECAO_CAMARA);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,
+                    "Selecione uma foto"), Configs.SELECAO_GALERIA);
         }
     }
 
@@ -272,10 +267,7 @@ public class CriarQuizFragment extends Fragment {
         try {
 
             switch (requestCode) {
-                case SELECAO_CAMARA:
-                    imagem = (Bitmap) data.getExtras().get("data");
-                    break;
-                case SELECAO_GALERIA:
+                case Configs.SELECAO_GALERIA:
                     Uri localImagemSelecionada = data.getData();
 
                     if (android.os.Build.VERSION.SDK_INT >= 29) {

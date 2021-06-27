@@ -80,7 +80,17 @@ public class EditarEmpresaActivity extends AppCompatActivity {
         ImageButton imageButtonGaleria;
 
         imageButtonGaleria = findViewById(R.id.imageButtonGaleriaEditarEmpresa);
-        imageButtonGaleria.setOnClickListener(v -> Configs.abrirGaleria(this));
+        imageButtonGaleria.setOnClickListener(v -> abrirGaleria());
+    }
+
+    private void abrirGaleria() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,
+                    "Selecione uma foto"), Configs.SELECAO_GALERIA);
+        }
     }
 
     private void buscarInfo(String idUtilizador) {
@@ -119,9 +129,6 @@ public class EditarEmpresaActivity extends AppCompatActivity {
         try {
 
             switch (requestCode) {
-                case Configs.SELECAO_CAMARA:
-                    imagem = (Bitmap) data.getExtras().get("data");
-                    break;
                 case Configs.SELECAO_GALERIA:
                     Uri localImagemSelecionada = data.getData();
 

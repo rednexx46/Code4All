@@ -42,7 +42,6 @@ import java.util.Random;
 public class Configs {
 
     public static final String emailCriador = "josexavier46@outlook.pt";
-    public static final int SELECAO_CAMARA = 100;
     public static final int SELECAO_GALERIA = 200;
     private static final String PREFS = "numero_execucoes";
     public static String[] grupos = {"membro", "mod", "admin", "empresa"};
@@ -63,13 +62,6 @@ public class Configs {
                 validacao.isValidacaoSucesso(false);
         });
 
-    }
-
-    public static void abrirGaleria(Activity atividade) {
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (i.resolveActivity(atividade.getPackageManager()) != null) {
-            atividade.startActivityForResult(i, SELECAO_GALERIA);
-        }
     }
 
     public static void quantidadeVezesExecucao(Context context) {

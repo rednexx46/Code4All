@@ -72,7 +72,7 @@ public class EmpresaConfiguracaoActivity extends AppCompatActivity {
 
         ImageButton imageButtonGaleria;
         imageButtonGaleria = findViewById(R.id.imageButtonGaleriaEmpresaConfiguracao);
-        imageButtonGaleria.setOnClickListener(v -> Configs.abrirGaleria(EmpresaConfiguracaoActivity.this));
+        imageButtonGaleria.setOnClickListener(v -> abrirGaleria());
 
 
         Button buttonGuardar;
@@ -128,6 +128,16 @@ public class EmpresaConfiguracaoActivity extends AppCompatActivity {
 
     }
 
+    private void abrirGaleria() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,
+                    "Selecione uma foto"), Configs.SELECAO_GALERIA);
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -137,10 +147,7 @@ public class EmpresaConfiguracaoActivity extends AppCompatActivity {
         try {
 
             switch (requestCode) {
-                case SELECAO_CAMARA:
-                    imagem = (Bitmap) data.getExtras().get("data");
-                    break;
-                case SELECAO_GALERIA:
+                case Configs.SELECAO_GALERIA:
                     Uri localImagemSelecionada = data.getData();
 
                     if (android.os.Build.VERSION.SDK_INT >= 29) {

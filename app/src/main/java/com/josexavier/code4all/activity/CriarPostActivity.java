@@ -37,9 +37,6 @@ import dmax.dialog.SpotsDialog;
 
 public class CriarPostActivity extends AppCompatActivity {
 
-    private final int SELECAO_CAMARA = 100;
-    private final int SELECAO_GALERIA = 200;
-
     private List<String> tags = new ArrayList<>();
     private ImageView imagemPost;
 
@@ -92,9 +89,6 @@ public class CriarPostActivity extends AppCompatActivity {
         try {
 
             switch (requestCode) {
-                case Configs.SELECAO_CAMARA:
-                    imagem = (Bitmap) data.getExtras().get("data");
-                    break;
                 case Configs.SELECAO_GALERIA:
                     Uri localImagemSelecionada = data.getData();
 
@@ -179,9 +173,12 @@ public class CriarPostActivity extends AppCompatActivity {
     }
 
     private void abrirGaleria() {
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (i.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(i, SELECAO_GALERIA);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,
+                    "Selecione uma foto"), Configs.SELECAO_GALERIA);
         }
     }
 

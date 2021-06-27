@@ -101,8 +101,8 @@ public class PontuacaoFragment extends Fragment {
                 Collections.sort(listaContas, (o1, o2) -> Integer.compare(o1.getTotalXP(), o2.getTotalXP()));
                 Collections.reverse(listaContas);
 
-                dialog.dismiss();
                 pontuacaoAdapter.notifyDataSetChanged();
+                dialog.dismiss();
 
             }
 

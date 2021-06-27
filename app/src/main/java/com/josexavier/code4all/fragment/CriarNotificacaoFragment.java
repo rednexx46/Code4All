@@ -32,8 +32,6 @@ import dmax.dialog.SpotsDialog;
 
 public class CriarNotificacaoFragment extends Fragment {
 
-    private final int SELECAO_CAMARA = 100;
-    private final int SELECAO_GALERIA = 200;
     private Bitmap imagem = null;
     private byte[] dadosImagem;
     private EditText editTextTitulo, editTextDescricao;
@@ -132,9 +130,6 @@ public class CriarNotificacaoFragment extends Fragment {
         try {
 
             switch (requestCode) {
-                case Configs.SELECAO_CAMARA:
-                    imagem = (Bitmap) data.getExtras().get("data");
-                    break;
                 case Configs.SELECAO_GALERIA:
                     Uri localImagemSelecionada = data.getData();
 
@@ -167,9 +162,12 @@ public class CriarNotificacaoFragment extends Fragment {
     }
 
     private void abrirGaleria() {
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(i, SELECAO_GALERIA);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,
+                    "Selecione uma foto"), Configs.SELECAO_GALERIA);
         }
     }
 
