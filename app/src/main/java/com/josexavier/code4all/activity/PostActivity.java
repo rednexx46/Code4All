@@ -257,7 +257,11 @@ public class PostActivity extends AppCompatActivity {
 
                 gostoUtilizadorRef.setValue(gosto).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        dialogCarregamento.show();
+                        try {
+                            dialogCarregamento.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost);
 
                         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -313,7 +317,12 @@ public class PostActivity extends AppCompatActivity {
             builder.setPositiveButton("Confirmar", (dialog, which) -> {
                 String textoComentario = editText.getText().toString();
                 if (!textoComentario.isEmpty()) {
-                    dialogCarregamento.show();
+                    try {
+                        dialogCarregamento.show();
+                    } catch (Exception e) {
+                       e.printStackTrace();
+                    }
+
                     DatabaseReference comentariosRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost).child("comentariosPost");
                     String idComentario = comentariosRef.push().getKey();
                     Comentario comentario = new Comentario();
