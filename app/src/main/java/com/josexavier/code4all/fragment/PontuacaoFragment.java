@@ -58,10 +58,14 @@ public class PontuacaoFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent activityConta = new Intent(getContext(), ContaActivity.class);
-                activityConta.putExtra("idConta", listaContas.get(position).getId());
-                activityConta.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(activityConta);
+                try {
+                    Intent activityConta = new Intent(getContext(), ContaActivity.class);
+                    activityConta.putExtra("idConta", listaContas.get(position).getId());
+                    activityConta.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(activityConta);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

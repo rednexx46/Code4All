@@ -80,7 +80,7 @@ public class QuizesSubscritosAdapter extends RecyclerView.Adapter<QuizesSubscrit
             holder.pontuacao.setVisibility(View.VISIBLE);
             holder.progressoQuiz.setVisibility(View.GONE);
             holder.barraProgressoQuiz.setVisibility(View.GONE);
-            int totalXPQuiz = Integer.parseInt(listaQuizes.get(position).getPontuacao());
+            int totalXPQuiz = listaQuizes.get(position).getPontuacao();
             int totalXP = listaQuizes.get(position).getTotalXP();
             if (totalXP > 0) {
                 double pontuacao = (100 * totalXP) / totalXPQuiz; // Regra 3 Simples #REGRA3SIMPLESEVIDA

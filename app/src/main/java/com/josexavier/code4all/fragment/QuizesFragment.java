@@ -88,7 +88,11 @@ public class QuizesFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        quizSubscritoRef.removeEventListener(quizSubscritosEventListener);
+        try {
+            quizSubscritoRef.removeEventListener(quizSubscritosEventListener);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         quizesRef.removeEventListener(quizesEventListener);
     }
 
@@ -104,23 +108,28 @@ public class QuizesFragment extends Fragment {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaInscricoes.clear();
                 textViewSubscricoes.setText("Subscrições Atuais .: ");
-                for (DataSnapshot dados : snapshot.getChildren()) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot dados : snapshot.getChildren()) {
 
-                    String tema = dados.getValue(String.class);
+                        String tema = dados.getValue(String.class);
 
-                    textViewSubscricoes.setText(textViewSubscricoes.getText() + "" + tema + " | ");
+                        textViewSubscricoes.setText(textViewSubscricoes.getText() + "" + tema + " | ");
 
-                    buscarQuizesSubscricao(tema, validar -> {
-                        if (validar) {
-                            dialog.dismiss();
-                            inscricoesAdapter.notifyDataSetChanged();
+                        buscarQuizesSubscricao(tema, validar -> {
+                            if (validar) {
+                                dialog.dismiss();
+                                inscricoesAdapter.notifyDataSetChanged();
+                            } else {
+                                dialog.dismiss();
+                                Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                        } else
-                            Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                    });
-
+                    }
+                } else {
+                    textViewSubscricoes.setText("Subscrições Atuais .: NENHUMA");
+                    dialog.dismiss();
                 }
-
             }
 
             @Override
@@ -136,15 +145,18 @@ public class QuizesFragment extends Fragment {
         quizSubscritosEventListener = quizSubscritoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot dados : snapshot.getChildren()) {
-                    Quiz quiz = dados.getValue(Quiz.class);
-                    if (quiz.getTema().equals(tema))
-                        listaInscricoes.add(quiz);
+                if (snapshot.exists()) {
+                    for (DataSnapshot dados : snapshot.getChildren()) {
+                        Quiz quiz = dados.getValue(Quiz.class);
+                        if (quiz.getTema().equals(tema))
+                            listaInscricoes.add(quiz);
+                    }
+
+                    Collections.sort(listaInscricoes, (o1, o2) -> Double.compare(o1.getClassificacao(), o2.getClassificacao()));
+                    Collections.reverse(listaInscricoes);
                 }
 
-                Collections.sort(listaInscricoes, (o1, o2) -> Double.compare(o1.getClassificacao(), o2.getClassificacao()));
-                Collections.reverse(listaInscricoes);
-
+                dialog.dismiss();
                 sucesso.isValidacaoSucesso(true);
 
             }

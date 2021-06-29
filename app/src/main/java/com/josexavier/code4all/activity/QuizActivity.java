@@ -139,6 +139,7 @@ public class QuizActivity extends AppCompatActivity {
                                 hashMapXP.put("totalXP", quiz.getTotalXP() + xpPergunta);
                                 quizAtualRef.updateChildren(hashMapXP).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
+                                        limparRadioButtons();
                                         Toast.makeText(QuizActivity.this, "Resposta Certa :)", Toast.LENGTH_SHORT).show();
                                         proximaPergunta(perguntaAtual, quizAtualRef);
                                     } else
@@ -156,8 +157,7 @@ public class QuizActivity extends AppCompatActivity {
                         Toast.makeText(QuizActivity.this, "Resposta Errada :(", Toast.LENGTH_SHORT).show();
                         proximaPergunta(perguntaAtual, quizAtualRef);
                     }
-
-
+                    radioGroup.check(-1);
                 }
 
             });
@@ -302,7 +302,6 @@ public class QuizActivity extends AppCompatActivity {
                                                 if (task2.isSuccessful()) {
                                                     Intent activityQuizAvaliacao = new Intent(getApplicationContext(), AvaliacaoQuizActivity.class);
                                                     activityQuizAvaliacao.putExtra("idQuiz", quizAtual.getId());
-                                                    activityQuizAvaliacao.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                                     startActivity(activityQuizAvaliacao);
                                                     finish();
                                                 } else

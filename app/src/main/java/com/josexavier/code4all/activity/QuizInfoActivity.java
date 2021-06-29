@@ -116,17 +116,22 @@ public class QuizInfoActivity extends YouTubeBaseActivity implements YouTubePlay
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean foiRestaurado) {
 
-        youTubePlayer.setShowFullscreenButton(true);
+        try {
+            youTubePlayer.setShowFullscreenButton(true);
 
-        if (!foiRestaurado) {
+            if (!foiRestaurado) {
 
-            String idVideo = obterIDYoutube(introducao.getVideo());
-            if (!idVideo.equals("erro"))
-                youTubePlayer.cueVideo(obterIDYoutube(introducao.getVideo()));
-            else
-                Toast.makeText(this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                String idVideo = obterIDYoutube(introducao.getVideo());
+                if (!idVideo.equals("erro"))
+                    youTubePlayer.cueVideo(obterIDYoutube(introducao.getVideo()));
+                else
+                    Toast.makeText(this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     @Override

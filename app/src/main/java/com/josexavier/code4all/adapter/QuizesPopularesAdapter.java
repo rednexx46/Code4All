@@ -132,7 +132,7 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
                         String imagemQuiz = listaQuizes.get(position).getImagem();
                         String criadorQuiz = listaQuizes.get(position).getCriador();
                         String temaQuiz = listaQuizes.get(position).getTema();
-                        String pontuacao = String.valueOf(listaQuizes.get(position).getTotalXP());
+                        int pontuacao = listaQuizes.get(position).getTotalXP();
                         int progresso = listaQuizes.get(position).getProgresso();
                         int totalPerguntasQuiz = listaQuizes.get(position).getTotalPerguntas();
 

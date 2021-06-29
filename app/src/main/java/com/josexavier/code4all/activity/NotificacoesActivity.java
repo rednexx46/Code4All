@@ -60,7 +60,7 @@ public class NotificacoesActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        notificacoesRef.addValueEventListener(new ValueEventListener() {
+        notificacoesRef.orderByChild("data").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaNotificacoes.clear();

@@ -116,7 +116,7 @@ public class SplashActivity extends AppCompatActivity {
                 } else {
                     FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
                     autenticacao.signOut();
-                    finish();
+                    startActivity(new Intent(getApplicationContext(), IntroActivity.class));
                 }
             });
         } else {

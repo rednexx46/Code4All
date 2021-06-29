@@ -1,6 +1,7 @@
 package com.josexavier.code4all.model;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 
@@ -9,8 +10,8 @@ import java.util.List;
 
 public class Quiz {
 
-    private String id, titulo, criador, idCriador, tema, imagem, experiencia, dataCriacao, dataInscricao, pontuacao;
-    private int totalPerguntas, progresso, perguntaAtual, totalMembros, totalXP;
+    private String id, titulo, criador, idCriador, tema, imagem, experiencia, dataCriacao, dataInscricao;
+    private int totalPerguntas, progresso, perguntaAtual, totalMembros, totalXP, pontuacao;
     private double classificacao;
     private Introducao introducao;
     private List<Pergunta> perguntas;
@@ -57,11 +58,11 @@ public class Quiz {
         });
     }
 
-    public String getPontuacao() {
+    public int getPontuacao() {
         return pontuacao;
     }
 
-    public void setPontuacao(String pontuacao) {
+    public void setPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
     }
 

@@ -43,56 +43,65 @@ public class AvaliacaoQuizActivity extends AppCompatActivity {
         FloatingActionButton fabAvaliacao;
         fabAvaliacao = findViewById(R.id.fabAvaliacaoQuiz);
 
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setMessage("Guardando Avaliação...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+
         fabAvaliacao.setOnClickListener(v -> {
 
-            DatabaseReference quizAtualRef = DefinicaoFirebase.recuperarBaseDados().child("quizes").child(idQuiz);
+            try {
 
-            String avaliacao = editTextAvaliacao.getText().toString();
+                DatabaseReference quizAtualRef = DefinicaoFirebase.recuperarBaseDados().child("quizes").child(idQuiz);
 
-            if (!avaliacao.isEmpty()) {
-                if (Double.valueOf(avaliacao) > 0) {
-                    AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setMessage("Guardando Avaliação...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                    try {
-                        dialog.show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    quizAtualRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                            Quiz quiz = snapshot.getValue(Quiz.class);
+                String avaliacao = editTextAvaliacao.getText().toString();
+                double avalia = Double.parseDouble(avaliacao);
 
-                            double classificacao = quiz.getClassificacao();
-                            double classificaoFinal = (classificacao + Double.valueOf(avaliacao)) / 2;
-
-                            HashMap<String, Object> hashClassificacao = new HashMap<>();
-
-                            hashClassificacao.put("classificacao", classificaoFinal);
-
-                            quizAtualRef.updateChildren(hashClassificacao).addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    dialog.dismiss();
-                                    Toast.makeText(AvaliacaoQuizActivity.this, "Avaliação submetida com Sucesso!", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                    if (isBotaoClicado)
-                                        startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
-                                } else {
-                                    dialog.dismiss();
-                                    Toast.makeText(AvaliacaoQuizActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
+                if (!avaliacao.isEmpty()) {
+                    if (avalia > 0 && avalia <= 5) {
+                        try {
+                            dialog.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
+                        quizAtualRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                Quiz quiz = snapshot.getValue(Quiz.class);
 
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                double classificacao = quiz.getClassificacao();
+                                double classificaoFinal = (classificacao + avalia) / 2;
 
-                        }
-                    });
+                                HashMap<String, Object> hashClassificacao = new HashMap<>();
+
+                                hashClassificacao.put("classificacao", classificaoFinal);
+
+                                quizAtualRef.updateChildren(hashClassificacao).addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        dialog.dismiss();
+                                        Toast.makeText(AvaliacaoQuizActivity.this, "Avaliação submetida com Sucesso!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        if (isBotaoClicado)
+                                            startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                                    } else {
+                                        dialog.dismiss();
+                                        Toast.makeText(AvaliacaoQuizActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
+                    } else
+                        Toast.makeText(this, "Introduza uma avaliação maior que 0 e menor que 5!", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(this, "Introduza uma avaliação maior que 0!", Toast.LENGTH_SHORT).show();
-            } else
-                Toast.makeText(this, "Introduza uma avaliação primeiro!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Introduza uma avaliação primeiro!", Toast.LENGTH_SHORT).show();
+
+            } catch (Exception e) {
+                finish();
+                e.printStackTrace();
+            }
         });
 
     }

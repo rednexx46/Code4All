@@ -103,8 +103,11 @@ public class InicioFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        quizes.removeEventListener(eventoQuizes);
+        try {
+            quizes.removeEventListener(eventoQuizes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }
