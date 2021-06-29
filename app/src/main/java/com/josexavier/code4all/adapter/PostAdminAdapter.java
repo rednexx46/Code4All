@@ -45,7 +45,6 @@ public class PostAdminAdapter extends RecyclerView.Adapter<PostAdminAdapter.MyVi
         holder.criador.setText(post.getCriador());
         holder.titulo.setText(post.getTitulo());
         holder.tag.setText(post.getTag());
-        holder.descricao.setText(post.getDescricao());
         holder.comentarios.setText("Comentários .: " + post.getComentarios());
         holder.gostos.setText("Gostos .: " + post.getGostos());
     }
@@ -72,7 +71,6 @@ public class PostAdminAdapter extends RecyclerView.Adapter<PostAdminAdapter.MyVi
             criador = itemView.findViewById(R.id.textPostCriador);
             titulo = itemView.findViewById(R.id.textPostTitulo);
             tag = itemView.findViewById(R.id.textPostTag);
-            descricao = itemView.findViewById(R.id.textPostDescricao);
             comentarios = itemView.findViewById(R.id.textPostComentarios);
             gostos = itemView.findViewById(R.id.textPostGostos);
 

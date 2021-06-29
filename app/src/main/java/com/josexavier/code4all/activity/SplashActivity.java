@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
@@ -30,10 +31,15 @@ public class SplashActivity extends AppCompatActivity {
         // Definir o arquivo XML como layout
         setContentView(R.layout.activity_splash);
 
-        Configs.recuperarUtilizador(user -> utilizador = user);
+        Configs.recuperarUtilizador(user -> {
 
-        // "Atividade de Carregamento"
-        carregamento();
+            utilizador = user;
+
+            // "Atividade de Carregamento"
+            carregamento();
+
+        });
+
 
     }
 
@@ -85,17 +91,11 @@ public class SplashActivity extends AppCompatActivity {
         if (temConexaoInternet()) {
 
             Handler handler = new Handler();
-            int delay = 0;
-            if (utilizador == null) {
-                delay = 2000;
-            }
-
-            final int tempoDelay = delay;
 
             Thread thread = new Thread() {
                 @Override
                 public void run() {
-                    handler.postDelayed(() -> introducao(), tempoDelay);
+                    handler.postDelayed(() -> introducao(), 0);
                 }
             };
 
@@ -114,6 +114,8 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
+                    FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
+                    autenticacao.signOut();
                     finish();
                 }
             });

@@ -69,7 +69,11 @@ public class QuizInfoActivity extends YouTubeBaseActivity implements YouTubePlay
         quizRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 String linkImagem = snapshot.getValue(Quiz.class).getImagem();
 
                 Glide.with(getApplicationContext()).load(linkImagem).into(imagemQuiz);

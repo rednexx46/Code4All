@@ -56,7 +56,15 @@ public class EditarNotificacaoActivity extends AppCompatActivity {
 
             if (!titulo.isEmpty()) {
                 if (!descricao.isEmpty()) {
-                    dialog.show();
+                    try {
+                        try {
+                            dialog.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     HashMap<String, Object> hashMapNotificacao = new HashMap<>();
                     hashMapNotificacao.put("titulo", titulo);
                     hashMapNotificacao.put("descricao", descricao);
@@ -92,7 +100,11 @@ public class EditarNotificacaoActivity extends AppCompatActivity {
         notificacaoRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialogCarregamento.show();
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Notificacao notificacao = snapshot.getValue(Notificacao.class);
 
                 Glide.with(getApplicationContext()).load(notificacao.getImagem()).into(imageViewEditarNotificacao);

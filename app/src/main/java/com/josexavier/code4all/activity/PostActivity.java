@@ -100,7 +100,11 @@ public class PostActivity extends AppCompatActivity {
                     builder.setPositiveButton("Confirmar", (dialog, which) -> {
                         String comentario = editText.getText().toString();
                         if (!comentario.isEmpty() || !comentario.equals("")) {
-                            dialogCarregamento.show();
+                            try {
+                                dialogCarregamento.show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             DatabaseReference comentarioRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost).child("comentariosPost").child(listaComentarios.get(position).getId());
                             HashMap<String, Object> hashMapComentario = new HashMap<>();
                             hashMapComentario.put("descricao", comentario);
@@ -218,7 +222,11 @@ public class PostActivity extends AppCompatActivity {
 
             if (buttonGostar.getText().toString().equals("Gostei")) {
                 gostoUtilizadorRef.removeValue().addOnCompleteListener(task -> {
-                    dialogCarregamento.show();
+                    try {
+                        dialogCarregamento.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost);
 
                     postRef.addListenerForSingleValueEvent(new ValueEventListener() {

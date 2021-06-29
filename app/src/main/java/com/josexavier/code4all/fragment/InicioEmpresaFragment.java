@@ -57,8 +57,11 @@ public class InicioEmpresaFragment extends Fragment {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                 AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Ofertas...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                dialog.show();
-
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 int concluidas = 0, aceites = 0, recusadas = 0, pendentes = 0;
 

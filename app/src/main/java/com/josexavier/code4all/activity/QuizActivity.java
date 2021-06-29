@@ -100,8 +100,6 @@ public class QuizActivity extends AppCompatActivity {
 
             int alfabeto = 65;
 
-            Log.i("dados", "opcoes .: " + perguntas.get(perguntaAtual).getOpcoesPergunta().size());
-
             for (int i = 0; i < perguntas.get(perguntaAtual).getOpcoesPergunta().size(); i++) {
                 char caracter = (char) alfabeto;
                 String botaoID = "radioButtonOpcao" + caracter;
@@ -110,7 +108,6 @@ public class QuizActivity extends AppCompatActivity {
                 radioButton.setVisibility(View.VISIBLE);
                 radioButton.setText(radioButton.getTag().toString() + " - " + perguntas.get(perguntaAtual).getOpcoesPergunta().get(i));
                 alfabeto++;
-                Log.i("dados", "alfabeto .: " + alfabeto);
 
             }
 
@@ -140,7 +137,6 @@ public class QuizActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 Quiz quiz = snapshot.getValue(Quiz.class);
                                 hashMapXP.put("totalXP", quiz.getTotalXP() + xpPergunta);
-
                                 quizAtualRef.updateChildren(hashMapXP).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(QuizActivity.this, "Resposta Certa :)", Toast.LENGTH_SHORT).show();
@@ -246,6 +242,7 @@ public class QuizActivity extends AppCompatActivity {
 
                             quizAtualRef.updateChildren(hashMapXP).addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
+                                    solucaoMultipla = "";
                                     Toast.makeText(QuizActivity.this, "Resposta Guardada com Sucesso!", Toast.LENGTH_SHORT).show();
                                     proximaPergunta(perguntaAtual, quizAtualRef);
                                 } else
@@ -277,7 +274,6 @@ public class QuizActivity extends AppCompatActivity {
         float progresso = ((float) (perguntaAtual + 1) / totalPerguntas);
         int progressoFinal = (int) (progresso * 100);
         hashMapPerguntaAtual.put("progresso", progressoFinal);
-
 
         quizAtualRef.updateChildren(hashMapPerguntaAtual).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

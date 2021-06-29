@@ -1,5 +1,6 @@
 package com.josexavier.code4all.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,6 +35,8 @@ import com.josexavier.code4all.model.Post;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import dmax.dialog.SpotsDialog;
 
 public class ForumFragment extends Fragment {
 
@@ -137,19 +140,25 @@ public class ForumFragment extends Fragment {
     private void buscarForum() {
 
         DatabaseReference forum = DefinicaoFirebase.recuperarBaseDados().child("posts");
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         queryForum = forum.orderByChild("estado").equalTo("aceite");
 
         queryForumEventListener = queryForum.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaPost.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     Post post = dados.getValue(Post.class);
                     listaPost.add(post);
                 }
                 adapter.notifyDataSetChanged();
-
+                dialog.dismiss();
             }
 
             @Override

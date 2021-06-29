@@ -35,7 +35,11 @@ public class EsquecerPasswordActivity extends AppCompatActivity {
         dialog = new SpotsDialog.Builder().setContext(EsquecerPasswordActivity.this).setMessage("Carregando...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         if (!email.isEmpty()) {
-            dialog.show();
+            try {
+                dialog.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
 
             autenticacao.sendPasswordResetEmail(email)

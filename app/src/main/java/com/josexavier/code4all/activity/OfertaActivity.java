@@ -20,8 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Oferta;
 import com.josexavier.code4all.interfaces.Validacao;
+import com.josexavier.code4all.model.Oferta;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -52,7 +52,11 @@ public class OfertaActivity extends AppCompatActivity {
         editTextMensagem = findViewById(R.id.editTextMensagemOferta);
 
         Configs.recuperarGrupo(grupo -> {
-            dialog.show();
+            try {
+                dialog.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (grupo.equals("membro")) { // se for utilizador normal
                 buscarOfertaUtilizador(idOferta, buscaSucesso -> {
                     if (buscaSucesso) {
@@ -89,7 +93,11 @@ public class OfertaActivity extends AppCompatActivity {
         alertDialog.setTitle("Quer realmente aceitar esta Oferta?");
         alertDialog.setMessage("Ao realizar esta operação estará a ACEITAR uma Oferta formidável da empresa \"" + empresa + "\".");
         alertDialog.setPositiveButton("Sim", (dialog, which) -> {
-            dialogCarregamento.show();
+            try {
+                dialogCarregamento.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             HashMap<String, Object> hashMapOfertaEstado = new HashMap<>();
             hashMapOfertaEstado.put("estado", Configs.ACEITE);
             ofertaRef.updateChildren(hashMapOfertaEstado).addOnCompleteListener(task -> {
@@ -113,7 +121,11 @@ public class OfertaActivity extends AppCompatActivity {
         alertDialog.setTitle("Quer realmente recusar esta Oferta?");
         alertDialog.setMessage("Ao realizar esta operação estará a RECUSAR uma Oferta formidável da empresa \"" + empresa + "\".");
         alertDialog.setPositiveButton("Sim", (dialog, which) -> {
-            dialogCarregamento.show();
+            try {
+                dialogCarregamento.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             HashMap<String, Object> hashMapOfertaEstado = new HashMap<>();
             hashMapOfertaEstado.put("estado", Configs.RECUSADO);
             ofertaRef.updateChildren(hashMapOfertaEstado).addOnCompleteListener(task -> {
@@ -132,6 +144,14 @@ public class OfertaActivity extends AppCompatActivity {
 
     private void buscarOfertaEmpresa(String idOferta) {
         DatabaseReference ofertaRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas").child(idOferta);
+        AlertDialog dialogCarregamento = new SpotsDialog.Builder().setContext(this).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+
+        try {
+            dialogCarregamento.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         ofertaRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -142,7 +162,7 @@ public class OfertaActivity extends AppCompatActivity {
                 editTextTitulo.setText(oferta.getTitulo());
                 editTextDescricao.setText(oferta.getDescricao());
                 editTextMensagem.setText(oferta.getMensagem());
-
+                dialogCarregamento.dismiss();
             }
 
             @Override
@@ -154,6 +174,14 @@ public class OfertaActivity extends AppCompatActivity {
 
     private void buscarOfertaUtilizador(String idOferta, Validacao validacao) {
         DatabaseReference ofertaRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas").child(idOferta);
+        AlertDialog dialogCarregamento = new SpotsDialog.Builder().setContext(this).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+
+        try {
+            dialogCarregamento.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         ofertaRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -166,7 +194,7 @@ public class OfertaActivity extends AppCompatActivity {
                 editTextMensagem.setText(oferta.getMensagem());
 
                 validacao.isValidacaoSucesso(true);
-
+                dialogCarregamento.dismiss();
             }
 
             @Override

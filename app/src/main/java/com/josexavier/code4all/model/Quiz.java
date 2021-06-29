@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Quiz {
 
-    private String id, titulo, criador, idCriador, tema, imagem, experiencia, dataCriacao, dataInscricao;
+    private String id, titulo, criador, idCriador, tema, imagem, experiencia, dataCriacao, dataInscricao, pontuacao;
     private int totalPerguntas, progresso, perguntaAtual, totalMembros, totalXP;
     private double classificacao;
     private Introducao introducao;
@@ -55,6 +55,14 @@ public class Quiz {
             else
                 validacao.isValidacaoSucesso(false);
         });
+    }
+
+    public String getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(String pontuacao) {
+        this.pontuacao = pontuacao;
     }
 
     public String getId() {

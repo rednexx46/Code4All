@@ -72,7 +72,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
         perfilListener = perfilRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialogCarregamento.show();
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Conta conta = snapshot.getValue(Conta.class);
 
                 Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
@@ -104,7 +108,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
     }
 
     public void atualizarCorPerfil(View view) {
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
         HashMap<String, Object> corPerfil = new HashMap<>();
         int corAleatoria = Configs.corAleatoria();
@@ -128,7 +136,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
     }
 
     public void atualizarCorFundoPerfil(View view) { // mudar a cor do botao para a cor gerada
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
         HashMap<String, Object> corPerfil = new HashMap<>();
         corPerfil.put("corFundoPerfil", Configs.corAleatoria());
@@ -218,7 +230,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         if (!nome.isEmpty()) {
             if (!biografia.isEmpty()) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 atualizarDadosPerfil();
             } else {
                 dialog.dismiss();

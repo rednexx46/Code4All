@@ -170,7 +170,11 @@ public class CriarPostFragment extends Fragment {
             if (!descricao.isEmpty()) {
                 if (tag > 0) {
                     if (imagem != null) {
-                        dialog.show();
+                        try {
+                            dialog.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         criarPost(titulo, descricao, tag);
                     } else {
                         Toast.makeText(getContext(), "Escolha uma Imagem para o Post!", Toast.LENGTH_SHORT).show();
@@ -187,7 +191,11 @@ public class CriarPostFragment extends Fragment {
     }
 
     private void buscarTags(Spinner spinner) {
-        dialogCarregamento.show();
+        try {
+            dialogCarregamento.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference referenciaTags = DefinicaoFirebase.recuperarBaseDados().child("tags");
         referenciaTags.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

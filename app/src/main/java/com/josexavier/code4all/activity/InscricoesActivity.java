@@ -73,7 +73,11 @@ public class InscricoesActivity extends AppCompatActivity {
 
     public void guardarInscricoes(View view) {
         AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setMessage("Guardando Inscrições...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String idUtilizador = Configs.recuperarIdUtilizador();
         DatabaseReference inscricoesRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador).child("temas");
         HashMap<String, String> inscricoesFinal = new HashMap<>();
@@ -103,7 +107,11 @@ public class InscricoesActivity extends AppCompatActivity {
         inscricoesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     idInscricoes.add(dados.getKey());
                     listaInscricoes.add(dados.getValue(String.class));

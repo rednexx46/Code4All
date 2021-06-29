@@ -60,12 +60,15 @@ public class EditarPostActivity extends AppCompatActivity {
         String idPost = getIntent().getStringExtra("idPost");
         buscarPost(idPost, validar -> {
             if (validar) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Glide.with(getApplicationContext()).load(post.getImagem()).into(imageViewEditarPost);
                 titulo.setText(post.getTitulo());
                 descricao.setText(post.getDescricao());
                 buscarTags(post.getTag());
-                dialog.dismiss();
             }
         });
 
@@ -73,7 +76,6 @@ public class EditarPostActivity extends AppCompatActivity {
 
     private void buscarTags(String tag) {
         tags.add(tag);
-
         DatabaseReference referenciaTags = DefinicaoFirebase.recuperarBaseDados().child("tags");
         referenciaTags.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -83,6 +85,7 @@ public class EditarPostActivity extends AppCompatActivity {
                         tags.add(dados.getValue(String.class));
                     }
                 }
+                dialog.dismiss();
             }
 
             @Override
@@ -129,7 +132,11 @@ public class EditarPostActivity extends AppCompatActivity {
     }
 
     private void atualizarPost(String tTitulo, String tDescricao, int posicao) {
-        dialogCarregamento.show();
+        try {
+            dialogCarregamento.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         HashMap<String, Object> hashMapAtualizarPost = new HashMap<>();
         hashMapAtualizarPost.put("titulo", tTitulo);
         hashMapAtualizarPost.put("descricao", tDescricao);

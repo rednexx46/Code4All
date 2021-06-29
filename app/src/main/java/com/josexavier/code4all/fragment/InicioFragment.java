@@ -61,7 +61,11 @@ public class InicioFragment extends Fragment {
         eventoQuizes = quizes.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaQuizes.clear();
                 listaQuizesSubscritos.clear();
 

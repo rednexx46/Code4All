@@ -48,7 +48,11 @@ public class EditarOfertaActivity extends AppCompatActivity {
     }
 
     private void buscarOferta() {
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference ofertaRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas").child(idOferta);
         ofertaRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -76,7 +80,11 @@ public class EditarOfertaActivity extends AppCompatActivity {
         if (!titulo.isEmpty()) {
             if (!descricao.isEmpty()) {
                 if (!mensagem.isEmpty()) {
-                    dialogCarregamento.show();
+                    try {
+                        dialogCarregamento.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     DatabaseReference ofertaRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas").child(idOferta);
                     HashMap<String, Object> hashMapEditarOferta = new HashMap<>();
                     hashMapEditarOferta.put("titulo", titulo);

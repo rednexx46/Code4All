@@ -51,7 +51,6 @@ public class ContasFragment extends Fragment {
     private AlertDialog dialogCarregamento, dialogModificacao;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -134,7 +133,11 @@ public class ContasFragment extends Fragment {
         builder.setTitle("Editar Privilégios do Utilizador");
         builder.setMessage("Você está atualmente a editar o Utilizador \"" + listaContas.get(position).getNome() + "\"");
         builder.setPositiveButton("Confirmar", (dialog, which) -> {
-            dialogModificacao.show();
+            try {
+                dialogModificacao.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             HashMap<String, Object> tipoConta = new HashMap<>();
 
             int posicao = spinnerTiposConta.getSelectedItemPosition();
@@ -209,7 +212,11 @@ public class ContasFragment extends Fragment {
         contasRef.orderByChild("tipo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialogCarregamento.show();
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaContas.clear();
                 String tipo = snapshot.child(Configs.recuperarIdUtilizador()).child("tipo").getValue(String.class);
                 for (DataSnapshot dados : snapshot.getChildren()) {
@@ -220,7 +227,6 @@ public class ContasFragment extends Fragment {
                     // Se o utilizador for diferente daquele que se encontra já logado
                     // Então adiciona para a listaContas
                     if (dados.getValue(Conta.class).getTipo() != null && !dados.getValue(Conta.class).getTipo().equals("")) {
-
                         if (tipo.equals("mod")) {
                             if (!idUtilizador.equals(Configs.recuperarIdUtilizador())) {
                                 if (!tipoUtilizador.equals("admin") && !tipoUtilizador.equals("empresa"))
@@ -228,10 +234,9 @@ public class ContasFragment extends Fragment {
                             }
                         } else if (tipo.equals("admin")) {
                             if (!idUtilizador.equals(Configs.recuperarIdUtilizador()))
-                                if (!tipoUtilizador.equals("empresa"))
+                                if (!tipoUtilizador.equals("empresa") && !tipoUtilizador.equals("admin"))
                                     listaContas.add(dados.getValue(Conta.class));
                         }
-
                     }
                 }
 

@@ -104,7 +104,11 @@ public class EmpresasFragment extends Fragment {
         empresasEventListener = empresasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaEmpresas.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     Empresa empresa = dados.getValue(Empresa.class);

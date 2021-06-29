@@ -72,7 +72,11 @@ public class EmpresaFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 Empresa empresa = snapshot.getValue(Empresa.class);
                 Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.borda_preta);

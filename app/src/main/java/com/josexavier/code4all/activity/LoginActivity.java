@@ -48,7 +48,11 @@ public class LoginActivity extends AppCompatActivity {
             // Verificar o seu conteúdo
             if (!email.isEmpty()) {
                 if (!password.isEmpty()) {
-                    dialogAutenticacao.show();
+                    try {
+                        dialogAutenticacao.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
                     autenticacao.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

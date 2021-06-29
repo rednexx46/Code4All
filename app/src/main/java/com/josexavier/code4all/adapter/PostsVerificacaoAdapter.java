@@ -1,5 +1,6 @@
 package com.josexavier.code4all.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.StorageReference;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
@@ -25,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
 public class PostsVerificacaoAdapter extends RecyclerView.Adapter<PostsVerificacaoAdapter.MyViewHolder> {
 
@@ -67,16 +70,39 @@ public class PostsVerificacaoAdapter extends RecyclerView.Adapter<PostsVerificac
     private void atualizarEstado(String idPost, String estado) {
 
         DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost);
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(context).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         if (estado.equals("aceite")) { // se for aceite, atualiza o estado da mesma...
-            postRef.child("estado").setValue(estado).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull @NotNull Task<Void> task) {
+            postRef.child("estado").setValue(estado).addOnCompleteListener(task -> {
+                 if (task.isSuccessful()) {
                     Toast.makeText(context, "Postagem aceite com Sucesso!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
                 }
             });
         } else { // se nao for, remove o post por completo...
-            postRef.removeValue().addOnCompleteListener(task -> Toast.makeText(context, "Postagem removida com Sucesso!", Toast.LENGTH_SHORT).show());
+            try {
+                dialog.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            StorageReference postFotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("posts").child(idPost + ".png");
+            postFotoRef.delete().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    postRef.removeValue().addOnCompleteListener(task2 -> {
+                        if (task2.isSuccessful()) {
+                            dialog.dismiss();
+                            Toast.makeText(context, "Postagem removida com Sucesso!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            dialog.dismiss();
+                            Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    dialog.dismiss();
+                    Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

@@ -76,8 +76,11 @@ public class ContaFragment extends Fragment {
 
     private void recuperarDadosUtilizador(String idUtilizador) {
         AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-        dialog.show();
-        Log.i("dados", "idUtilizador .: " + idUtilizador);
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
 
         utilizadorRef.addListenerForSingleValueEvent(new ValueEventListener() {

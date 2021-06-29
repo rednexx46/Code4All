@@ -60,7 +60,11 @@ public class CriarOfertaActivity extends AppCompatActivity {
                         if (!descricao.isEmpty()) {
                             if (!mensagem.isEmpty()) {
 
-                                dialog.show();
+                                try {
+                                    dialog.show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
                                 DatabaseReference ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
                                 String idOferta = ofertasRef.push().getKey();
@@ -90,7 +94,6 @@ public class CriarOfertaActivity extends AppCompatActivity {
                                         Toast.makeText(CriarOfertaActivity.this, getApplicationContext().getString(R.string.erro), Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
                             } else {
                                 Toast.makeText(getApplicationContext(), "Introduza uma Mensagem!", Toast.LENGTH_SHORT).show();
                             }

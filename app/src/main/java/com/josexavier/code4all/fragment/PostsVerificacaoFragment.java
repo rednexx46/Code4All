@@ -71,7 +71,11 @@ public class PostsVerificacaoFragment extends Fragment {
         postsEventListener = postsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaPosts.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     if (dados.getValue(Post.class).getEstado().equals(Configs.PENDENTE)) {

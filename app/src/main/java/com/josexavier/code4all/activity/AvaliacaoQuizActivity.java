@@ -1,5 +1,6 @@
 package com.josexavier.code4all.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+import dmax.dialog.SpotsDialog;
+
 public class AvaliacaoQuizActivity extends AppCompatActivity {
 
     private boolean isBotaoClicado = false;
@@ -41,14 +44,19 @@ public class AvaliacaoQuizActivity extends AppCompatActivity {
         fabAvaliacao = findViewById(R.id.fabAvaliacaoQuiz);
 
         fabAvaliacao.setOnClickListener(v -> {
+
             DatabaseReference quizAtualRef = DefinicaoFirebase.recuperarBaseDados().child("quizes").child(idQuiz);
 
             String avaliacao = editTextAvaliacao.getText().toString();
 
             if (!avaliacao.isEmpty()) {
                 if (Double.valueOf(avaliacao) > 0) {
-
-
+                    AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setMessage("Guardando Avaliação...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+                    try {
+                        dialog.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     quizAtualRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -63,12 +71,15 @@ public class AvaliacaoQuizActivity extends AppCompatActivity {
 
                             quizAtualRef.updateChildren(hashClassificacao).addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
+                                    dialog.dismiss();
                                     Toast.makeText(AvaliacaoQuizActivity.this, "Avaliação submetida com Sucesso!", Toast.LENGTH_SHORT).show();
                                     finish();
                                     if (isBotaoClicado)
                                         startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
-                                } else
+                                } else {
+                                    dialog.dismiss();
                                     Toast.makeText(AvaliacaoQuizActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                }
                             });
 
                         }
@@ -80,10 +91,8 @@ public class AvaliacaoQuizActivity extends AppCompatActivity {
                     });
                 } else
                     Toast.makeText(this, "Introduza uma avaliação maior que 0!", Toast.LENGTH_SHORT).show();
-            } else {
+            } else
                 Toast.makeText(this, "Introduza uma avaliação primeiro!", Toast.LENGTH_SHORT).show();
-            }
-
         });
 
     }

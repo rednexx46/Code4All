@@ -99,7 +99,11 @@ public class EditarEmpresaActivity extends AppCompatActivity {
         empresaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialogCarregamento.show();
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Empresa empresa = snapshot.getValue(Empresa.class);
 
                 Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
@@ -161,7 +165,11 @@ public class EditarEmpresaActivity extends AppCompatActivity {
 
     public void atualizarCorFundoEmpresa(View view) {
         AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setMessage("Atualizando a Cor de Fundo da Empresa...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Configs.recuperarIdUtilizador(idUtilizador -> {
             DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
 
@@ -170,13 +178,14 @@ public class EditarEmpresaActivity extends AppCompatActivity {
             corPerfil.put("corFundoPerfil", corAleatoria);
 
             utilizadorRef.updateChildren(corPerfil).addOnCompleteListener(task -> {
-                if (task.isSuccessful())
+                if (task.isSuccessful()) {
+                    dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Cor de Fundo atualizada com Sucesso!", Toast.LENGTH_SHORT).show();
-                else
+                }
+                else {
+                    dialog.dismiss();
                     Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-
-                dialog.dismiss();
-
+                }
             });
         });
 
@@ -232,7 +241,11 @@ public class EditarEmpresaActivity extends AppCompatActivity {
         if (!nome.isEmpty()) {
             if (!descricao.isEmpty()) {
                 AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setMessage("Guardando Alterações...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Configs.recuperarIdUtilizador(idUtilizador -> {
 
                     DatabaseReference empresaRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);

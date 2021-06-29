@@ -1,5 +1,6 @@
 package com.josexavier.code4all.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import dmax.dialog.SpotsDialog;
 
 public class NotificacoesActivity extends AppCompatActivity {
 
@@ -51,7 +54,12 @@ public class NotificacoesActivity extends AppCompatActivity {
 
     private void buscarNotificacoes() {
         DatabaseReference notificacoesRef = DefinicaoFirebase.recuperarBaseDados().child("notificacoes");
-
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         notificacoesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -61,7 +69,7 @@ public class NotificacoesActivity extends AppCompatActivity {
                     listaNotificacoes.add(dados.getValue(Notificacao.class));
 
                 notificacoesAdapter.notifyDataSetChanged();
-
+                dialog.dismiss();
             }
 
             @Override

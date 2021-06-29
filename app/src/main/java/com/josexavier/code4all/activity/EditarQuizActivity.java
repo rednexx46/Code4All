@@ -59,7 +59,11 @@ public class EditarQuizActivity extends AppCompatActivity {
                 if (!tituloIntro.isEmpty()) {
                     if (!descricao.isEmpty()) {
                         if (!video.isEmpty()) {
-                            dialogCarregamento.show();
+                            try {
+                                dialogCarregamento.show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             DatabaseReference quizRef = DefinicaoFirebase.recuperarBaseDados().child("quizes").child(idQuiz);
 
                             HashMap<String, Object> hashMapEditarQuiz = new HashMap<>();
@@ -115,7 +119,11 @@ public class EditarQuizActivity extends AppCompatActivity {
         quizRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Quiz quiz = snapshot.getValue(Quiz.class);
 
                 Glide.with(getApplicationContext()).load(quiz.getImagem()).into(imageViewEditarQuiz);

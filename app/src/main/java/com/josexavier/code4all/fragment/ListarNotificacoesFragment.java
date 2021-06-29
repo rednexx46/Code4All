@@ -148,7 +148,11 @@ public class ListarNotificacoesFragment extends Fragment {
         builder.setMessage("Tem a certeza que pretende eliminar a Notificação " + listaNotificacoes.get(position).getTitulo() + "?");
 
         builder.setPositiveButton("Sim", (dialog, which) -> {
-            dialogRemocao.show();
+            try {
+                dialogRemocao.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("notificacoes").child(listaNotificacoes.get(position).getId() + ".png");
             fotoRef.delete().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -179,12 +183,16 @@ public class ListarNotificacoesFragment extends Fragment {
     }
 
     private void buscarNotificacoes() {
-        dialogCarregamento.show();
         notificacoesRef = DefinicaoFirebase.recuperarBaseDados().child("notificacoes");
 
         notificacoesEventListener = notificacoesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaNotificacoes.clear();
 
                 for (DataSnapshot dados : snapshot.getChildren())

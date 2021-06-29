@@ -41,7 +41,7 @@ import java.util.Locale;
 
 import dmax.dialog.SpotsDialog;
 
-public class CriarContaActivity extends AppCompatActivity {
+public class  CriarContaActivity extends AppCompatActivity {
 
     private EditText editNome, editEmail, editPassword, editConfirmarPassword, editDataNascimento, editNIF;
     private Spinner spinnerEstado, spinnerSexo;
@@ -228,7 +228,11 @@ public class CriarContaActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 if (!dataNascimento.isEmpty()) { // Utilizador
                     dialog = new SpotsDialog.Builder().setContext(this).setMessage("Criando conta...").setCancelable(false).setTheme(R.style.dialog_carregamento).build();
-                    dialog.show();
+                    try {
+                        dialog.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     conta = new Conta();
                     conta.setId(task.getResult().getUser().getUid());
                     conta.setNome(nome);
@@ -257,17 +261,25 @@ public class CriarContaActivity extends AppCompatActivity {
                                     dialog.dismiss();
                                     IntroActivity.activity.finish(); // Finaliza a IntroActivity
                                     finish();
-                                } else
+                                } else {
+                                    dialog.dismiss();
                                     Toast.makeText(CriarContaActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                }
 
                             });
-                        else
+                        else {
+                            dialog.dismiss();
                             Toast.makeText(CriarContaActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                        }
                     });
 
                 } else if (!nif.isEmpty()) {// Empresa (nif não for nulo)
                     dialog = new SpotsDialog.Builder().setContext(this).setMessage("Criando Empresa...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                    dialog.show();
+                    try {
+                        dialog.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     Empresa empresa = new Empresa();
                     empresa.setId(task.getResult().getUser().getUid());
                     empresa.setNome(nome);

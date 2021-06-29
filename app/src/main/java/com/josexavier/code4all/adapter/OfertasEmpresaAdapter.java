@@ -115,7 +115,11 @@ public class OfertasEmpresaAdapter extends RecyclerView.Adapter<OfertasEmpresaAd
                 builder.setCancelable(false);
                 builder.setMessage("Tem a certeza, que pretende eliminar a Oferta \"" + listaOfertas.get(position).getTitulo() + "\" ?");
                 builder.setPositiveButton("Sim", (dialog, which) -> {
-                    dialogCarregamento.show();
+                    try {
+                        dialogCarregamento.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     DatabaseReference ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas").child(listaOfertas.get(position).getId());
                     ofertasRef.removeValue().addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

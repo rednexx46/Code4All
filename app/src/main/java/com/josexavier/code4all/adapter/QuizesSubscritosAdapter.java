@@ -2,6 +2,7 @@ package com.josexavier.code4all.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.activity.QuizActivity;
 import com.josexavier.code4all.activity.QuizInfoActivity;
-import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Quiz;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -86,21 +80,13 @@ public class QuizesSubscritosAdapter extends RecyclerView.Adapter<QuizesSubscrit
             holder.pontuacao.setVisibility(View.VISIBLE);
             holder.progressoQuiz.setVisibility(View.GONE);
             holder.barraProgressoQuiz.setVisibility(View.GONE);
-            DatabaseReference quizRef = DefinicaoFirebase.recuperarBaseDados().child("quizes").child(quizSubscrito.getId());
-            quizRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    int totalXP = snapshot.getValue(Quiz.class).getTotalXP();
-                    double pontuacao = (100 * quizSubscrito.getTotalXP()) / totalXP; // Regra 3 Simples #REGRA3SIMPLESEVIDA
-                    holder.pontuacao.setText("Pontuação Final :\n" + pontuacao + " %");
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-
+            int totalXPQuiz = Integer.parseInt(listaQuizes.get(position).getPontuacao());
+            int totalXP = listaQuizes.get(position).getTotalXP();
+            if (totalXP > 0) {
+                double pontuacao = (100 * totalXP) / totalXPQuiz; // Regra 3 Simples #REGRA3SIMPLESEVIDA
+                holder.pontuacao.setText("Pontuação Final :\n" + pontuacao + " %");
+            } else
+                holder.pontuacao.setText("Pontuação Final :\n 0 %");
         } else {
             holder.botaoQuiz.setText("Continuar!");
         }

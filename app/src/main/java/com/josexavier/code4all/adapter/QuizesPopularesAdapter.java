@@ -1,5 +1,6 @@
 package com.josexavier.code4all.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -31,6 +32,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
+
+import dmax.dialog.SpotsDialog;
 
 public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopularesAdapter.MyViewHolder> {
 
@@ -95,11 +98,15 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
 
         String id = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getUid();
         DatabaseReference quizesSubscritos = DefinicaoFirebase.recuperarBaseDados().child("contas").child(id).child("inscricoes");
-
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(context).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
         quizesSubscritos.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     String idQuiz = dados.getKey();
 
@@ -125,6 +132,7 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
                         String imagemQuiz = listaQuizes.get(position).getImagem();
                         String criadorQuiz = listaQuizes.get(position).getCriador();
                         String temaQuiz = listaQuizes.get(position).getTema();
+                        String pontuacao = String.valueOf(listaQuizes.get(position).getTotalXP());
                         int progresso = listaQuizes.get(position).getProgresso();
                         int totalPerguntasQuiz = listaQuizes.get(position).getTotalPerguntas();
 
@@ -141,6 +149,7 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
                         quizSubscrito.setProgresso(progresso);
                         quizSubscrito.setDataInscricao(Configs.recuperarDataHoje());
                         quizSubscrito.setCriador(criadorQuiz);
+                        quizSubscrito.setPontuacao(pontuacao);
                         quizSubscrito.guardar(subscreverQuiz, sucesso -> {
                             if (sucesso) {
 
@@ -183,6 +192,8 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
                     Drawable retanguloMatricular = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja);
                     holder.matricular.setBackground(retanguloMatricular);
                 }
+
+                dialog.dismiss();
 
             }
 

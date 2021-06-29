@@ -38,8 +38,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
-import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.model.Introducao;
 import com.josexavier.code4all.model.Pergunta;
 import com.josexavier.code4all.model.Quiz;
@@ -201,10 +201,12 @@ public class CriarQuizFragment extends Fragment {
                 if (isCamposPasso3Preenchido) {
 
                     if (imagem != null) {
-                        dialogCarregamento.show();
+                        try {
+                            dialogCarregamento.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         guardarPergunta();
-
-
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date(System.currentTimeMillis());
                         String dataCriacao = formatter.format(date);
@@ -234,10 +236,11 @@ public class CriarQuizFragment extends Fragment {
                                 });
                             }
                         });
+
                     } else {
+                        dialogCarregamento.dismiss();
                         Toast.makeText(getContext(), "Escolha uma Foto para o Quiz!", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
 
@@ -424,7 +427,7 @@ public class CriarQuizFragment extends Fragment {
                         if (opcoes.get(i) == null || opcoes.get(i).equals("")) isNulo = true;
                     }
                     if (!isNulo) {
-                        if (solucao != null) {
+                        if (!solucao.isEmpty()) {
                             isCamposPasso3Preenchido = true;
                             xpValor = new Integer(editTextPerguntaXP.getText().toString());
                         } else {
@@ -555,7 +558,11 @@ public class CriarQuizFragment extends Fragment {
     }
 
     private void buscarTemas() {
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference referenciaTemas = DefinicaoFirebase.recuperarBaseDados().child("temas");
         referenciaTemas.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

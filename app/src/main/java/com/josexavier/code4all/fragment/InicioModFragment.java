@@ -1,5 +1,6 @@
 package com.josexavier.code4all.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.josexavier.code4all.model.Conta;
 import com.josexavier.code4all.model.Post;
 
 import org.jetbrains.annotations.NotNull;
+
+import dmax.dialog.SpotsDialog;
 
 public class InicioModFragment extends Fragment {
 
@@ -48,10 +51,16 @@ public class InicioModFragment extends Fragment {
 
     private void buscarInfo() {
         geralRef = DefinicaoFirebase.recuperarBaseDados();
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         geralEventListener = geralRef.child("posts").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 int postsFazer = 0, posts = 0;
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
@@ -92,6 +101,7 @@ public class InicioModFragment extends Fragment {
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 int ofertas = (int) snapshot.getChildrenCount();
                                 textOfertas.setText(String.valueOf(ofertas));
+                                dialog.dismiss();
                             }
 
                             @Override

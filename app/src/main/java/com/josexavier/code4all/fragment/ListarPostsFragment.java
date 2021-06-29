@@ -120,7 +120,11 @@ public class ListarPostsFragment extends Fragment {
         dialog.setMessage("Tem a certeza que pretende eliminar o Post " + listaPosts.get(position).getTitulo() + "?");
 
         dialog.setPositiveButton("Sim", (dialog2, which) -> {
-            dialogPostRemocao.show();
+            try {
+                dialogPostRemocao.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("posts").child(listaPosts.get(position).getId() + ".png");
             fotoRef.delete().addOnCompleteListener(task -> {
@@ -179,7 +183,11 @@ public class ListarPostsFragment extends Fragment {
         postsEventListener = postsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dialogCarregamento.show();
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaPosts.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Post post = postSnapshot.getValue(Post.class);

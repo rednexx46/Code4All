@@ -65,11 +65,10 @@ public class ContasEmpresaAdapter extends RecyclerView.Adapter<ContasEmpresaAdap
             Calendar calendarioNascimento = Calendar.getInstance();
             calendarioNascimento.setTime(dataFormatacao.parse(conta.getDataNascimento()));
 
-            if (calendarioHoje.before(calendarioNascimento)) {
+            if (calendarioHoje.get(Calendar.MONTH) > calendarioNascimento.get(Calendar.MONTH))
                 idade = (calendarioHoje.get(Calendar.YEAR) - calendarioNascimento.get(Calendar.YEAR));
-            } else {
+            else
                 idade = (calendarioHoje.get(Calendar.YEAR) - calendarioNascimento.get(Calendar.YEAR)) - 1;
-            }
 
         } catch (ParseException e) {
             e.printStackTrace();

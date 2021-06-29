@@ -90,7 +90,11 @@ public class PontuacaoFragment extends Fragment {
         contasEventListener = contasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaContas.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     Conta conta = dados.getValue(Conta.class);

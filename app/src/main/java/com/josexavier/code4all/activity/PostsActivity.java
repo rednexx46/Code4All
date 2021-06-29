@@ -89,7 +89,11 @@ public class PostsActivity extends AppCompatActivity {
                 dialog.setMessage("Tem a certeza que pretende eliminar o Post " + listaPosts.get(position).getTitulo() + "?");
 
                 dialog.setPositiveButton("Sim", (dialog2, which) -> {
-                    dialogRemocao.show();
+                    try {
+                        dialogRemocao.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     DefinicaoFirebase.recuperarBaseDados().child("posts").child(listaPosts.get(position).getId()).removeValue((error, ref) -> {
                         if (error == null) {
                             dialogRemocao.dismiss();
@@ -130,7 +134,11 @@ public class PostsActivity extends AppCompatActivity {
         meusPostsEventListener = meusPostsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 // Limpar Posts (evitar posts duplicados)
                 listaPosts.clear();
 

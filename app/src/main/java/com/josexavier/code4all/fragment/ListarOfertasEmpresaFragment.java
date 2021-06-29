@@ -63,13 +63,17 @@ public class ListarOfertasEmpresaFragment extends Fragment {
     }
 
     private void buscarOfertas(String idEmpresa) { // Buscar todas as ofertas da empresa para listar as mesmas
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Ofertas...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
         ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
         ofertasEventListener = ofertasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 listaOfertas.clear();
-                AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Ofertas...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     if (dados.getValue(Oferta.class).getIdEmpresa().equals(idEmpresa))

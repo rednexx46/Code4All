@@ -123,7 +123,11 @@ public class ListarQuizFragment extends Fragment {
         builder.setMessage("Tem a certeza que pretende eliminar o quiz " + listaQuizes.get(position).getTitulo() + "?");
 
         builder.setPositiveButton("Sim", (dialog, which) -> {
-            dialogRemocao.show();
+            try {
+                dialogRemocao.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("quizes").child(listaQuizes.get(position).getId() + ".png");
             fotoRef.delete().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -177,11 +181,15 @@ public class ListarQuizFragment extends Fragment {
     }
 
     private void buscarQuizes() {
-        dialog.show();
         quizesRef = DefinicaoFirebase.recuperarBaseDados().child("quizes");
         quizesEventListener = quizesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaQuizes.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Quiz quiz = postSnapshot.getValue(Quiz.class);

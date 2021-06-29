@@ -105,7 +105,11 @@ public class CriarOfertaFragment extends Fragment {
                 listaContas.clear();
 
                 AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Ofertas...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     String tipo = dados.getValue(Conta.class).getTipo();

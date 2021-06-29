@@ -64,12 +64,17 @@ public class OfertasEmpresaVerificacaoFragment extends Fragment {
 
     private void buscarOfertas() { // vai buscar as ofertas e mostra uma janela de carregamento
         ofertasRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas");
+        AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+
         ofertasEventListener = ofertasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaOfertas.clear();
-                AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Procurando Ofertas...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-                dialog.show();
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     if (Objects.requireNonNull(dados.getValue(Oferta.class)).getEstado().equals(Configs.ACEITE))
                         listaOfertas.add(dados.getValue(Oferta.class));

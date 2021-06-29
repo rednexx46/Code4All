@@ -53,7 +53,11 @@ public class CriarTagsTemasFragment extends Fragment {
     private void criarTT(String op, String texto) {
         if (!texto.isEmpty() || !texto.equals("")) { // se o campo está preenchido
             if (op.equals("tema")) { // op = tema
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 DatabaseReference temasRef = DefinicaoFirebase.recuperarBaseDados().child("temas");
 
                 temasRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -84,7 +88,11 @@ public class CriarTagsTemasFragment extends Fragment {
                 });
 
             } else { // op = tag
-                dialog.show();
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 DatabaseReference tagsRef = DefinicaoFirebase.recuperarBaseDados().child("tags");
                 tagsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

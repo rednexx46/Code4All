@@ -146,6 +146,7 @@ public class CriarPostActivity extends AppCompatActivity {
                     }
                 });
             } else {
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
             }
         });
@@ -156,7 +157,11 @@ public class CriarPostActivity extends AppCompatActivity {
             if (!descricao.isEmpty()) {
                 if (tag > 0) {
                     if (imagem != null) {
-                        dialog.show();
+                        try {
+                            dialog.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         criarPost(titulo, descricao, tag);
                     } else {
                         Toast.makeText(getApplicationContext(), "Escolha uma Imagem para o Post!", Toast.LENGTH_SHORT).show();
@@ -183,7 +188,11 @@ public class CriarPostActivity extends AppCompatActivity {
     }
 
     private void buscarTags(Spinner spinner) {
-        dialogCarregamento.show();
+        try {
+            dialogCarregamento.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference referenciaTags = DefinicaoFirebase.recuperarBaseDados().child("tags");
         referenciaTags.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

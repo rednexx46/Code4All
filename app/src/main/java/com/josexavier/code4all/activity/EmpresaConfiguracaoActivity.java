@@ -85,7 +85,11 @@ public class EmpresaConfiguracaoActivity extends AppCompatActivity {
                 if (spinnerEmpregados.getSelectedItemPosition() != 0) {
                     if (!localidade.isEmpty()) {
                         if (!descricao.isEmpty()) {
-                            dialogGuardando.show();
+                            try {
+                                dialogGuardando.show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             empresa.setId(Configs.recuperarIdUtilizador());
                             empresa.setDataInscricao(Configs.recuperarDataHoje());
                             empresa.setDescricao(descricao);
@@ -179,7 +183,11 @@ public class EmpresaConfiguracaoActivity extends AppCompatActivity {
     }
 
     private void buscarEmpregados(Spinner spinnerEmpregados) {
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DatabaseReference referenciaTags = DefinicaoFirebase.recuperarBaseDados().child("empregados");
         referenciaTags.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

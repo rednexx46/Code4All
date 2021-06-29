@@ -68,7 +68,11 @@ public class CriarNotificacaoFragment extends Fragment {
             if (!titulo.isEmpty()) {
                 if (!descricao.isEmpty()) {
                     if (imagem != null) {
-                        dialogCarregamento.show();
+                        try {
+                            dialogCarregamento.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         Notificacao notificacao = new Notificacao();
                         DatabaseReference notificacaoRef = DefinicaoFirebase.recuperarBaseDados().child("notificacoes");
                         String idNotificacao = notificacaoRef.push().getKey();

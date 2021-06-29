@@ -67,7 +67,11 @@ public class OfertasFragment extends Fragment {
             ofertasEventListener = ofertasRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    dialog.show();
+                    try {
+                        dialog.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     listaOfertas.clear();
                     for (DataSnapshot dados : snapshot.getChildren()) {
                         Oferta oferta = dados.getValue(Oferta.class);

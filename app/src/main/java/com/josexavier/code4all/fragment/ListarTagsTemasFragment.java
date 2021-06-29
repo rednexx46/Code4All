@@ -41,7 +41,7 @@ public class ListarTagsTemasFragment extends Fragment {
     private ArrayList<String> listaTags = new ArrayList<>();
     private ArrayList<String> idTags = new ArrayList<>();
     private ArrayAdapter<String> listaTagsAdapter;
-    private AlertDialog dialogRemocao, dialogCarregamento;
+    private AlertDialog dialogGuardar, dialogCarregamento, dialogRemocao;
 
     private DatabaseReference tagsRef, temasRef;
     private ValueEventListener tagsEventListener, temasEventListener;
@@ -54,6 +54,7 @@ public class ListarTagsTemasFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_listar_tags_temas, container, false);
 
+        dialogGuardar = new SpotsDialog.Builder().setContext(getContext()).setMessage("Guardando Alterações...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
         dialogRemocao = new SpotsDialog.Builder().setContext(getContext()).setMessage("Removendo TT...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
         dialogCarregamento = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
@@ -82,16 +83,20 @@ public class ListarTagsTemasFragment extends Fragment {
             builder.setPositiveButton("Confirmar", (dialog, which) -> {
                 String tema = editText.getText().toString();
                 if (!tema.isEmpty() || !tema.equals("")) {
-                    dialogRemocao.show();
+                    try {
+                        dialogGuardar.show();
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
                     DatabaseReference temaEditar = DefinicaoFirebase.recuperarBaseDados().child("temas").child(idTemas.get(position));
                     temaEditar.setValue(tema).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(getContext(), "Tema atualizado com sucesso!", Toast.LENGTH_SHORT).show();
                             listaTemasAdapter.notifyDataSetChanged();
                             dialog.dismiss();
-                            dialogRemocao.dismiss();
+                            dialogGuardar.dismiss();
                         } else {
-                            dialogRemocao.dismiss();
+                            dialogGuardar.dismiss();
                             Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
@@ -109,15 +114,21 @@ public class ListarTagsTemasFragment extends Fragment {
             builder.setCancelable(false);
             builder.setMessage("Tem a certeza, que pretende eliminar o Tema \"" + listaTemas.get(position) + "\" ?");
             builder.setPositiveButton("Sim", (dialog, which) -> {
-
+                try {
+                    dialogRemocao.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 DatabaseReference tagsRef = DefinicaoFirebase.recuperarBaseDados().child("temas");
                 tagsRef.child(idTemas.get(position)).removeValue().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(getContext(), "Tema Eliminado com Sucesso!", Toast.LENGTH_SHORT).show();
                         listaTemasAdapter.notifyDataSetChanged();
+                        dialogRemocao.dismiss();
                         dialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                        dialogRemocao.dismiss();
                         dialog.dismiss();
                     }
                 });
@@ -152,13 +163,20 @@ public class ListarTagsTemasFragment extends Fragment {
                 if (!tagAtualizada.isEmpty() || !tagAtualizada.equals("")) {
                     DatabaseReference tagEditar = DefinicaoFirebase.recuperarBaseDados().child("tags").child(idTags.get(position));
                     tagEditar.setValue(tagAtualizada).addOnCompleteListener(task -> {
+                        try {
+                            dialogGuardar.show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         if (task.isSuccessful()) {
                             Toast.makeText(getContext(), "Tag atualizado com sucesso!", Toast.LENGTH_SHORT).show();
                             listaTagsAdapter.notifyDataSetChanged();
+                            dialogGuardar.dismiss();
                             dialog.dismiss();
                         } else {
                             Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+                            dialogGuardar.dismiss();
                         }
                     });
                 } else {
@@ -174,14 +192,21 @@ public class ListarTagsTemasFragment extends Fragment {
             builder.setCancelable(false);
             builder.setMessage("Tem a certeza, que pretende eliminar a Tag \"" + listaTags.get(position) + "\" ?");
             builder.setPositiveButton("Sim", (dialog, which) -> {
+                try {
+                    dialogRemocao.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 DatabaseReference tagsRef = DefinicaoFirebase.recuperarBaseDados().child("tags");
                 tagsRef.child(idTags.get(position)).removeValue().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(getContext(), "Tag Eliminada com Sucesso!", Toast.LENGTH_SHORT).show();
                         listaTagsAdapter.notifyDataSetChanged();
                         dialog.dismiss();
+                        dialogRemocao.dismiss();
                     } else {
                         Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                        dialogRemocao.dismiss();
                         dialog.dismiss();
                     }
                 });
@@ -223,12 +248,16 @@ public class ListarTagsTemasFragment extends Fragment {
     }
 
     private void buscarTemas() {
-        dialogCarregamento.show();
         temasRef = DefinicaoFirebase.recuperarBaseDados().child("temas");
 
         temasEventListener = temasRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaTemas.clear();
                 idTemas.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {
@@ -247,12 +276,16 @@ public class ListarTagsTemasFragment extends Fragment {
     }
 
     private void buscarTags() {
-        dialogCarregamento.show();
         tagsRef = DefinicaoFirebase.recuperarBaseDados().child("tags");
 
         tagsEventListener = tagsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                try {
+                    dialogCarregamento.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaTags.clear();
                 idTags.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {

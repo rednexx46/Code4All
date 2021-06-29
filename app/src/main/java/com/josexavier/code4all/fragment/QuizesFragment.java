@@ -97,6 +97,7 @@ public class QuizesFragment extends Fragment {
     }
 
     private void buscarInscricoes(String idUtilizador) {
+
         DatabaseReference inscricoesRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador).child("temas");
         inscricoesRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -158,13 +159,16 @@ public class QuizesFragment extends Fragment {
 
     private void buscarQuizes(Validacao validacao) {
 
-        dialog.show();
-
         quizesRef = DefinicaoFirebase.recuperarBaseDados().child("quizes");
 
         quizesEventListener = quizesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    dialog.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 listaQuizes.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Quiz quiz = postSnapshot.getValue(Quiz.class);
@@ -176,7 +180,6 @@ public class QuizesFragment extends Fragment {
 
                 quizesPopularesAdapter.notifyDataSetChanged();
                 validacao.isValidacaoSucesso(true);
-
             }
 
             @Override
