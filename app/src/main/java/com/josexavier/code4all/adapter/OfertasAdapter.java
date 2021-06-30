@@ -45,6 +45,7 @@ public class OfertasAdapter extends RecyclerView.Adapter<OfertasAdapter.MyViewHo
         Glide.with(context).load(oferta.getFotoEmpresa()).into(holder.imagem);
         holder.empresa.setText(oferta.getNomeEmpresa());
         holder.descricao.setText(oferta.descricao);
+        holder.estado.setText(oferta.getEstado());
 
         holder.imagem.setOnClickListener(v -> {
             Intent intentOfertaEmpresaActivity = new Intent(context, EmpresaVisualizacaoActivity.class);
@@ -70,17 +71,16 @@ public class OfertasAdapter extends RecyclerView.Adapter<OfertasAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imagem;
-        private TextView empresa, descricao;
+        private TextView empresa, descricao, estado;
         private Button buttonVisualizarOferta;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             imagem = itemView.findViewById(R.id.imageOfertasEmpresa);
             empresa = itemView.findViewById(R.id.textOfertasNomeEmpresa);
             descricao = itemView.findViewById(R.id.textOfertasDescricao);
+            estado = itemView.findViewById(R.id.textOfertasEstado);
             buttonVisualizarOferta = itemView.findViewById(R.id.buttonVisualizarOferta);
-
         }
     }
 

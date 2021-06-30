@@ -27,8 +27,8 @@ import com.google.firebase.storage.UploadTask;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Conta;
 import com.josexavier.code4all.interfaces.Validacao;
+import com.josexavier.code4all.model.Conta;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -106,7 +106,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
         super.onDestroy();
         perfilRef.removeEventListener(perfilListener);
     }
-
+    /*
     public void atualizarCorPerfil(View view) {
         try {
             dialog.show();
@@ -134,6 +134,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
             }
         });
     }
+     */
 
     public void atualizarCorFundoPerfil(View view) { // mudar a cor do botao para a cor gerada
         try {

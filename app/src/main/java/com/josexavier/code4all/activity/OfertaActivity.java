@@ -35,6 +35,7 @@ public class OfertaActivity extends AppCompatActivity {
     private CircleImageView imageViewOferta;
     private TextView textViewNome;
     private EditText editTextTitulo, editTextDescricao, editTextMensagem;
+    private String estado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class OfertaActivity extends AppCompatActivity {
             }
             if (grupo.equals("membro")) { // se for utilizador normal
                 buscarOfertaUtilizador(idOferta, buscaSucesso -> {
-                    if (buscaSucesso) {
+                    if (buscaSucesso && estado.equals(Configs.PENDENTE)) {
                         // Configurações Iniciais
                         DatabaseReference ofertaRef = DefinicaoFirebase.recuperarBaseDados().child("ofertas").child(idOferta);
 
@@ -73,8 +74,8 @@ public class OfertaActivity extends AppCompatActivity {
                         // Configuração dos métodos "onClick" dos botões para a oferta apenas aplicável se o utilizador for do tipo "membro"
                         buttonAceitarOferta.setOnClickListener(v -> aceitarOferta(ofertaRef, textViewNome.getText().toString()));
                         buttonRecusarOferta.setOnClickListener(v -> recusarOferta(ofertaRef, textViewNome.getText().toString()));
-                        dialog.dismiss();
                     }
+                    dialog.dismiss();
                 });
 
             } else if (grupo.equals("empresa")) { // se for empresa
@@ -192,6 +193,8 @@ public class OfertaActivity extends AppCompatActivity {
                 editTextTitulo.setText(oferta.getTitulo());
                 editTextDescricao.setText(oferta.getDescricao());
                 editTextMensagem.setText(oferta.getMensagem());
+
+                estado = oferta.getEstado();
 
                 validacao.isValidacaoSucesso(true);
                 dialogCarregamento.dismiss();

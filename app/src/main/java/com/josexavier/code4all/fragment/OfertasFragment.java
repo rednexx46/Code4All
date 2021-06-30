@@ -75,7 +75,7 @@ public class OfertasFragment extends Fragment {
                     listaOfertas.clear();
                     for (DataSnapshot dados : snapshot.getChildren()) {
                         Oferta oferta = dados.getValue(Oferta.class);
-                        if (oferta.getIdUtilizador().equals(idUtilizador) && oferta.getEstado().equals(Configs.PENDENTE))
+                        if (oferta.getIdUtilizador().equals(idUtilizador))
                             listaOfertas.add(dados.getValue(Oferta.class));
                     }
                     dialog.dismiss();

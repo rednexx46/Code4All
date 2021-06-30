@@ -125,7 +125,7 @@
                     android:drawableStart="@drawable/ic_atualizar"
                     android:drawablePadding="8dp"
                     android:fontFamily="@font/montserrat_extra_bold"
-                    android:onClick="atualizarCorPerfil"
+                    android:visibility="gone"
                     android:padding="8dp"
                     android:text="@string/atualizar_cor_perfil"
                     android:textColor="@android:color/white" />
@@ -134,14 +134,15 @@
                     android:id="@+id/buttonAtualizarCorFundoPerfil"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="0.5"
                     android:background="@drawable/retangulo_rosa"
                     android:drawableStart="@drawable/ic_atualizar"
                     android:drawablePadding="8dp"
                     android:fontFamily="@font/montserrat_extra_bold"
                     android:onClick="atualizarCorFundoPerfil"
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:text="@string/atualizar_cor_fundo_perfil"
                     android:textColor="@android:color/white" />
 

@@ -135,6 +135,10 @@ public class ContaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Configs.recuperarIdUtilizador(idUtilizador -> recuperarDadosUtilizador(idUtilizador));
+        try {
+            Configs.recuperarIdUtilizador(idUtilizador -> recuperarDadosUtilizador(idUtilizador));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
