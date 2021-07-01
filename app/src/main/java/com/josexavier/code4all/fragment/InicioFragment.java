@@ -48,7 +48,11 @@ public class InicioFragment extends Fragment {
         recyclerQuizesFinalizados.setItemAnimator(new DefaultItemAnimator());
         recyclerQuizesFinalizados.setHasFixedSize(true);
 
-        buscarQuizes(recyclerQuizesSubscritos, recyclerQuizesFinalizados);
+        try {
+            buscarQuizes(recyclerQuizesSubscritos, recyclerQuizesFinalizados);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return root;
     }
