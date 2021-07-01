@@ -19,6 +19,7 @@ import com.josexavier.code4all.model.Oferta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -59,7 +60,7 @@ public class EditarOfertaActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 Oferta oferta = snapshot.getValue(Oferta.class);
 
-                editTextTitulo.setText(oferta.getTitulo());
+                editTextTitulo.setText(Objects.requireNonNull(oferta).getTitulo());
                 editTextDescricao.setText(oferta.getDescricao());
                 editTextMensagem.setText(oferta.getMensagem());
                 dialog.dismiss();

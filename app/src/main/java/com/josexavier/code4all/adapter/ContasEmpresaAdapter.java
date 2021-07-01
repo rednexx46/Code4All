@@ -25,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class ContasEmpresaAdapter extends RecyclerView.Adapter<ContasEmpresaAdapter.MyViewHolder> {
 
@@ -60,10 +61,10 @@ public class ContasEmpresaAdapter extends RecyclerView.Adapter<ContasEmpresaAdap
         // Cálculo da idade consoante a sua data de nascimento e a data atual
         try {
             Calendar calendarioHoje = Calendar.getInstance();
-            calendarioHoje.setTime(dataFormatacao.parse(Configs.recuperarDataHoje()));
+            calendarioHoje.setTime(Objects.requireNonNull(dataFormatacao.parse(Configs.recuperarDataHoje())));
 
             Calendar calendarioNascimento = Calendar.getInstance();
-            calendarioNascimento.setTime(dataFormatacao.parse(conta.getDataNascimento()));
+            calendarioNascimento.setTime(Objects.requireNonNull(dataFormatacao.parse(conta.getDataNascimento())));
 
             if (calendarioHoje.get(Calendar.MONTH) > calendarioNascimento.get(Calendar.MONTH))
                 idade = (calendarioHoje.get(Calendar.YEAR) - calendarioNascimento.get(Calendar.YEAR));

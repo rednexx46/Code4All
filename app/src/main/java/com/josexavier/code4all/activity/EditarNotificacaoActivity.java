@@ -22,6 +22,7 @@ import com.josexavier.code4all.model.Notificacao;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -107,7 +108,7 @@ public class EditarNotificacaoActivity extends AppCompatActivity {
                 }
                 Notificacao notificacao = snapshot.getValue(Notificacao.class);
 
-                Glide.with(getApplicationContext()).load(notificacao.getImagem()).into(imageViewEditarNotificacao);
+                Glide.with(getApplicationContext()).load(Objects.requireNonNull(notificacao).getImagem()).into(imageViewEditarNotificacao);
                 editTextTitulo.setText(notificacao.getTitulo());
                 editTextDescricao.setText(notificacao.getDescricao());
                 dialogCarregamento.dismiss();

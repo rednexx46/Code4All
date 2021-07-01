@@ -7,6 +7,7 @@ import android.graphics.ImageDecoder;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -34,13 +35,14 @@ import com.google.firebase.storage.UploadTask;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Empresa;
 import com.josexavier.code4all.interfaces.Validacao;
+import com.josexavier.code4all.model.Empresa;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -50,7 +52,6 @@ public class EditarEmpresaActivity extends AppCompatActivity {
     private ImageView imageViewEmpresa;
     private EditText editTextNome, editTextEmail, editTextDescricao;
 
-    private Bitmap imagem = null;
     private byte[] dadosImagem;
     private AlertDialog dialogCarregamento;
 
@@ -63,9 +64,7 @@ public class EditarEmpresaActivity extends AppCompatActivity {
 
         configuracoesIniciais();
 
-        Configs.recuperarIdUtilizador(idUtilizador -> {
-            buscarInfo(idUtilizador);
-        });
+        Configs.recuperarIdUtilizador(this::buscarInfo);
 
 
     }
@@ -107,7 +106,7 @@ public class EditarEmpresaActivity extends AppCompatActivity {
                 Empresa empresa = snapshot.getValue(Empresa.class);
 
                 Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
-                drawable.setColorFilter(empresa.getCorFundoPerfil(), PorterDuff.Mode.SRC);
+                Objects.requireNonNull(drawable).setColorFilter(Objects.requireNonNull(empresa).getCorFundoPerfil(), PorterDuff.Mode.SRC);
                 linearLayoutEmpresa.setBackground(drawable);
 
                 Glide.with(getApplicationContext()).load(empresa.getFoto()).into(imageViewEmpresa);
@@ -128,23 +127,21 @@ public class EditarEmpresaActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        imagem = null;
+        Bitmap imagem = null;
 
         try {
 
-            switch (requestCode) {
-                case Configs.SELECAO_GALERIA:
-                    Uri localImagemSelecionada = data.getData();
+            if (requestCode == Configs.SELECAO_GALERIA) {
+                Uri localImagemSelecionada = Objects.requireNonNull(data).getData();
 
-                    if (android.os.Build.VERSION.SDK_INT >= 29) {
-                        // Usar versão mais recente do código
-                        ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), localImagemSelecionada);
-                        imagem = ImageDecoder.decodeBitmap(source);
-                    } else {
-                        /// Usar versão mais antiga do código
-                        imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
-                    }
-                    break;
+                if (Build.VERSION.SDK_INT >= 29) {
+                    // Usar versão mais recente do código
+                    ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), localImagemSelecionada);
+                    imagem = ImageDecoder.decodeBitmap(source);
+                } else {
+                    /// Usar versão mais antiga do código
+                    imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
+                }
             }
 
         } catch (Exception e) {
@@ -181,8 +178,7 @@ public class EditarEmpresaActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Cor de Fundo atualizada com Sucesso!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
                 }
@@ -194,14 +190,14 @@ public class EditarEmpresaActivity extends AppCompatActivity {
     private void guardarFoto(Validacao validacao) { // Guardar foto no FirebaseStorage, guarda foto no perfil do utilizador e guarda também na FirebaseDatabase (url da foto)
         FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
 
-        StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(autenticacao.getCurrentUser().getUid()).child("foto.png");
+        StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(Objects.requireNonNull(autenticacao.getCurrentUser()).getUid()).child("foto.png");
         UploadTask uploadTask = firebaseStorage.putBytes(dadosImagem);
 
         uploadTask.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 firebaseStorage.getDownloadUrl().addOnCompleteListener(task2 -> {
                     if (task2.isSuccessful()) {
-                        final String foto = task2.getResult().toString();
+                        final String foto = Objects.requireNonNull(task2.getResult()).toString();
 
                         UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setPhotoUri(task2.getResult()).build();
                         FirebaseUser utilizador = autenticacao.getCurrentUser();
@@ -213,13 +209,7 @@ public class EditarEmpresaActivity extends AppCompatActivity {
 
                                 DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(utilizador.getUid());
 
-                                utilizadorRef.updateChildren(fotoPerfil).addOnCompleteListener(task4 -> {
-                                    if (task4.isSuccessful())
-                                        validacao.isValidacaoSucesso(true);
-                                    else
-                                        validacao.isValidacaoSucesso(false);
-
-                                });
+                                utilizadorRef.updateChildren(fotoPerfil).addOnCompleteListener(task4 -> validacao.isValidacaoSucesso(task4.isSuccessful()));
 
                             } else {
                                 Toast.makeText(this, getString(R.string.erro), Toast.LENGTH_SHORT).show();

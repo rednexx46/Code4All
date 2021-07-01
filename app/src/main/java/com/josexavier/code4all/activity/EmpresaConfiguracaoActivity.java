@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
@@ -32,13 +33,12 @@ import com.josexavier.code4all.model.Empresa;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
 public class EmpresaConfiguracaoActivity extends AppCompatActivity {
 
-    private final int SELECAO_CAMARA = 100;
-    private final int SELECAO_GALERIA = 200;
     private ImageView imageViewEmpresa;
     private List<String> listaEmpregados = new ArrayList<>();
     private Bitmap imagem = null;
@@ -150,19 +150,17 @@ public class EmpresaConfiguracaoActivity extends AppCompatActivity {
 
         try {
 
-            switch (requestCode) {
-                case Configs.SELECAO_GALERIA:
-                    Uri localImagemSelecionada = data.getData();
+            if (requestCode == Configs.SELECAO_GALERIA) {
+                Uri localImagemSelecionada = Objects.requireNonNull(data).getData();
 
-                    if (android.os.Build.VERSION.SDK_INT >= 29) {
-                        // Usar versão mais recente do código
-                        ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), localImagemSelecionada);
-                        imagem = ImageDecoder.decodeBitmap(source);
-                    } else {
-                        /// Usar versão mais antiga do código
-                        imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
-                    }
-                    break;
+                if (Build.VERSION.SDK_INT >= 29) {
+                    // Usar versão mais recente do código
+                    ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), localImagemSelecionada);
+                    imagem = ImageDecoder.decodeBitmap(source);
+                } else {
+                    /// Usar versão mais antiga do código
+                    imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
+                }
             }
 
         } catch (Exception e) {

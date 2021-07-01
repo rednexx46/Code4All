@@ -26,6 +26,8 @@ import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PrincipalActivity extends AppCompatActivity {
@@ -99,7 +101,7 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     protected void onResume() { // Recuperar Imagem e Nome do Utilizador (Firebase)
         super.onResume();
-        Glide.with(getApplicationContext()).load(autenticacao.getCurrentUser().getPhotoUrl()).into(perfil);
+        Glide.with(getApplicationContext()).load(Objects.requireNonNull(autenticacao.getCurrentUser()).getPhotoUrl()).into(perfil);
         nome.setText(autenticacao.getCurrentUser().getDisplayName());
     }
 

@@ -8,6 +8,7 @@ import android.graphics.ImageDecoder;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -50,10 +51,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
-public class CriarQuizFragment extends Fragment {
+public class  CriarQuizFragment extends Fragment {
 
     private final int idCharInicial = 65;
     private final int NULO = 0;
@@ -210,7 +212,7 @@ public class CriarQuizFragment extends Fragment {
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date(System.currentTimeMillis());
                         String dataCriacao = formatter.format(date);
-                        String nomeUtilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getDisplayName();
+                        String nomeUtilizador = Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getDisplayName();
                         String idUtilizador = DefinicaoFirebase.recuperarAutenticacao().getUid();
                         quiz.setIdCriador(idUtilizador);
                         quiz.setAutoId();
@@ -228,7 +230,7 @@ public class CriarQuizFragment extends Fragment {
                                     if (validar2) {
                                         dialogCarregamento.dismiss();
                                         Toast.makeText(getContext(), "Quiz Criado com sucesso!", Toast.LENGTH_SHORT).show();
-                                        getActivity().onBackPressed();
+                                        requireActivity().onBackPressed();
                                     } else {
                                         dialogCarregamento.dismiss();
                                         Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
@@ -252,7 +254,7 @@ public class CriarQuizFragment extends Fragment {
 
     private void abrirGaleria() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent,
@@ -269,19 +271,17 @@ public class CriarQuizFragment extends Fragment {
 
         try {
 
-            switch (requestCode) {
-                case Configs.SELECAO_GALERIA:
-                    Uri localImagemSelecionada = data.getData();
+            if (requestCode == Configs.SELECAO_GALERIA) {
+                Uri localImagemSelecionada = Objects.requireNonNull(data).getData();
 
-                    if (android.os.Build.VERSION.SDK_INT >= 29) {
-                        // Usar versão mais recente do código
-                        ImageDecoder.Source source = ImageDecoder.createSource(getActivity().getContentResolver(), localImagemSelecionada);
-                        imagem = ImageDecoder.decodeBitmap(source);
-                    } else {
-                        /// Usar versão mais antiga do código
-                        imagem = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), localImagemSelecionada);
-                    }
-                    break;
+                if (Build.VERSION.SDK_INT >= 29) {
+                    // Usar versão mais recente do código
+                    ImageDecoder.Source source = ImageDecoder.createSource(Objects.requireNonNull(getActivity()).getContentResolver(), localImagemSelecionada);
+                    imagem = ImageDecoder.decodeBitmap(source);
+                } else {
+                    /// Usar versão mais antiga do código
+                    imagem = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), localImagemSelecionada);
+                }
             }
 
         } catch (Exception e) {
@@ -429,7 +429,7 @@ public class CriarQuizFragment extends Fragment {
                     if (!isNulo) {
                         if (!solucao.isEmpty()) {
                             isCamposPasso3Preenchido = true;
-                            xpValor = new Integer(editTextPerguntaXP.getText().toString());
+                            xpValor = Integer.valueOf(editTextPerguntaXP.getText().toString());
                         } else {
                             Toast.makeText(getContext(), "É preciso definir a solução da Pergunta", Toast.LENGTH_SHORT).show();
                         }

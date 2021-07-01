@@ -21,6 +21,8 @@ import com.josexavier.code4all.model.Oferta;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 
 public class InicioEmpresaFragment extends Fragment {
@@ -66,9 +68,9 @@ public class InicioEmpresaFragment extends Fragment {
                 int concluidas = 0, aceites = 0, recusadas = 0, pendentes = 0;
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    String estado = dados.getValue(Oferta.class).getEstado();
+                    String estado = Objects.requireNonNull(dados.getValue(Oferta.class)).getEstado();
 
-                    if (dados.getValue(Oferta.class).getIdEmpresa().equals(idUtilizador)) {
+                    if (Objects.requireNonNull(dados.getValue(Oferta.class)).getIdEmpresa().equals(idUtilizador)) {
                         if (estado.equals(Configs.CONCLUIDO))
                             concluidas++;
                         else if (estado.equals(Configs.PENDENTE))

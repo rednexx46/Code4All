@@ -28,9 +28,9 @@ import com.google.firebase.storage.UploadTask;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.model.Conta;
 import com.josexavier.code4all.model.Empresa;
-import com.josexavier.code4all.interfaces.Validacao;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -38,10 +38,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
-public class  CriarContaActivity extends AppCompatActivity {
+public class CriarContaActivity extends AppCompatActivity {
 
     private EditText editNome, editEmail, editPassword, editConfirmarPassword, editDataNascimento, editNIF;
     private Spinner spinnerEstado, spinnerSexo;
@@ -78,9 +79,9 @@ public class  CriarContaActivity extends AppCompatActivity {
         autenticacao = DefinicaoFirebase.recuperarAutenticacao();
 
         Drawable casa = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_casa);
-        casa.setBounds(8, 8, 8, 8);
+        Objects.requireNonNull(casa).setBounds(8, 8, 8, 8);
         Drawable pessoa = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_pessoa);
-        pessoa.setBounds(8, 8, 8, 8);
+        Objects.requireNonNull(pessoa).setBounds(8, 8, 8, 8);
 
         switchUtilizadorEmpresa = findViewById(R.id.toggleButton);
         switchUtilizadorEmpresa.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -234,7 +235,7 @@ public class  CriarContaActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     conta = new Conta();
-                    conta.setId(task.getResult().getUser().getUid());
+                    conta.setId(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
                     conta.setNome(nome);
                     conta.setEmail(email);
                     conta.setEstado(estado);
@@ -281,7 +282,7 @@ public class  CriarContaActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Empresa empresa = new Empresa();
-                    empresa.setId(task.getResult().getUser().getUid());
+                    empresa.setId(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
                     empresa.setNome(nome);
                     empresa.setEmail(email);
                     empresa.setNif(nif);
@@ -306,7 +307,7 @@ public class  CriarContaActivity extends AppCompatActivity {
 
                 String erro;
                 try {
-                    throw task.getException();
+                    throw Objects.requireNonNull(task.getException());
                 } catch (FirebaseAuthWeakPasswordException e) {
                     erro = "A Password introduzida é fraca!";
                 } catch (FirebaseAuthInvalidCredentialsException e) {
@@ -327,7 +328,7 @@ public class  CriarContaActivity extends AppCompatActivity {
 
         UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setDisplayName(nome).build();
         FirebaseUser utilizador = autenticacao.getCurrentUser();
-        utilizador.updateProfile(profileRequest).addOnCompleteListener(task -> {
+        Objects.requireNonNull(utilizador).updateProfile(profileRequest).addOnCompleteListener(task -> {
             if (task.isSuccessful())
                 validacao.isValidacaoSucesso(true);
             else
@@ -344,14 +345,14 @@ public class  CriarContaActivity extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
-        StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(autenticacao.getCurrentUser().getUid()).child("foto.jpeg");
+        StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(Objects.requireNonNull(autenticacao.getCurrentUser()).getUid()).child("foto.jpeg");
         UploadTask uploadTask = firebaseStorage.putBytes(data);
 
         uploadTask.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 firebaseStorage.getDownloadUrl().addOnCompleteListener(task2 -> {
                     if (task2.isSuccessful()) {
-                        final String foto = task2.getResult().toString();
+                        final String foto = Objects.requireNonNull(task2.getResult()).toString();
 
                         UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setPhotoUri(task2.getResult()).build();
                         FirebaseUser utilizador = autenticacao.getCurrentUser();

@@ -19,14 +19,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Post;
 import com.josexavier.code4all.interfaces.Validacao;
+import com.josexavier.code4all.model.Post;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -81,7 +82,7 @@ public class EditarPostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    if (!dados.getValue(String.class).equals(tag)) { // Se for diferente do já anteriormente selecionado.
+                    if (!Objects.requireNonNull(dados.getValue(String.class)).equals(tag)) { // Se for diferente do já anteriormente selecionado.
                         tags.add(dados.getValue(String.class));
                     }
                 }

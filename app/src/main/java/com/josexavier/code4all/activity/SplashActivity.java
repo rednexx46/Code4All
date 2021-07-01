@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.interfaces.Utilizador;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -95,7 +94,7 @@ public class SplashActivity extends AppCompatActivity {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
-                    handler.postDelayed(() -> introducao(), 0);
+                    handler.postDelayed(() -> introducao(), 2000);
                 }
             };
 

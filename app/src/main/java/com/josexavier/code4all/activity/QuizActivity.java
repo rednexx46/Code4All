@@ -3,7 +3,6 @@ package com.josexavier.code4all.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,15 +23,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.model.Conta;
 import com.josexavier.code4all.model.Pergunta;
 import com.josexavier.code4all.model.Quiz;
-import com.josexavier.code4all.interfaces.Validacao;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -136,7 +136,7 @@ public class QuizActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 Quiz quiz = snapshot.getValue(Quiz.class);
-                                hashMapXP.put("totalXP", quiz.getTotalXP() + xpPergunta);
+                                hashMapXP.put("totalXP", Objects.requireNonNull(quiz).getTotalXP() + xpPergunta);
                                 quizAtualRef.updateChildren(hashMapXP).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
                                         limparRadioButtons();
@@ -238,7 +238,7 @@ public class QuizActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                             Quiz quiz = snapshot.getValue(Quiz.class);
-                            hashMapXP.put("totalXP", quiz.getTotalXP() + finalXpPergunta);
+                            hashMapXP.put("totalXP", Objects.requireNonNull(quiz).getTotalXP() + finalXpPergunta);
 
                             quizAtualRef.updateChildren(hashMapXP).addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
@@ -285,7 +285,7 @@ public class QuizActivity extends AppCompatActivity {
                             quizAtualRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                    int xpQuiz = snapshot.getValue(Quiz.class).getTotalXP();
+                                    int xpQuiz = Objects.requireNonNull(snapshot.getValue(Quiz.class)).getTotalXP();
 
 
                                     DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(Configs.recuperarIdUtilizador());
@@ -296,7 +296,7 @@ public class QuizActivity extends AppCompatActivity {
                                             Conta conta = snapshot.getValue(Conta.class);
 
                                             HashMap<String, Object> hashMapXP = new HashMap<>();
-                                            hashMapXP.put("totalXP", conta.getTotalXP() + xpQuiz); // somar totalxp mais o xp adquirido no quiz feito
+                                            hashMapXP.put("totalXP", Objects.requireNonNull(conta).getTotalXP() + xpQuiz); // somar totalxp mais o xp adquirido no quiz feito
 
                                             utilizadorRef.updateChildren(hashMapXP).addOnCompleteListener(task2 -> {
                                                 if (task2.isSuccessful()) {

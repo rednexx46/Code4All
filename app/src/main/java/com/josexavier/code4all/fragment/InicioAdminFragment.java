@@ -22,6 +22,8 @@ import com.josexavier.code4all.model.Post;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 
 public class InicioAdminFragment extends Fragment {
@@ -66,15 +68,20 @@ public class InicioAdminFragment extends Fragment {
                 int membros = 0, empresas = 0, mods = 0, admins = 0;
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    if (dados.getValue(Conta.class).getTipo() != null) {
-                        if (dados.getValue(Conta.class).getTipo().equals("membro")) {
-                            membros++;
-                        } else if (dados.getValue(Conta.class).getTipo().equals("empresa")) {
-                            empresas++;
-                        } else if (dados.getValue(Conta.class).getTipo().equals("mod")) {
-                            mods++;
-                        } else if (dados.getValue(Conta.class).getTipo().equals("admin")) {
-                            admins++;
+                    if (Objects.requireNonNull(dados.getValue(Conta.class)).getTipo() != null) {
+                        switch (Objects.requireNonNull(dados.getValue(Conta.class)).getTipo()) {
+                            case "membro":
+                                membros++;
+                                break;
+                            case "empresa":
+                                empresas++;
+                                break;
+                            case "mod":
+                                mods++;
+                                break;
+                            case "admin":
+                                admins++;
+                                break;
                         }
                     }
                 }
@@ -98,9 +105,9 @@ public class InicioAdminFragment extends Fragment {
                                 int posts = 0, postsFazer = 0;
 
                                 for (DataSnapshot dados : snapshot.getChildren()) {
-                                    if (dados.getValue(Post.class).getEstado().equals(Configs.ACEITE)) {
+                                    if (Objects.requireNonNull(dados.getValue(Post.class)).getEstado().equals(Configs.ACEITE)) {
                                         posts++;
-                                    } else if (dados.getValue(Post.class).getEstado().equals(Configs.PENDENTE)) {
+                                    } else if (Objects.requireNonNull(dados.getValue(Post.class)).getEstado().equals(Configs.PENDENTE)) {
                                         postsFazer++;
                                     }
                                 }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +32,7 @@ import com.josexavier.code4all.model.Conta;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -50,7 +50,7 @@ public class ContaFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_conta, container, false);
 
-        Configs.recuperarIdUtilizador(idUtilizador -> recuperarDadosUtilizador(idUtilizador));
+        Configs.recuperarIdUtilizador(this::recuperarDadosUtilizador);
 
         fundoPerfil = root.findViewById(R.id.linearLayoutConta);
         fotoPerfil = root.findViewById(R.id.imageContaPerfil);
@@ -88,11 +88,11 @@ public class ContaFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 conta = snapshot.getValue(Conta.class);
 
-                Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.borda_preta);
-                drawable.setColorFilter(conta.getCorFundoPerfil(), PorterDuff.Mode.SRC);
+                Drawable drawable = ContextCompat.getDrawable(requireContext(), R.drawable.borda_preta);
+                Objects.requireNonNull(drawable).setColorFilter(conta.getCorFundoPerfil(), PorterDuff.Mode.SRC);
 
                 fundoPerfil.setBackground(drawable);
-                Glide.with(getContext()).load(conta.getFoto()).into(fotoPerfil);
+                Glide.with(requireContext()).load(conta.getFoto()).into(fotoPerfil);
                 nomeConta.setText(conta.getNome());
                 contaXP.setText("Total de XP .: " + conta.getTotalXP());
                 biografia.setText(conta.getBiografia());
@@ -136,7 +136,7 @@ public class ContaFragment extends Fragment {
     public void onResume() {
         super.onResume();
         try {
-            Configs.recuperarIdUtilizador(idUtilizador -> recuperarDadosUtilizador(idUtilizador));
+            Configs.recuperarIdUtilizador(this::recuperarDadosUtilizador);
         } catch (Exception e) {
             e.printStackTrace();
         }

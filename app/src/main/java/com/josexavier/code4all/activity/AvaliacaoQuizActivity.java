@@ -23,6 +23,7 @@ import com.josexavier.code4all.model.Quiz;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -66,7 +67,7 @@ public class AvaliacaoQuizActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 Quiz quiz = snapshot.getValue(Quiz.class);
 
-                                double classificacao = quiz.getClassificacao();
+                                double classificacao = Objects.requireNonNull(quiz).getClassificacao();
                                 double classificaoFinal = (classificacao + avalia) / 2;
 
                                 HashMap<String, Object> hashClassificacao = new HashMap<>();

@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -38,7 +39,6 @@ public class QuizesFragment extends Fragment {
     private List<Quiz> listaQuizes = new ArrayList<>();
     private List<Quiz> listaInscricoes = new ArrayList<>();
     private QuizesPopularesAdapter quizesPopularesAdapter, inscricoesAdapter;
-    private RecyclerView recyclerViewQuizesPopulares, recyclerViewInscricoes;
     private TextView textViewSubscricoes;
     private AlertDialog dialog;
     private DatabaseReference quizSubscritoRef, quizesRef;
@@ -54,7 +54,7 @@ public class QuizesFragment extends Fragment {
         dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Quizes...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
         // Definição do RecyclerViewQuizesPopulares
-        recyclerViewQuizesPopulares = root.findViewById(R.id.recyclerViewQuizesPopulares);
+        RecyclerView recyclerViewQuizesPopulares = root.findViewById(R.id.recyclerViewQuizesPopulares);
         recyclerViewQuizesPopulares.setLayoutManager(criarLayoutManager());
         recyclerViewQuizesPopulares.setItemAnimator(new DefaultItemAnimator());
         recyclerViewQuizesPopulares.setHasFixedSize(true);
@@ -64,7 +64,7 @@ public class QuizesFragment extends Fragment {
         recyclerViewQuizesPopulares.setAdapter(quizesPopularesAdapter);
 
         // Definição do recyclerViewInscricoes
-        recyclerViewInscricoes = root.findViewById(R.id.recyclerViewInscricoesQuizes);
+        RecyclerView recyclerViewInscricoes = root.findViewById(R.id.recyclerViewInscricoesQuizes);
         recyclerViewInscricoes.setLayoutManager(criarLayoutManager());
         recyclerViewInscricoes.setItemAnimator(new DefaultItemAnimator());
         recyclerViewInscricoes.setHasFixedSize(true);
@@ -76,7 +76,7 @@ public class QuizesFragment extends Fragment {
 
         buscarQuizes(sucesso -> {
             if (sucesso)
-                Configs.recuperarIdUtilizador(idUtilizador -> buscarInscricoes(idUtilizador));
+                Configs.recuperarIdUtilizador(this::buscarInscricoes);
             else
                 Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
         });
@@ -148,7 +148,7 @@ public class QuizesFragment extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot dados : snapshot.getChildren()) {
                         Quiz quiz = dados.getValue(Quiz.class);
-                        if (quiz.getTema().equals(tema))
+                        if (Objects.requireNonNull(quiz).getTema().equals(tema))
                             listaInscricoes.add(quiz);
                     }
 

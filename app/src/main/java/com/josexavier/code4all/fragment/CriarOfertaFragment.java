@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -112,7 +113,7 @@ public class CriarOfertaFragment extends Fragment {
                 }
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    String tipo = dados.getValue(Conta.class).getTipo();
+                    String tipo = Objects.requireNonNull(dados.getValue(Conta.class)).getTipo();
 
                     if (tipo.equals("membro"))
                         listaContas.add(dados.getValue(Conta.class));

@@ -34,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
@@ -80,7 +81,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 Conta conta = snapshot.getValue(Conta.class);
 
                 Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
-                drawable.setColorFilter(conta.getCorFundoPerfil(), PorterDuff.Mode.SRC);
+                Objects.requireNonNull(drawable).setColorFilter(Objects.requireNonNull(conta).getCorFundoPerfil(), PorterDuff.Mode.SRC);
 
                 linearLayoutCorFundoPerfil.setBackground(drawable);
                 Glide.with(getApplicationContext()).load(conta.getFoto()).into(imagemPerfil);
@@ -174,14 +175,14 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] data = baos.toByteArray();
-                StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(autenticacao.getCurrentUser().getUid()).child("foto.jpeg");
+                StorageReference firebaseStorage = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("perfil").child(Objects.requireNonNull(autenticacao.getCurrentUser()).getUid()).child("foto.jpeg");
                 UploadTask uploadTask = firebaseStorage.putBytes(data);
 
                 uploadTask.addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         firebaseStorage.getDownloadUrl().addOnCompleteListener(task2 -> {
                             if (task2.isSuccessful()) {
-                                final String foto = task2.getResult().toString();
+                                final String foto = Objects.requireNonNull(task2.getResult()).toString();
 
                                 UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setPhotoUri(task2.getResult()).build();
                                 FirebaseUser utilizador = autenticacao.getCurrentUser();
@@ -252,11 +253,8 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setDisplayName(nome).build();
         FirebaseUser utilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser();
-        utilizador.updateProfile(profileRequest).addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                validacao.isValidacaoSucesso(true);
-            else
-                validacao.isValidacaoSucesso(false);
+        Objects.requireNonNull(utilizador).updateProfile(profileRequest).addOnCompleteListener(task -> {
+            validacao.isValidacaoSucesso(task.isSuccessful());
         });
 
     }
@@ -274,7 +272,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                         Conta conta = snapshot.getValue(Conta.class);
-                        guardarFoto(conta.getCorPerfil(), validar -> {
+                        guardarFoto(Objects.requireNonNull(conta).getCorPerfil(), validar -> {
                             if (validar) {
                                 HashMap<String, Object> dadosPerfil = new HashMap<>();
                                 dadosPerfil.put("nome", nome);

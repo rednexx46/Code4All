@@ -42,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -149,15 +150,14 @@ public class PostActivity extends AppCompatActivity {
                                     postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                            hashMapComentario.put("comentarios", snapshot.getValue(Post.class).getComentarios() - 1);
+                                            hashMapComentario.put("comentarios", Objects.requireNonNull(snapshot.getValue(Post.class)).getComentarios() - 1);
                                             postRef.updateChildren(hashMapComentario).addOnCompleteListener(task2 -> {
                                                 if (task2.isSuccessful()) {
                                                     Toast.makeText(getApplicationContext(), "Comentário Eliminado com Sucesso!", Toast.LENGTH_SHORT).show();
-                                                    dialogCarregamento.dismiss();
                                                 } else {
                                                     Toast.makeText(PostActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                                    dialogCarregamento.dismiss();
                                                 }
+                                                dialogCarregamento.dismiss();
                                                 dialog.dismiss();
                                             });
                                         }
@@ -233,7 +233,7 @@ public class PostActivity extends AppCompatActivity {
                         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                int gostos = snapshot.getValue(Post.class).getGostos();
+                                int gostos = Objects.requireNonNull(snapshot.getValue(Post.class)).getGostos();
 
                                 HashMap<String, Object> hashMapGosto = new HashMap<>();
                                 hashMapGosto.put("gostos", gostos - 1);
@@ -276,7 +276,7 @@ public class PostActivity extends AppCompatActivity {
                             postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                    int gostos = snapshot.getValue(Post.class).getGostos();
+                                    int gostos = Objects.requireNonNull(snapshot.getValue(Post.class)).getGostos();
 
                                     HashMap<String, Object> hashMapGosto = new HashMap<>();
                                     hashMapGosto.put("gostos", gostos + 1);
@@ -343,7 +343,7 @@ public class PostActivity extends AppCompatActivity {
                         Configs.recuperarIdUtilizador(idUtilizador -> {
                             comentario.setIdUtilizador(idUtilizador);
 
-                            comentariosRef.child(idComentario).setValue(comentario).addOnCompleteListener(task -> {
+                            comentariosRef.child(Objects.requireNonNull(idComentario)).setValue(comentario).addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
                                     DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(idPost);
 
@@ -352,19 +352,17 @@ public class PostActivity extends AppCompatActivity {
                                     postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                            int comentarios = snapshot.getValue(Post.class).getComentarios();
+                                            int comentarios = Objects.requireNonNull(snapshot.getValue(Post.class)).getComentarios();
                                             hashMapComentarios.put("comentarios", comentarios + 1);
 
                                             postRef.updateChildren(hashMapComentarios).addOnCompleteListener(task2 -> {
                                                 if (task2.isSuccessful()) {
                                                     Toast.makeText(PostActivity.this, "Comentário criado com Sucesso!", Toast.LENGTH_SHORT).show();
-                                                    dialogCarregamento.dismiss();
-                                                    dialog.dismiss();
                                                 } else {
                                                     Toast.makeText(PostActivity.this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                                    dialogCarregamento.dismiss();
-                                                    dialog.dismiss();
                                                 }
+                                                dialogCarregamento.dismiss();
+                                                dialog.dismiss();
 
                                             });
 
@@ -406,7 +404,7 @@ public class PostActivity extends AppCompatActivity {
             gostosRef.removeEventListener(gostosEventListener);
             comentariosRef.removeEventListener(comentariosEventListener);
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -439,7 +437,7 @@ public class PostActivity extends AppCompatActivity {
 
                 Post post = snapshot.getValue(Post.class);
 
-                Glide.with(getApplicationContext()).load(post.getImagem()).into(imagemFoto);
+                Glide.with(getApplicationContext()).load(Objects.requireNonNull(post).getImagem()).into(imagemFoto);
                 textViewTitulo.setText(post.getTitulo());
                 textViewTag.setText(post.getTag());
                 textViewDescricao.setText(post.getDescricao());

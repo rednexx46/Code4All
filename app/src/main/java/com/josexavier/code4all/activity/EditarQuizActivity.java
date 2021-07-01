@@ -21,6 +21,7 @@ import com.josexavier.code4all.model.Quiz;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -126,7 +127,7 @@ public class EditarQuizActivity extends AppCompatActivity {
                 }
                 Quiz quiz = snapshot.getValue(Quiz.class);
 
-                Glide.with(getApplicationContext()).load(quiz.getImagem()).into(imageViewEditarQuiz);
+                Glide.with(getApplicationContext()).load(Objects.requireNonNull(quiz).getImagem()).into(imageViewEditarQuiz);
 
                 editTextTituloQuiz.setText(quiz.getTitulo());
                 editTextTituloIntro.setText(quiz.getIntroducao().getTitulo());

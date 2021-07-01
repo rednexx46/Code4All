@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -96,7 +97,7 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
             holder.estrela5.setImageDrawable(estrelaAmarela);
         }
 
-        String id = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getUid();
+        String id = Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getUid();
         DatabaseReference quizesSubscritos = DefinicaoFirebase.recuperarBaseDados().child("contas").child(id).child("inscricoes");
         AlertDialog dialog = new SpotsDialog.Builder().setContext(context).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
         quizesSubscritos.addValueEventListener(new ValueEventListener() {
@@ -126,7 +127,7 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
                     if (holder.matricular.getText() != "Matriculado") {
                         FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
 
-                        String idUtilizador = autenticacao.getCurrentUser().getUid();
+                        String idUtilizador = Objects.requireNonNull(autenticacao.getCurrentUser()).getUid();
                         String idQuiz = listaQuizes.get(position).getId();
                         String tituloQuiz = listaQuizes.get(position).getTitulo();
                         String imagemQuiz = listaQuizes.get(position).getImagem();
@@ -159,18 +160,21 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
                                 quizRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                        int totalMembros = snapshot.child("totalMembros").getValue(Integer.class);
+                                        try {
+                                            int totalMembros = snapshot.child("totalMembros").getValue(Integer.class);
+                                            hashMapTotalMembros.put("totalMembros", totalMembros + 1);
 
-                                        hashMapTotalMembros.put("totalMembros", totalMembros + 1);
-
-                                        quizRef.updateChildren(hashMapTotalMembros).addOnCompleteListener(task -> {
-                                            if (task.isSuccessful()) {
-                                                Drawable retanguloMatriculado = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja_escuro);
-                                                holder.matricular.setBackground(retanguloMatriculado);
-                                                holder.matricular.setText("Matriculado");
-                                            } else
-                                                Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                        });
+                                            quizRef.updateChildren(hashMapTotalMembros).addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    Drawable retanguloMatriculado = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja_escuro);
+                                                    holder.matricular.setBackground(retanguloMatriculado);
+                                                    holder.matricular.setText("Matriculado");
+                                                } else
+                                                    Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                            });
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
 
                                     }
 

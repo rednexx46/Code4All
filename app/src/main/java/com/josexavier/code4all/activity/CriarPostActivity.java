@@ -32,6 +32,7 @@ import com.josexavier.code4all.model.Post;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -88,19 +89,17 @@ public class CriarPostActivity extends AppCompatActivity {
 
         try {
 
-            switch (requestCode) {
-                case Configs.SELECAO_GALERIA:
-                    Uri localImagemSelecionada = data.getData();
+            if (requestCode == Configs.SELECAO_GALERIA) {
+                Uri localImagemSelecionada = Objects.requireNonNull(data).getData();
 
-                    if (Build.VERSION.SDK_INT >= 29) {
-                        // Usar versão mais recente do código
-                        ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), localImagemSelecionada);
-                        imagem = ImageDecoder.decodeBitmap(source);
-                    } else {
-                        /// Usar versão mais antiga do código
-                        imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
-                    }
-                    break;
+                if (Build.VERSION.SDK_INT >= 29) {
+                    // Usar versão mais recente do código
+                    ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), localImagemSelecionada);
+                    imagem = ImageDecoder.decodeBitmap(source);
+                } else {
+                    /// Usar versão mais antiga do código
+                    imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
+                }
             }
 
         } catch (Exception e) {

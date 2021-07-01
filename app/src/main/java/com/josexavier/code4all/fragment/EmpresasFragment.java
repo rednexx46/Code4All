@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -81,7 +82,7 @@ public class EmpresasFragment extends Fragment {
         empresasAdapter = new EmpresasAdapter(listaEmpresas, getContext());
         recyclerViewEmpresas.setAdapter(empresasAdapter);
 
-        Configs.recuperarIdUtilizador(idUtilizador -> buscarEmpresas(idUtilizador));
+        Configs.recuperarIdUtilizador(this::buscarEmpresas);
 
 
         return root;
@@ -113,7 +114,7 @@ public class EmpresasFragment extends Fragment {
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     Empresa empresa = dados.getValue(Empresa.class);
 
-                    if (empresa.getTipo().equals(Configs.grupos[3]) && !empresa.getId().equals(idUtilizador))
+                    if (Objects.requireNonNull(empresa).getTipo().equals(Configs.grupos[3]) && !empresa.getId().equals(idUtilizador))
                         listaEmpresas.add(empresa);
 
                 }

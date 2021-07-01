@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
@@ -38,7 +39,6 @@ public class ContaActivity extends AppCompatActivity {
     private LinearLayout fundoPerfil;
     private CircleImageView imagemPerfil;
     private TextView nomePerfil, contaXP, biografia, biografiaData, estado, nascimento;
-    private RecyclerView recyclerViewQuizes;
     private QuizesSubscritosAdapter quizesSubscritosAdapter;
     private List<Quiz> listaQuizes = new ArrayList<>();
 
@@ -88,7 +88,7 @@ public class ContaActivity extends AppCompatActivity {
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     Quiz quizSubscrito = dados.getValue(Quiz.class);
-                    if (quizSubscrito.getProgresso() == 100)
+                    if (Objects.requireNonNull(quizSubscrito).getProgresso() == 100)
                         listaQuizes.add(quizSubscrito);
                 }
 
@@ -120,7 +120,8 @@ public class ContaActivity extends AppCompatActivity {
                 Conta conta = snapshot.getValue(Conta.class);
 
                 Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
-                drawable.setColorFilter(conta.getCorFundoPerfil(), PorterDuff.Mode.SRC);
+                assert drawable != null;
+                drawable.setColorFilter(Objects.requireNonNull(conta).getCorFundoPerfil(), PorterDuff.Mode.SRC);
 
                 fundoPerfil.setBackground(drawable);
 

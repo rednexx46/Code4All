@@ -36,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -149,13 +150,11 @@ public class ContasFragment extends Fragment {
             contaSelecionadaRef.updateChildren(tipoConta).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), "Tipo de Conta atualizado com Sucesso!", Toast.LENGTH_SHORT).show();
-                    dialogModificacao.dismiss();
-                    dialog.dismiss();
                 } else {
                     Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                    dialogModificacao.dismiss();
-                    dialog.dismiss();
                 }
+                dialogModificacao.dismiss();
+                dialog.dismiss();
             });
 
             dialog.dismiss();
@@ -221,13 +220,13 @@ public class ContasFragment extends Fragment {
                 String tipo = snapshot.child(Configs.recuperarIdUtilizador()).child("tipo").getValue(String.class);
                 for (DataSnapshot dados : snapshot.getChildren()) {
 
-                    String idUtilizador = dados.getValue(Conta.class).getId();
-                    String tipoUtilizador = dados.getValue(Conta.class).getTipo();
+                    String idUtilizador = Objects.requireNonNull(dados.getValue(Conta.class)).getId();
+                    String tipoUtilizador = Objects.requireNonNull(dados.getValue(Conta.class)).getTipo();
 
                     // Se o utilizador for diferente daquele que se encontra já logado
                     // Então adiciona para a listaContas
-                    if (dados.getValue(Conta.class).getTipo() != null && !dados.getValue(Conta.class).getTipo().equals("")) {
-                        if (tipo.equals("mod")) {
+                    if (Objects.requireNonNull(dados.getValue(Conta.class)).getTipo() != null && !Objects.requireNonNull(dados.getValue(Conta.class)).getTipo().equals("")) {
+                        if (Objects.requireNonNull(tipo).equals("mod")) {
                             if (!idUtilizador.equals(Configs.recuperarIdUtilizador())) {
                                 if (!tipoUtilizador.equals("admin") && !tipoUtilizador.equals("empresa"))
                                     listaContas.add(dados.getValue(Conta.class));

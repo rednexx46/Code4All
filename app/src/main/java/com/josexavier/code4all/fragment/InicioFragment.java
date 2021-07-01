@@ -23,6 +23,7 @@ import com.josexavier.code4all.model.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -37,14 +38,14 @@ public class InicioFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_inicio, container, false);
 
         RecyclerView recyclerQuizesSubscritos = root.findViewById(R.id.recyclerViewQuizesSubscritos);
-        recyclerQuizesSubscritos.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), RecyclerView.HORIZONTAL, false));
+        recyclerQuizesSubscritos.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         recyclerQuizesSubscritos.setItemAnimator(new DefaultItemAnimator());
         recyclerQuizesSubscritos.setHasFixedSize(true);
 
         // Separação //
 
         RecyclerView recyclerQuizesFinalizados = root.findViewById(R.id.recyclerViewQuizesFinalizados);
-        recyclerQuizesFinalizados.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), RecyclerView.HORIZONTAL, false));
+        recyclerQuizesFinalizados.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         recyclerQuizesFinalizados.setItemAnimator(new DefaultItemAnimator());
         recyclerQuizesFinalizados.setHasFixedSize(true);
 
@@ -61,7 +62,7 @@ public class InicioFragment extends Fragment {
     private void buscarQuizes(RecyclerView recyclerViewSubscritos, RecyclerView recyclerViewFinalizados) {
         AlertDialog dialog = new SpotsDialog.Builder().setContext(getContext()).setMessage("Carregando Quizes...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
         String idUtilizador = DefinicaoFirebase.recuperarAutenticacao().getUid();
-        quizes = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador).child("inscricoes");
+        quizes = DefinicaoFirebase.recuperarBaseDados().child("contas").child(Objects.requireNonNull(idUtilizador)).child("inscricoes");
 
         eventoQuizes = quizes.addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,7 +77,7 @@ public class InicioFragment extends Fragment {
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     Quiz quizSubscrito = dados.getValue(Quiz.class);
-                    if (quizSubscrito.getProgresso() == 100)
+                    if (Objects.requireNonNull(quizSubscrito).getProgresso() == 100)
                         listaQuizesSubscritos.add(quizSubscrito);
                     else
                         listaQuizes.add(quizSubscrito);
@@ -89,7 +90,7 @@ public class InicioFragment extends Fragment {
                 quizesAdapterSubscritos.notifyDataSetChanged();
 
                 //Configuração do Adapter (RecyclerViewFinalizados)
-                QuizesSubscritosAdapter quizesAdapterFinalizados = new QuizesSubscritosAdapter(listaQuizesSubscritos, getActivity().getApplicationContext());
+                QuizesSubscritosAdapter quizesAdapterFinalizados = new QuizesSubscritosAdapter(listaQuizesSubscritos, requireActivity().getApplicationContext());
                 recyclerViewFinalizados.setAdapter(quizesAdapterFinalizados);
                 quizesAdapterFinalizados.notifyDataSetChanged();
 

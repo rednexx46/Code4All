@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -51,7 +52,7 @@ public class PostsVerificacaoFragment extends Fragment {
         recyclerPostsVerificacao = root.findViewById(R.id.recyclerViewPostsVerificacao);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerPostsVerificacao.getContext(), RecyclerView.VERTICAL);
-        adapter = new PostsVerificacaoAdapter(listaPosts, getActivity().getApplicationContext());
+        adapter = new PostsVerificacaoAdapter(listaPosts, requireActivity().getApplicationContext());
 
         // Configurar RecyclerView
         recyclerPostsVerificacao.setLayoutManager(layoutManager);
@@ -78,7 +79,7 @@ public class PostsVerificacaoFragment extends Fragment {
                 }
                 listaPosts.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    if (dados.getValue(Post.class).getEstado().equals(Configs.PENDENTE)) {
+                    if (Objects.requireNonNull(dados.getValue(Post.class)).getEstado().equals(Configs.PENDENTE)) {
                         listaPosts.add(dados.getValue(Post.class));
                     }
                 }

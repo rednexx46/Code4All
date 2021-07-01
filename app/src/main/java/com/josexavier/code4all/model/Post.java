@@ -3,8 +3,8 @@ package com.josexavier.code4all.model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 
 public class Post {
 
@@ -13,13 +13,7 @@ public class Post {
 
     public void guardar(Validacao validacao) {
         DatabaseReference postRef = DefinicaoFirebase.recuperarBaseDados().child("posts").child(getId());
-        postRef.setValue(this).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                validacao.isValidacaoSucesso(true);
-            } else {
-                validacao.isValidacaoSucesso(false);
-            }
-        });
+        postRef.setValue(this).addOnCompleteListener(task -> validacao.isValidacaoSucesso(task.isSuccessful()));
     }
 
     public void guardarImagem(byte[] imagem, Validacao validacao) {

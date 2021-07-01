@@ -35,6 +35,7 @@ import com.josexavier.code4all.model.Post;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -91,19 +92,17 @@ public class CriarPostFragment extends Fragment {
 
         try {
 
-            switch (requestCode) {
-                case Configs.SELECAO_GALERIA:
-                    Uri localImagemSelecionada = data.getData();
+            if (requestCode == Configs.SELECAO_GALERIA) {
+                Uri localImagemSelecionada = Objects.requireNonNull(data).getData();
 
-                    if (Build.VERSION.SDK_INT >= 29) {
-                        // Usar versão mais recente do código
-                        ImageDecoder.Source source = ImageDecoder.createSource(getActivity().getContentResolver(), localImagemSelecionada);
-                        imagem = ImageDecoder.decodeBitmap(source);
-                    } else {
-                        /// Usar versão mais antiga do código
-                        imagem = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), localImagemSelecionada);
-                    }
-                    break;
+                if (Build.VERSION.SDK_INT >= 29) {
+                    // Usar versão mais recente do código
+                    ImageDecoder.Source source = ImageDecoder.createSource(requireActivity().getContentResolver(), localImagemSelecionada);
+                    imagem = ImageDecoder.decodeBitmap(source);
+                } else {
+                    /// Usar versão mais antiga do código
+                    imagem = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), localImagemSelecionada);
+                }
             }
 
         } catch (Exception e) {
@@ -125,7 +124,7 @@ public class CriarPostFragment extends Fragment {
 
     private void abrirGaleria() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent,
@@ -152,7 +151,7 @@ public class CriarPostFragment extends Fragment {
                     if (validar2) {
                         dialog.dismiss();
                         Toast.makeText(getContext(), "Post Criado com Sucesso!", Toast.LENGTH_SHORT).show();
-                        getActivity().onBackPressed();
+                        requireActivity().onBackPressed();
                     } else {
                         dialog.dismiss();
                         Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();

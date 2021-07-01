@@ -1,6 +1,5 @@
 package com.josexavier.code4all.helper;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.provider.MediaStore;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -37,6 +35,7 @@ import com.josexavier.code4all.model.Conta;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Random;
 
 public class Configs {
@@ -55,12 +54,7 @@ public class Configs {
 
         UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setDisplayName(nome).build();
         FirebaseUser utilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser();
-        utilizador.updateProfile(profileRequest).addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                validacao.isValidacaoSucesso(true);
-            else
-                validacao.isValidacaoSucesso(false);
-        });
+        Objects.requireNonNull(utilizador).updateProfile(profileRequest).addOnCompleteListener(task -> validacao.isValidacaoSucesso(task.isSuccessful()));
 
     }
 
@@ -114,7 +108,7 @@ public class Configs {
     }
 
     public static void buscarUtilizador(Context context, RecuperarIntent recuperarIntent) {
-        String idUtilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getUid();
+        String idUtilizador = Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getUid();
         DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
         utilizadorRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -122,29 +116,39 @@ public class Configs {
                 Conta utilizador = snapshot.getValue(Conta.class);
                 try {
                     String grupo = "";
-                    if (utilizador.getTipo() != null && !utilizador.getTipo().equals("")) {
+                    if (Objects.requireNonNull(utilizador).getTipo() != null && !utilizador.getTipo().equals("")) {
                         grupo = utilizador.getTipo();
                     }
-                    if (grupo != "" && !grupo.isEmpty()) {
-                        if (grupo.equals("membro")) {
-                            Intent intent = new Intent(context, PrincipalActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                            recuperarIntent.recuperarIntent(intent);
-                        } else if (grupo.equals("mod")) {
-                            Intent intent = new Intent(context, ModeradorActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                            recuperarIntent.recuperarIntent(intent);
-                        } else if (grupo.equals("admin")) {
-                            Intent intent = new Intent(context, AdminActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                            recuperarIntent.recuperarIntent(intent);
-                        } else if (grupo.equals("empresa")) {
-                            Intent intent = new Intent(context, EmpresaActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                            recuperarIntent.recuperarIntent(intent);
-                        } else {
-                            Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                            recuperarIntent.recuperarIntent(null);
+                    if (!grupo.equals("") && !grupo.isEmpty()) {
+                        switch (grupo) {
+                            case "membro": {
+                                Intent intent = new Intent(context, PrincipalActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                recuperarIntent.recuperarIntent(intent);
+                                break;
+                            }
+                            case "mod": {
+                                Intent intent = new Intent(context, ModeradorActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                recuperarIntent.recuperarIntent(intent);
+                                break;
+                            }
+                            case "admin": {
+                                Intent intent = new Intent(context, AdminActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                recuperarIntent.recuperarIntent(intent);
+                                break;
+                            }
+                            case "empresa": {
+                                Intent intent = new Intent(context, EmpresaActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                recuperarIntent.recuperarIntent(intent);
+                                break;
+                            }
+                            default:
+                                Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                recuperarIntent.recuperarIntent(null);
+                                break;
                         }
                     } else {
                         Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_LONG).show();
@@ -168,22 +172,14 @@ public class Configs {
         });
     }
 
-    public static boolean verificarString(String string) {
-        if (string != null && !string.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static void recuperarGrupo(VariavelTemp grupo) {
-        String idUtilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getUid();
+        String idUtilizador = Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getUid();
         DatabaseReference utilizadorRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador);
         utilizadorRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Conta utilizador = snapshot.getValue(Conta.class);
-                if (utilizador.getTipo() != null) {
+                if (Objects.requireNonNull(utilizador).getTipo() != null) {
                     grupo.tempVar(utilizador.getTipo());
                 }
             }
@@ -194,6 +190,7 @@ public class Configs {
             }
         });
     }
+
     public static void recuperarUtilizador(Utilizador utilizador) {
         utilizador.recuperarUtilizador(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser());
     }
@@ -204,30 +201,30 @@ public class Configs {
     }
 
     public static String recuperarIdUtilizador() {
-        return DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getUid();
+        return Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getUid();
     }
 
     public static void recuperarIdUtilizador(VariavelTemp idUtilizador) {
-        idUtilizador.tempVar(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getUid());
+        idUtilizador.tempVar(Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getUid());
     }
 
     public static String recuperarNomeUtilizador() {
-        return DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getDisplayName();
+        return Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getDisplayName();
     }
 
     public static void recuperarNomeUtilizador(VariavelTemp nomeUtilizador) {
-        nomeUtilizador.tempVar(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getDisplayName());
+        nomeUtilizador.tempVar(Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getDisplayName());
     }
 
     public static String recuperarEmailUtilizador() {
-        return DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getEmail();
+        return Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getEmail();
     }
 
     public static void recuperarEmailUtilizador(VariavelTemp emailUtilizador) {
-        emailUtilizador.tempVar(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getEmail());
+        emailUtilizador.tempVar(Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getEmail());
     }
 
     public static String recuperarFotoUtilizador() {
-        return DefinicaoFirebase.recuperarAutenticacao().getCurrentUser().getPhotoUrl().toString();
+        return Objects.requireNonNull(Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getPhotoUrl()).toString();
     }
 }

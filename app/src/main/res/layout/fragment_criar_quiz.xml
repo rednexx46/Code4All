@@ -291,8 +291,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/retangulo_azul"
-            android:padding="16dp"
             android:fontFamily="@font/montserrat_extra_bold"
+            android:padding="16dp"
             android:text="@string/passo_anterior"
             android:textColor="@android:color/white"
             android:visibility="gone" />

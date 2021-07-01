@@ -27,6 +27,7 @@ import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Notificacao;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -82,7 +83,7 @@ public class CriarNotificacaoFragment extends Fragment {
                         notificacao.setDescricao(descricao);
                         notificacao.setData(Configs.recuperarDataHoje());
 
-                        notificacaoRef.child(idNotificacao).setValue(notificacao).addOnCompleteListener(task -> {
+                        notificacaoRef.child(Objects.requireNonNull(idNotificacao)).setValue(notificacao).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 notificacao.guardarImagem(dadosImagem, validar -> {
                                     if (validar) {
@@ -90,7 +91,7 @@ public class CriarNotificacaoFragment extends Fragment {
                                             if (validar2) {
                                                 dialogCarregamento.dismiss();
                                                 Toast.makeText(getContext(), "Notificação criada com Sucesso!", Toast.LENGTH_SHORT).show();
-                                                getActivity().onBackPressed();
+                                                requireActivity().onBackPressed();
                                             } else {
                                                 dialogCarregamento.dismiss();
                                                 Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
@@ -133,19 +134,17 @@ public class CriarNotificacaoFragment extends Fragment {
 
         try {
 
-            switch (requestCode) {
-                case Configs.SELECAO_GALERIA:
-                    Uri localImagemSelecionada = data.getData();
+            if (requestCode == Configs.SELECAO_GALERIA) {
+                Uri localImagemSelecionada = Objects.requireNonNull(data).getData();
 
-                    if (Build.VERSION.SDK_INT >= 29) {
-                        // Usar versão mais recente do código
-                        ImageDecoder.Source source = ImageDecoder.createSource(getActivity().getContentResolver(), localImagemSelecionada);
-                        imagem = ImageDecoder.decodeBitmap(source);
-                    } else {
-                        /// Usar versão mais antiga do código
-                        imagem = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), localImagemSelecionada);
-                    }
-                    break;
+                if (Build.VERSION.SDK_INT >= 29) {
+                    // Usar versão mais recente do código
+                    ImageDecoder.Source source = ImageDecoder.createSource(requireActivity().getContentResolver(), localImagemSelecionada);
+                    imagem = ImageDecoder.decodeBitmap(source);
+                } else {
+                    /// Usar versão mais antiga do código
+                    imagem = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), localImagemSelecionada);
+                }
             }
 
         } catch (Exception e) {
@@ -167,7 +166,7 @@ public class CriarNotificacaoFragment extends Fragment {
 
     private void abrirGaleria() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent,

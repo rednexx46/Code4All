@@ -42,7 +42,6 @@ public class ForumFragment extends Fragment {
 
     private List<Post> listaPost = new ArrayList<>();
     private List<Post> listaFiltrada = new ArrayList<>();
-    private RecyclerView recyclerForum;
     private PostsAdapter adapter;
     private Query queryForum;
     private ValueEventListener queryForumEventListener;
@@ -70,14 +69,14 @@ public class ForumFragment extends Fragment {
             }
         });
 
-        recyclerForum = root.findViewById(R.id.recyclerViewForum);
+        RecyclerView recyclerForum = root.findViewById(R.id.recyclerViewForum);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         recyclerForum.setLayoutManager(layoutManager);
         recyclerForum.setItemAnimator(new DefaultItemAnimator());
         recyclerForum.setHasFixedSize(true);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerForum.getContext(), RecyclerView.VERTICAL);
         recyclerForum.addItemDecoration(dividerItemDecoration);
-        adapter = new PostsAdapter(listaPost, getActivity().getApplicationContext());
+        adapter = new PostsAdapter(listaPost, requireActivity().getApplicationContext());
         recyclerForum.setAdapter(adapter);
 
         recyclerForum.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerForum, new RecyclerItemClickListener.OnItemClickListener() {

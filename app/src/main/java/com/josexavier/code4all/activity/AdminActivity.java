@@ -26,6 +26,8 @@ import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdminActivity extends AppCompatActivity {
@@ -81,9 +83,7 @@ public class AdminActivity extends AppCompatActivity {
 
         ImageButton menu = findViewById(R.id.botaoMenu);
 
-        menu.setOnClickListener(v -> {
-            drawer.openDrawer(GravityCompat.START);
-        });
+        menu.setOnClickListener(v -> drawer.openDrawer(GravityCompat.START));
 
         RelativeLayout footer = (RelativeLayout) navigationView.getMenu().findItem(R.id.nav_footer).getActionView();
         try {
@@ -106,7 +106,7 @@ public class AdminActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Glide.with(getApplicationContext()).load(autenticacao.getCurrentUser().getPhotoUrl()).into(perfil);
+        Glide.with(getApplicationContext()).load(Objects.requireNonNull(autenticacao.getCurrentUser()).getPhotoUrl()).into(perfil);
         nome.setText(autenticacao.getCurrentUser().getDisplayName());
 
     }

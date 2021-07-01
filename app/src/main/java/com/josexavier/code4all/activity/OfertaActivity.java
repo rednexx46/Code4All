@@ -26,6 +26,7 @@ import com.josexavier.code4all.model.Oferta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
@@ -158,7 +159,7 @@ public class OfertaActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 Oferta oferta = snapshot.getValue(Oferta.class);
 
-                Glide.with(getApplicationContext()).load(oferta.getFotoUtilizador()).into(imageViewOferta);
+                Glide.with(getApplicationContext()).load(Objects.requireNonNull(oferta).getFotoUtilizador()).into(imageViewOferta);
                 textViewNome.setText(oferta.getNomeUtilizador());
                 editTextTitulo.setText(oferta.getTitulo());
                 editTextDescricao.setText(oferta.getDescricao());
@@ -188,7 +189,7 @@ public class OfertaActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 Oferta oferta = snapshot.getValue(Oferta.class);
 
-                Glide.with(getApplicationContext()).load(oferta.getFotoEmpresa()).into(imageViewOferta);
+                Glide.with(getApplicationContext()).load(Objects.requireNonNull(oferta).getFotoEmpresa()).into(imageViewOferta);
                 textViewNome.setText(oferta.getNomeEmpresa());
                 editTextTitulo.setText(oferta.getTitulo());
                 editTextDescricao.setText(oferta.getDescricao());

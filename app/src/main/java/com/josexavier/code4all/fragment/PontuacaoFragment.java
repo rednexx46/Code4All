@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -51,7 +52,7 @@ public class PontuacaoFragment extends Fragment {
         // Definição do RecyclerViewPontuacao
         RecyclerView recyclerView = root.findViewById(R.id.recyclerViewPontuacao);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), RecyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity().getApplicationContext(), RecyclerView.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setHasFixedSize(true);
@@ -102,7 +103,7 @@ public class PontuacaoFragment extends Fragment {
                 listaContas.clear();
                 for (DataSnapshot dados : snapshot.getChildren()) {
                     Conta conta = dados.getValue(Conta.class);
-                    if (conta.getTipo().equals(Configs.grupos[0]))
+                    if (Objects.requireNonNull(conta).getTipo().equals(Configs.grupos[0]))
                         listaContas.add(conta);
                 }
 

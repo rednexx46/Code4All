@@ -17,10 +17,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
-import com.josexavier.code4all.model.Oferta;
 import com.josexavier.code4all.interfaces.Validacao;
+import com.josexavier.code4all.model.Oferta;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -84,7 +86,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
                                 oferta.setFotoEmpresa(Configs.recuperarFotoUtilizador());
                                 oferta.setFotoUtilizador(foto);
 
-                                ofertasRef.child(idOferta).setValue(oferta).addOnCompleteListener(task -> {
+                                ofertasRef.child(Objects.requireNonNull(idOferta)).setValue(oferta).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
                                         dialog.dismiss();
                                         Toast.makeText(CriarOfertaActivity.this, "Oferta criada com Sucesso!", Toast.LENGTH_SHORT).show();

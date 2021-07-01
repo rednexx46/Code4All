@@ -1,8 +1,8 @@
 package com.josexavier.code4all.model;
 
 import com.google.firebase.database.DatabaseReference;
-import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 
 public class Conta {
 
@@ -12,12 +12,7 @@ public class Conta {
     public void guardar(Validacao validacao) {
         DatabaseReference contaRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(getId());
 
-        contaRef.setValue(this).addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                validacao.isValidacaoSucesso(true);
-            else
-                validacao.isValidacaoSucesso(false);
-        });
+        contaRef.setValue(this).addOnCompleteListener(task -> validacao.isValidacaoSucesso(task.isSuccessful()));
     }
 
     public String getSexo() {

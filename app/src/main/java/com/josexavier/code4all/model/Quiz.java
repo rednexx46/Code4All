@@ -1,9 +1,8 @@
 package com.josexavier.code4all.model;
 
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Exclude;
-import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,21 +40,11 @@ public class Quiz {
         quizMap.put("perguntas", this.perguntas);
 
         // Guardar
-        quiz.setValue(quizMap).addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                validacao.isValidacaoSucesso(true);
-            else
-                validacao.isValidacaoSucesso(false);
-        });
+        quiz.setValue(quizMap).addOnCompleteListener(task -> validacao.isValidacaoSucesso(task.isSuccessful()));
     }
 
     public void guardar(DatabaseReference referencia, Validacao validacao) {
-        referencia.setValue(this).addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                validacao.isValidacaoSucesso(true);
-            else
-                validacao.isValidacaoSucesso(false);
-        });
+        referencia.setValue(this).addOnCompleteListener(task -> validacao.isValidacaoSucesso(task.isSuccessful()));
     }
 
     public int getPontuacao() {

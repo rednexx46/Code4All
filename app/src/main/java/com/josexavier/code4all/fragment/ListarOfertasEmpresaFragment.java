@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -76,7 +77,7 @@ public class ListarOfertasEmpresaFragment extends Fragment {
                 }
 
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    if (dados.getValue(Oferta.class).getIdEmpresa().equals(idEmpresa))
+                    if (Objects.requireNonNull(dados.getValue(Oferta.class)).getIdEmpresa().equals(idEmpresa))
                         listaOfertas.add(dados.getValue(Oferta.class));
                 }
 

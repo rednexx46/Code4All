@@ -66,8 +66,8 @@ public class ListarTagsTemasFragment extends Fragment {
         temas.setOnItemClickListener((parent, view, position, id) -> {
 
             EditText editText = new EditText(getContext());
-            Drawable bordaPreta = ContextCompat.getDrawable(getContext(), R.drawable.borda_preta_quiz);
-            Typeface face = ResourcesCompat.getFont(getContext(), R.font.montserrat_medium);
+            Drawable bordaPreta = ContextCompat.getDrawable(requireContext(), R.drawable.borda_preta_quiz);
+            Typeface face = ResourcesCompat.getFont(requireContext(), R.font.montserrat_medium);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.setMargins(16, 16, 16, 16);
             editText.setBackground(bordaPreta);
@@ -85,7 +85,7 @@ public class ListarTagsTemasFragment extends Fragment {
                 if (!tema.isEmpty() || !tema.equals("")) {
                     try {
                         dialogGuardar.show();
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     DatabaseReference temaEditar = DefinicaoFirebase.recuperarBaseDados().child("temas").child(idTemas.get(position));
@@ -124,13 +124,11 @@ public class ListarTagsTemasFragment extends Fragment {
                     if (task.isSuccessful()) {
                         Toast.makeText(getContext(), "Tema Eliminado com Sucesso!", Toast.LENGTH_SHORT).show();
                         listaTemasAdapter.notifyDataSetChanged();
-                        dialogRemocao.dismiss();
-                        dialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                        dialogRemocao.dismiss();
-                        dialog.dismiss();
                     }
+                    dialogRemocao.dismiss();
+                    dialog.dismiss();
                 });
             });
             builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
@@ -144,8 +142,8 @@ public class ListarTagsTemasFragment extends Fragment {
         tags.setOnItemClickListener((parent, view, position, id) -> {
 
             EditText editText = new EditText(getContext());
-            Drawable bordaPreta = ContextCompat.getDrawable(getContext(), R.drawable.borda_preta_quiz);
-            Typeface face = ResourcesCompat.getFont(getContext(), R.font.montserrat_medium);
+            Drawable bordaPreta = ContextCompat.getDrawable(requireContext(), R.drawable.borda_preta_quiz);
+            Typeface face = ResourcesCompat.getFont(requireContext(), R.font.montserrat_medium);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.setMargins(16, 16, 16, 16);
             editText.setBackground(bordaPreta);

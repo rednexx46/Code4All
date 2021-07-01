@@ -28,6 +28,8 @@ import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 import com.josexavier.code4all.model.Empresa;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 
 public class EmpresaFragment extends Fragment {
@@ -79,11 +81,11 @@ public class EmpresaFragment extends Fragment {
                 }
 
                 Empresa empresa = snapshot.getValue(Empresa.class);
-                Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.borda_preta);
-                drawable.setColorFilter(empresa.getCorFundoPerfil(), PorterDuff.Mode.SRC);
+                Drawable drawable = ContextCompat.getDrawable(requireContext(), R.drawable.borda_preta);
+                Objects.requireNonNull(drawable).setColorFilter(Objects.requireNonNull(empresa).getCorFundoPerfil(), PorterDuff.Mode.SRC);
 
                 linearLayoutEmpresa.setBackground(drawable);
-                Glide.with(getContext()).load(empresa.getFoto()).into(imageViewEmpresa);
+                Glide.with(requireContext()).load(empresa.getFoto()).into(imageViewEmpresa);
                 textViewNome.setText(empresa.getNome());
                 textViewDescricao.setText(empresa.getDescricao());
                 textViewDescricaoData.setText("Última vez atualizado .: " + empresa.getDataDescricao());

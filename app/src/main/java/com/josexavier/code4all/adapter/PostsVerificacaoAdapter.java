@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.josexavier.code4all.R;
@@ -74,7 +72,7 @@ public class PostsVerificacaoAdapter extends RecyclerView.Adapter<PostsVerificac
 
         if (estado.equals("aceite")) { // se for aceite, atualiza o estado da mesma...
             postRef.child("estado").setValue(estado).addOnCompleteListener(task -> {
-                 if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     Toast.makeText(context, "Postagem aceite com Sucesso!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();

@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -144,7 +145,7 @@ public class PostsActivity extends AppCompatActivity {
 
                 String idUtilizador = Configs.recuperarIdUtilizador();
                 for (DataSnapshot dados : snapshot.getChildren()) {
-                    if (dados.getValue(Post.class).getIdCriador().equals(idUtilizador)) { // Adicionar para a lista apenas aqueles que são do utilizador logado.
+                    if (Objects.requireNonNull(dados.getValue(Post.class)).getIdCriador().equals(idUtilizador)) { // Adicionar para a lista apenas aqueles que são do utilizador logado.
                         listaPosts.add(dados.getValue(Post.class));
                     }
                 }

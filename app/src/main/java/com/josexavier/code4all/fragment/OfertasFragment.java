@@ -25,6 +25,7 @@ import com.josexavier.code4all.model.Oferta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -43,7 +44,7 @@ public class OfertasFragment extends Fragment {
 
         // Configurações RecyclerView
         RecyclerView recyclerViewOfertas = root.findViewById(R.id.recyclerViewOfertas);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity().getApplicationContext(), RecyclerView.VERTICAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerViewOfertas.getContext(), RecyclerView.VERTICAL);
         recyclerViewOfertas.setHasFixedSize(true);
         recyclerViewOfertas.setLayoutManager(layoutManager);
@@ -75,7 +76,7 @@ public class OfertasFragment extends Fragment {
                     listaOfertas.clear();
                     for (DataSnapshot dados : snapshot.getChildren()) {
                         Oferta oferta = dados.getValue(Oferta.class);
-                        if (oferta.getIdUtilizador().equals(idUtilizador))
+                        if (Objects.requireNonNull(oferta).getIdUtilizador().equals(idUtilizador))
                             listaOfertas.add(dados.getValue(Oferta.class));
                     }
                     dialog.dismiss();

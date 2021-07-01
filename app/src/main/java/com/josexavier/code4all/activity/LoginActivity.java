@@ -1,6 +1,5 @@
 package com.josexavier.code4all.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,10 +17,11 @@ import com.josexavier.code4all.R;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 
 public class LoginActivity extends AppCompatActivity {
-
 
 
     @Override
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else if (!task.isSuccessful()) { // Tratamento de erros
                             String erro;
                             try {
-                                throw task.getException();
+                                throw Objects.requireNonNull(task.getException());
                             } catch (FirebaseAuthInvalidUserException excecao) {
                                 erro = "Utilizador não registrado!";
                             } catch (FirebaseAuthInvalidCredentialsException excecao) {

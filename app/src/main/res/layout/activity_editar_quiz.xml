@@ -91,8 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:fontFamily="@font/montserrat_extra_bold"
             android:background="@drawable/retangulo_laranja_escuro"
+            android:fontFamily="@font/montserrat_extra_bold"
             android:padding="16dp"
             android:text="@string/confirmar_edicao"
             android:textColor="@android:color/white" />

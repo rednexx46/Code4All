@@ -23,6 +23,8 @@ import com.josexavier.code4all.model.Empresa;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 
 public class EmpresaVisualizacaoActivity extends AppCompatActivity {
@@ -65,7 +67,7 @@ public class EmpresaVisualizacaoActivity extends AppCompatActivity {
                 Empresa empresa = snapshot.getValue(Empresa.class);
 
                 Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
-                drawable.setColorFilter(empresa.getCorFundoPerfil(), PorterDuff.Mode.SRC);
+                Objects.requireNonNull(drawable).setColorFilter(Objects.requireNonNull(empresa).getCorFundoPerfil(), PorterDuff.Mode.SRC);
 
                 linearLayoutEmpresa.setBackground(drawable);
                 Glide.with(getApplicationContext()).load(empresa.getFoto()).into(imageViewEmpresa);

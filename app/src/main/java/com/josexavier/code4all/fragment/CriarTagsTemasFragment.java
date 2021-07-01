@@ -21,6 +21,8 @@ import com.josexavier.code4all.helper.DefinicaoFirebase;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 
 public class CriarTagsTemasFragment extends Fragment {
@@ -66,7 +68,7 @@ public class CriarTagsTemasFragment extends Fragment {
                         int valorAtual = 0;
 
                         for (DataSnapshot dados : snapshot.getChildren())
-                            valorAtual = Integer.valueOf(dados.getKey()) + 1; // ir buscar ultimo ID
+                            valorAtual = Integer.parseInt(Objects.requireNonNull(dados.getKey())) + 1; // ir buscar ultimo ID
 
                         temasRef.child(String.valueOf(valorAtual)).setValue(texto).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
@@ -100,7 +102,7 @@ public class CriarTagsTemasFragment extends Fragment {
                         int valorAtual = 0;
 
                         for (DataSnapshot dados : snapshot.getChildren())
-                            valorAtual = Integer.valueOf(dados.getKey()) + 1; // ir buscar ultimo ID
+                            valorAtual = Integer.parseInt(Objects.requireNonNull(dados.getKey())) + 1; // ir buscar ultimo ID
 
                         tagsRef.child(String.valueOf(valorAtual)).setValue(texto).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {

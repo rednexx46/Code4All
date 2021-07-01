@@ -5,10 +5,11 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.josexavier.code4all.interfaces.Validacao;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
+import com.josexavier.code4all.interfaces.Validacao;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Empresa implements Serializable {
 
@@ -17,12 +18,7 @@ public class Empresa implements Serializable {
 
     public void guardar(Validacao sucesso) {
         DatabaseReference empresaRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(getId());
-        empresaRef.setValue(this).addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                sucesso.isValidacaoSucesso(true);
-            else
-                sucesso.isValidacaoSucesso(false);
-        });
+        empresaRef.setValue(this).addOnCompleteListener(task -> sucesso.isValidacaoSucesso(task.isSuccessful()));
     }
 
     public void guardarImagem(byte[] imagem, Validacao validacao) {
@@ -34,7 +30,7 @@ public class Empresa implements Serializable {
 
             UserProfileChangeRequest profileRequest = new UserProfileChangeRequest.Builder().setPhotoUri(uri).build();
             FirebaseUser utilizador = DefinicaoFirebase.recuperarAutenticacao().getCurrentUser();
-            utilizador.updateProfile(profileRequest).addOnCompleteListener(task -> {
+            Objects.requireNonNull(utilizador).updateProfile(profileRequest).addOnCompleteListener(task -> {
                 if (task.isSuccessful())
                     validacao.isValidacaoSucesso(true);
                 else

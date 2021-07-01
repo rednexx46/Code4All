@@ -31,6 +31,8 @@ import com.josexavier.code4all.activity.IntroActivity;
 import com.josexavier.code4all.helper.Configs;
 import com.josexavier.code4all.helper.DefinicaoFirebase;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 
 public class DefinicoesFragment extends Fragment {
@@ -73,8 +75,8 @@ public class DefinicoesFragment extends Fragment {
             buttonRemoverConta.setOnClickListener(v -> {
 
                 EditText editText = new EditText(getContext());
-                Drawable bordaPreta = ContextCompat.getDrawable(getContext(), R.drawable.borda_preta_quiz);
-                Typeface face = ResourcesCompat.getFont(getContext(), R.font.montserrat_medium);
+                Drawable bordaPreta = ContextCompat.getDrawable(requireContext(), R.drawable.borda_preta_quiz);
+                Typeface face = ResourcesCompat.getFont(requireContext(), R.font.montserrat_medium);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 params.setMargins(16, 16, 16, 16);
                 editText.setBackground(bordaPreta);
@@ -105,7 +107,7 @@ public class DefinicoesFragment extends Fragment {
                             AuthCredential credenciais = EmailAuthProvider
                                     .getCredential(emailUtilizador, password);
 
-                            String idUtilizador = utilizador.getUid();
+                            String idUtilizador = Objects.requireNonNull(utilizador).getUid();
 
                             utilizador.reauthenticate(credenciais).addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
@@ -121,13 +123,13 @@ public class DefinicoesFragment extends Fragment {
                                                     Intent intentIntroActivity = new Intent(getContext(), IntroActivity.class);
                                                     intentIntroActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                                     startActivity(intentIntroActivity);
-                                                    getActivity().finish();
+                                                    requireActivity().finish();
                                                 } else {
                                                     dialogConta.dismiss();
                                                     dialog.dismiss();
                                                     String erro;
                                                     try {
-                                                        throw task3.getException();
+                                                        throw Objects.requireNonNull(task3.getException());
                                                     } catch (FirebaseAuthRecentLoginRequiredException e) {
                                                         erro = "Credenciais Expiradas!";
                                                     } catch (Exception e) {
@@ -166,8 +168,8 @@ public class DefinicoesFragment extends Fragment {
 
             buttonAlterarPassword.setOnClickListener(v -> {
                 EditText editText = new EditText(getContext());
-                Drawable bordaPreta = ContextCompat.getDrawable(getContext(), R.drawable.borda_preta_quiz);
-                Typeface face = ResourcesCompat.getFont(getContext(), R.font.montserrat_medium);
+                Drawable bordaPreta = ContextCompat.getDrawable(requireContext(), R.drawable.borda_preta_quiz);
+                Typeface face = ResourcesCompat.getFont(requireContext(), R.font.montserrat_medium);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 params.setMargins(16, 16, 16, 16);
                 editText.setBackground(bordaPreta);
@@ -190,7 +192,7 @@ public class DefinicoesFragment extends Fragment {
                         }
                         FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
                         FirebaseUser utilizador = autenticacao.getCurrentUser();
-                        utilizador.updatePassword(password).addOnCompleteListener(task -> {
+                        Objects.requireNonNull(utilizador).updatePassword(password).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 dialogCarregamento.dismiss();
                                 dialog.dismiss();
@@ -199,11 +201,11 @@ public class DefinicoesFragment extends Fragment {
                                 Intent intentIntroActivity = new Intent(getContext(), IntroActivity.class);
                                 intentIntroActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 startActivity(intentIntroActivity);
-                                getActivity().finish();
+                                requireActivity().finish();
                             } else {
                                 String erro;
                                 try {
-                                    throw task.getException();
+                                    throw Objects.requireNonNull(task.getException());
                                 } catch (FirebaseAuthWeakPasswordException e) {
                                     erro = "A Password introduzida é fraca!";
                                 } catch (FirebaseAuthRecentLoginRequiredException e) {
