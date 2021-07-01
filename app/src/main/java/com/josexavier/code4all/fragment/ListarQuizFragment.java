@@ -117,43 +117,48 @@ public class ListarQuizFragment extends Fragment {
     }
 
     private void cliqueLongo(int position, List<Quiz> listaQuizes) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        if (listaQuizes.get(position).getTotalMembros() == 0) {
 
-        builder.setTitle("Remoção do Quiz");
-        builder.setMessage("Tem a certeza que pretende eliminar o quiz " + listaQuizes.get(position).getTitulo() + "?");
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        builder.setPositiveButton("Sim", (dialog, which) -> {
-            try {
-                dialogRemocao.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("quizes").child(listaQuizes.get(position).getId() + ".png");
-            fotoRef.delete().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DefinicaoFirebase.recuperarBaseDados().child("quizes").child(listaQuizes.get(position).getId()).removeValue((error, ref) -> {
-                        if (error == null) {
-                            dialogRemocao.dismiss();
-                            dialog.dismiss();
-                            Toast.makeText(getContext(), "Quiz removido com Sucesso!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            dialogRemocao.dismiss();
-                            dialog.dismiss();
-                            Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    dialogRemocao.dismiss();
-                    Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+            builder.setTitle("Remoção do Quiz");
+            builder.setMessage("Tem a certeza que pretende eliminar o quiz " + listaQuizes.get(position).getTitulo() + "?");
+
+            builder.setPositiveButton("Sim", (dialog, which) -> {
+                try {
+                    dialogRemocao.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                StorageReference fotoRef = DefinicaoFirebase.recuperarArmazenamento().child("imagens").child("quizes").child(listaQuizes.get(position).getId() + ".png");
+                fotoRef.delete().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DefinicaoFirebase.recuperarBaseDados().child("quizes").child(listaQuizes.get(position).getId()).removeValue((error, ref) -> {
+                            if (error == null) {
+                                dialogRemocao.dismiss();
+                                dialog.dismiss();
+                                Toast.makeText(getContext(), "Quiz removido com Sucesso!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                dialogRemocao.dismiss();
+                                dialog.dismiss();
+                                Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        dialogRemocao.dismiss();
+                        Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                quizesAdapter.notifyItemRemoved(position);
             });
 
-            quizesAdapter.notifyItemRemoved(position);
-        });
+            builder.setNegativeButton("Não", (dialog, which) -> dialog.dismiss());
 
-        builder.setNegativeButton("Não", (dialog, which) -> dialog.dismiss());
-
-        builder.show();
+            builder.show();
+        } else {
+            Toast.makeText(getContext(), "O Quiz tem mais de um membro, logo não pode ser removido!", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void cliqueCurto(int position, List<Quiz> listaQuizes) {
