@@ -73,13 +73,16 @@ public class QuizesFragment extends Fragment {
         inscricoesAdapter = new QuizesPopularesAdapter(listaInscricoes, getContext());
         recyclerViewInscricoes.setAdapter(inscricoesAdapter);
 
-
-        buscarQuizes(sucesso -> {
-            if (sucesso)
-                Configs.recuperarIdUtilizador(this::buscarInscricoes);
-            else
-                Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
-        });
+        try {
+            buscarQuizes(sucesso -> {
+                if (sucesso)
+                    Configs.recuperarIdUtilizador(this::buscarInscricoes);
+                else
+                    Toast.makeText(getContext(), getString(R.string.erro), Toast.LENGTH_SHORT).show();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         return root;
