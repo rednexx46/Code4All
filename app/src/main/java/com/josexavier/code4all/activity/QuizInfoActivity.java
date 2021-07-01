@@ -46,20 +46,23 @@ public class QuizInfoActivity extends YouTubeBaseActivity implements YouTubePlay
         TextView textViewTitulo = findViewById(R.id.textViewTituloQuizInfo);
         TextView textViewDescricao = findViewById(R.id.textViewDescricaoQuizInfo);
 
-        String idQuiz = getIntent().getStringExtra("idQuiz");
-        buscarQuiz(idQuiz, validar -> {
-            if (validar) {
-                textViewDescricao.setText(introducao.getDescricao());
-                textViewTitulo.setText(introducao.getTitulo());
-                youtubePlayerView = findViewById(R.id.viewYoutubePlayer);
-                try {
-                    youtubePlayerView.initialize(GOOGLE_API_KEY, QuizInfoActivity.this);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        try {
+            String idQuiz = getIntent().getStringExtra("idQuiz");
+            buscarQuiz(idQuiz, validar -> {
+                if (validar) {
+                    textViewDescricao.setText(introducao.getDescricao());
+                    textViewTitulo.setText(introducao.getTitulo());
+                    youtubePlayerView = findViewById(R.id.viewYoutubePlayer);
+                    try {
+                        youtubePlayerView.initialize(GOOGLE_API_KEY, QuizInfoActivity.this);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
-
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
