@@ -84,7 +84,11 @@ public class PontuacaoFragment extends Fragment {
         pontuacaoAdapter = new PontuacaoAdapter(listaContas, getContext());
         recyclerView.setAdapter(pontuacaoAdapter);
 
-        buscarUtilizadores();
+        try {
+            buscarUtilizadores();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return root;
     }
