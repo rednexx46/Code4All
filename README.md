@@ -1,5 +1,4 @@
 # Code4All
-Code4All official repository. 
 
 Code4All, é uma aplicação onde pode realizar provas de programação, visto que esse é o seu principal propósito, nomeadamente pessoas, que querem aprender a programar mas não sabem por onde começar. Se é esse o seu caso, então veio à app certa!
 
