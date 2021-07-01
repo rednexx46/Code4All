@@ -114,7 +114,11 @@ public class ForumFragment extends Fragment {
             }
         });
 
-        buscarForum();
+        try {
+            buscarForum();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return root;
     }
