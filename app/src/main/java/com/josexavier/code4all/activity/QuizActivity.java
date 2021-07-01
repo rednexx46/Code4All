@@ -65,21 +65,27 @@ public class QuizActivity extends AppCompatActivity {
         botaoConfirmar = findViewById(R.id.buttonConfirmarSelecaoQuiz);
         botaoLimpar = findViewById(R.id.buttonLimparSelecaoQuiz);
 
-        buscarQuiz(idQuiz, validar -> {
-            if (validar) {
-                buscarInfoQuizAtual(validar2 -> {
-                    if (validar2) {
-                        DatabaseReference quizAtualRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(Configs.recuperarIdUtilizador()).child("inscricoes").child(quizAtual.getId());
-                        dialog.dismiss();
-                        preparacaoInterface(quizAtualRef);
-                    } else {
-                        dialog.dismiss();
-                        Toast.makeText(this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                    }
+        try {
+            buscarQuiz(idQuiz, validar -> {
+                if (validar) {
+                    buscarInfoQuizAtual(validar2 -> {
+                        if (validar2) {
+                            DatabaseReference quizAtualRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(Configs.recuperarIdUtilizador()).child("inscricoes").child(quizAtual.getId());
+                            dialog.dismiss();
+                            preparacaoInterface(quizAtualRef);
+                        } else {
+                            dialog.dismiss();
+                            Toast.makeText(this, getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                        }
 
-                });
-            }
-        });
+                    });
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
