@@ -28,7 +28,7 @@ import dmax.dialog.SpotsDialog;
 
 public class CriarOfertaActivity extends AppCompatActivity {
 
-    private String nome, foto;
+    private String nome, foto, email;
     private AlertDialog dialog;
 
     @Override
@@ -73,7 +73,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
 
                                 Oferta oferta = new Oferta();
                                 oferta.setId(idOferta);
-                                oferta.setEmailUtilizador(Configs.recuperarEmailUtilizador());
+                                oferta.setEmailUtilizador(email);
                                 oferta.setNomeEmpresa(Configs.recuperarNomeUtilizador());
                                 oferta.setTitulo(titulo);
                                 oferta.setDescricao(descricao);
@@ -119,6 +119,7 @@ public class CriarOfertaActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 nome = snapshot.child("nome").getValue(String.class);
                 foto = snapshot.child("foto").getValue(String.class);
+                email = snapshot.child("email").getValue(String.class);
                 textViewSlogan.setText("Está atualmente a criar uma oferta para o utilizador " + nome + "!");
                 isSucesso.isValidacaoSucesso(true);
             }
