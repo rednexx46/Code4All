@@ -111,6 +111,7 @@ public class CriarContaActivity extends AppCompatActivity {
         listaSexo.add("Selecionar Sexo...");
         listaSexo.add("Masculino");
         listaSexo.add("Feminino");
+        listaSexo.add("Prefiro não dizer");
 
         ArrayAdapter<List<String>> adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaSexo);
         spinnerSexo.setAdapter(adapter);
@@ -247,8 +248,10 @@ public class CriarContaActivity extends AppCompatActivity {
                     conta.setDataInscricao(Configs.recuperarDataHoje());
                     if (sexo.equals("Masculino"))
                         conta.setBiografia("Olá, eu sou o " + nome + "!");
-                    else
+                    else if (sexo.equals("Feminino"))
                         conta.setBiografia("Olá, eu sou a " + nome + "!");
+                    else
+                        conta.setBiografia("Olá, o meu nome é " + nome + "!");
                     conta.setBiografiaData(Configs.recuperarDataHoje());
                     guardarNome(nome, sucessoNome -> {
                         if (sucessoNome)

@@ -93,10 +93,10 @@ public class QuizesFragment extends Fragment {
         super.onDestroy();
         try {
             quizSubscritoRef.removeEventListener(quizSubscritosEventListener);
+            quizesRef.removeEventListener(quizesEventListener);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        quizesRef.removeEventListener(quizesEventListener);
     }
 
     private LinearLayoutManager criarLayoutManager() {

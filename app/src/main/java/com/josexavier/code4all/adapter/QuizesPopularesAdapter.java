@@ -97,115 +97,119 @@ public class QuizesPopularesAdapter extends RecyclerView.Adapter<QuizesPopulares
             holder.estrela5.setImageDrawable(estrelaAmarela);
         }
 
-        String id = Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getUid();
-        DatabaseReference quizesSubscritos = DefinicaoFirebase.recuperarBaseDados().child("contas").child(id).child("inscricoes");
-        AlertDialog dialog = new SpotsDialog.Builder().setContext(context).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
-        quizesSubscritos.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try {
-                    dialog.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                for (DataSnapshot dados : snapshot.getChildren()) {
-                    String idQuiz = dados.getKey();
+        try {
+            String id = Objects.requireNonNull(DefinicaoFirebase.recuperarAutenticacao().getCurrentUser()).getUid();
+            DatabaseReference quizesSubscritos = DefinicaoFirebase.recuperarBaseDados().child("contas").child(id).child("inscricoes");
+            AlertDialog dialog = new SpotsDialog.Builder().setContext(context).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
+            quizesSubscritos.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try {
+                        dialog.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    for (DataSnapshot dados : snapshot.getChildren()) {
+                        String idQuiz = dados.getKey();
 
-                    if (quiz.getId().equals(idQuiz)) {
-                        holder.matricular.setText("Matriculado");
-                        Drawable retanguloMatriculado = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja_escuro);
-                        holder.matricular.setBackground(retanguloMatriculado);
-                        break;
-                    } else {
+                        if (quiz.getId().equals(idQuiz)) {
+                            holder.matricular.setText("Matriculado");
+                            Drawable retanguloMatriculado = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja_escuro);
+                            holder.matricular.setBackground(retanguloMatriculado);
+                            break;
+                        } else {
+                            holder.matricular.setText("Matricular");
+                            Drawable retanguloMatricular = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja);
+                            holder.matricular.setBackground(retanguloMatricular);
+                        }
+                    }
+
+                    holder.matricular.setOnClickListener(v -> {
+                        if (holder.matricular.getText() != "Matriculado") {
+                            FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
+
+                            String idUtilizador = Objects.requireNonNull(autenticacao.getCurrentUser()).getUid();
+                            String idQuiz = listaQuizes.get(position).getId();
+                            String tituloQuiz = listaQuizes.get(position).getTitulo();
+                            String imagemQuiz = listaQuizes.get(position).getImagem();
+                            String criadorQuiz = listaQuizes.get(position).getCriador();
+                            String temaQuiz = listaQuizes.get(position).getTema();
+                            int pontuacao = listaQuizes.get(position).getTotalXP();
+                            int progresso = listaQuizes.get(position).getProgresso();
+                            int totalPerguntasQuiz = listaQuizes.get(position).getTotalPerguntas();
+
+                            DatabaseReference subscreverQuiz = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador).child("inscricoes").child(idQuiz);
+
+                            Quiz quizSubscrito = new Quiz();
+
+                            quizSubscrito.setId(idQuiz);
+                            quizSubscrito.setTitulo(tituloQuiz);
+                            quizSubscrito.setImagem(imagemQuiz);
+                            quizSubscrito.setPerguntaAtual(0);
+                            quizSubscrito.setTotalPerguntas(totalPerguntasQuiz);
+                            quizSubscrito.setTema(temaQuiz);
+                            quizSubscrito.setProgresso(progresso);
+                            quizSubscrito.setDataInscricao(Configs.recuperarDataHoje());
+                            quizSubscrito.setCriador(criadorQuiz);
+                            quizSubscrito.setPontuacao(pontuacao);
+                            quizSubscrito.guardar(subscreverQuiz, sucesso -> {
+                                if (sucesso) {
+
+                                    DatabaseReference quizRef = DefinicaoFirebase.recuperarBaseDados().child("quizes").child(quiz.getId());
+                                    HashMap<String, Object> hashMapTotalMembros = new HashMap<>();
+
+                                    quizRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                            try {
+                                                int totalMembros = snapshot.child("totalMembros").getValue(Integer.class);
+                                                hashMapTotalMembros.put("totalMembros", totalMembros + 1);
+
+                                                quizRef.updateChildren(hashMapTotalMembros).addOnCompleteListener(task -> {
+                                                    if (task.isSuccessful()) {
+                                                        Drawable retanguloMatriculado = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja_escuro);
+                                                        holder.matricular.setBackground(retanguloMatriculado);
+                                                        holder.matricular.setText("Matriculado");
+                                                    } else
+                                                        Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                                                });
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                        }
+                                    });
+                                } else
+                                    Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
+                            });
+
+                        }
+
+                    });
+
+                    if (!snapshot.hasChildren()) {
                         holder.matricular.setText("Matricular");
                         Drawable retanguloMatricular = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja);
                         holder.matricular.setBackground(retanguloMatricular);
                     }
+
+                    dialog.dismiss();
+
                 }
 
-                holder.matricular.setOnClickListener(v -> {
-                    if (holder.matricular.getText() != "Matriculado") {
-                        FirebaseAuth autenticacao = DefinicaoFirebase.recuperarAutenticacao();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-                        String idUtilizador = Objects.requireNonNull(autenticacao.getCurrentUser()).getUid();
-                        String idQuiz = listaQuizes.get(position).getId();
-                        String tituloQuiz = listaQuizes.get(position).getTitulo();
-                        String imagemQuiz = listaQuizes.get(position).getImagem();
-                        String criadorQuiz = listaQuizes.get(position).getCriador();
-                        String temaQuiz = listaQuizes.get(position).getTema();
-                        int pontuacao = listaQuizes.get(position).getTotalXP();
-                        int progresso = listaQuizes.get(position).getProgresso();
-                        int totalPerguntasQuiz = listaQuizes.get(position).getTotalPerguntas();
-
-                        DatabaseReference subscreverQuiz = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idUtilizador).child("inscricoes").child(idQuiz);
-
-                        Quiz quizSubscrito = new Quiz();
-
-                        quizSubscrito.setId(idQuiz);
-                        quizSubscrito.setTitulo(tituloQuiz);
-                        quizSubscrito.setImagem(imagemQuiz);
-                        quizSubscrito.setPerguntaAtual(0);
-                        quizSubscrito.setTotalPerguntas(totalPerguntasQuiz);
-                        quizSubscrito.setTema(temaQuiz);
-                        quizSubscrito.setProgresso(progresso);
-                        quizSubscrito.setDataInscricao(Configs.recuperarDataHoje());
-                        quizSubscrito.setCriador(criadorQuiz);
-                        quizSubscrito.setPontuacao(pontuacao);
-                        quizSubscrito.guardar(subscreverQuiz, sucesso -> {
-                            if (sucesso) {
-
-                                DatabaseReference quizRef = DefinicaoFirebase.recuperarBaseDados().child("quizes").child(quiz.getId());
-                                HashMap<String, Object> hashMapTotalMembros = new HashMap<>();
-
-                                quizRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                        try {
-                                            int totalMembros = snapshot.child("totalMembros").getValue(Integer.class);
-                                            hashMapTotalMembros.put("totalMembros", totalMembros + 1);
-
-                                            quizRef.updateChildren(hashMapTotalMembros).addOnCompleteListener(task -> {
-                                                if (task.isSuccessful()) {
-                                                    Drawable retanguloMatriculado = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja_escuro);
-                                                    holder.matricular.setBackground(retanguloMatriculado);
-                                                    holder.matricular.setText("Matriculado");
-                                                } else
-                                                    Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                                            });
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                                    }
-                                });
-                            } else
-                                Toast.makeText(context, context.getString(R.string.erro), Toast.LENGTH_SHORT).show();
-                        });
-
-                    }
-
-                });
-
-                if (!snapshot.hasChildren()) {
-                    holder.matricular.setText("Matricular");
-                    Drawable retanguloMatricular = ContextCompat.getDrawable(context, R.drawable.retangulo_laranja);
-                    holder.matricular.setBackground(retanguloMatricular);
                 }
-
-                dialog.dismiss();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

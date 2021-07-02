@@ -41,6 +41,8 @@ public class ContaActivity extends AppCompatActivity {
     private TextView nomePerfil, contaXP, biografia, biografiaData, estado, nascimento;
     private QuizesSubscritosAdapter quizesSubscritosAdapter;
     private List<Quiz> listaQuizes = new ArrayList<>();
+    private DatabaseReference contaRef;
+    private ValueEventListener contaEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,35 +107,33 @@ public class ContaActivity extends AppCompatActivity {
     }
 
     private void buscarConta(String idConta) {
-        DatabaseReference contaRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idConta);
+        contaRef = DefinicaoFirebase.recuperarBaseDados().child("contas").child(idConta);
         AlertDialog dialog = new SpotsDialog.Builder().setContext(ContaActivity.this).setMessage("Carregando dados...").setTheme(R.style.dialog_carregamento).setCancelable(false).build();
 
-        contaRef.addValueEventListener(new ValueEventListener() {
+        contaEventListener = contaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 try {
                     dialog.show();
+
+                    Conta conta = snapshot.getValue(Conta.class);
+                    Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
+                    Objects.requireNonNull(drawable).setColorFilter(Objects.requireNonNull(conta).getCorFundoPerfil(), PorterDuff.Mode.SRC);
+
+                    fundoPerfil.setBackground(drawable);
+
+                    Glide.with(getApplicationContext()).load(conta.getFoto()).into(imagemPerfil);
+                    nomePerfil.setText(conta.getNome());
+                    contaXP.setText("Total de XP .: " + conta.getTotalXP());
+                    biografia.setText(conta.getBiografia());
+                    biografiaData.setText("Última vez atualizado .: " + conta.getBiografiaData());
+                    estado.setText("Estado .: " + conta.getEstado());
+                    nascimento.setText("Data de Nascimento\n" + conta.getDataNascimento());
+
+                    dialog.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                Conta conta = snapshot.getValue(Conta.class);
-
-                Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.borda_preta);
-                assert drawable != null;
-                drawable.setColorFilter(Objects.requireNonNull(conta).getCorFundoPerfil(), PorterDuff.Mode.SRC);
-
-                fundoPerfil.setBackground(drawable);
-
-                Glide.with(getApplicationContext()).load(conta.getFoto()).into(imagemPerfil);
-                nomePerfil.setText(conta.getNome());
-                contaXP.setText("Total de XP .: " + conta.getTotalXP());
-                biografia.setText(conta.getBiografia());
-                biografiaData.setText("Última vez atualizado .: " + conta.getBiografiaData());
-                estado.setText("Estado .: " + conta.getEstado());
-                nascimento.setText("Data de Nascimento\n" + conta.getDataNascimento());
-
-                dialog.dismiss();
 
             }
 
@@ -142,6 +142,15 @@ public class ContaActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            contaRef.removeEventListener(contaEventListener);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -100,7 +100,6 @@ public class AvaliacaoQuizActivity extends AppCompatActivity {
                     Toast.makeText(this, "Introduza uma avaliação primeiro!", Toast.LENGTH_SHORT).show();
 
             } catch (Exception e) {
-                finish();
                 e.printStackTrace();
             }
         });

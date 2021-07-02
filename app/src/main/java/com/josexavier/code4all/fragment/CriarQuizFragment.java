@@ -276,11 +276,11 @@ public class  CriarQuizFragment extends Fragment {
 
                 if (Build.VERSION.SDK_INT >= 29) {
                     // Usar versão mais recente do código
-                    ImageDecoder.Source source = ImageDecoder.createSource(Objects.requireNonNull(getActivity()).getContentResolver(), localImagemSelecionada);
+                    ImageDecoder.Source source = ImageDecoder.createSource(requireActivity().getContentResolver(), localImagemSelecionada);
                     imagem = ImageDecoder.decodeBitmap(source);
                 } else {
                     /// Usar versão mais antiga do código
-                    imagem = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), localImagemSelecionada);
+                    imagem = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), localImagemSelecionada);
                 }
             }
 
